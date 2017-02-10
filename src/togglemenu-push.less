@@ -1,0 +1,230 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+@color-primary: #ff5a60;
+@color-secondary: #303748;
+@color-tertiary: #181b22;
+@menu-width: 300px;
+
+/* ==========================================================================
+   Navigation push
+   ========================================================================== */
+.nav--togglemenuPush {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: @menu-width;
+    height: 100%;
+    background: #fff;
+    overflow: auto;
+    overflow-x: hidden;
+    transform: translateX(-100%);
+    transition: transform .3s;
+    box-shadow: 0 5px 24px rgba(0, 0, 0, .24);
+
+    .is-togglemenuOpen & {
+        transform: translateX(0);
+    }
+}
+
+/* ==========================================================================
+   TogglemenuPush
+   ========================================================================== */
+.togglemenu-push {
+    overflow-x: hidden;
+}
+.togglemenu-close {
+    padding: 20px;
+    background: @color-tertiary;
+    overflow: hidden;
+
+    button {
+        position: relative;
+        display: inline-block;
+        float: right;
+        padding: 0;
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        text-indent: -9999px;
+        background: @color-secondary;
+        border: 0;
+        cursor: pointer;
+        transition: background-color .3s;
+
+        &:hover {
+            background-color: @color-primary;
+        }
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 46%;
+            left: 29%;
+            width: 22px;
+            height: 3px;
+            background-color: #fff;
+            transform: rotate(45deg);
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+}
+.togglemenu-menu {
+    .item-depth {
+        margin: 0;
+        padding: 0;
+    }
+    .item-nav {
+        list-style: none;
+
+        a {
+            position: relative;
+            display: block;
+            padding: 20px;
+            color: @color-secondary;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        + .item-nav > a {
+            border-top: 1px solid fade(@color-secondary, 10%);
+        }
+    }
+}
+
+
+/* Contexte de page
+   ========================================================================== */
+.togglemenu-push .page {
+    transition: transform .3s;
+
+    .is-togglemenuOpen& {
+        position: fixed;
+        transform: translateX(@menu-width) scale(.9);
+        user-select: none;
+    }
+}
+
+/* ==========================================================================
+   Layout accordéon
+   ========================================================================== */
+.l-accordion {
+    > .item-depth {
+        padding-left: 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height ease-out .3s;
+
+        > .item-nav {
+            > a {
+                padding-top: 0;
+                font-weight: normal;
+            }
+
+            + .item-nav > a {
+                border: 0;
+            }
+        }
+    }
+
+    > a {
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 31px;
+            right: 22px;
+            z-index: 5;
+            width: 10px;
+            height: 2px;
+            background: @color-secondary;
+            transform: rotate(45deg);
+            transform-origin: center -3px;
+            transition: transform-origin .3s;
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+    &.is-active {
+        > .item-depth {
+            z-index: 50;
+            max-height: 500px;
+            overflow: visible;
+        }
+        > a {
+            &:before,
+            &:after {
+                transform-origin: center 5px;
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   Layout panel
+   ========================================================================== */
+.l-panel {
+    > a {
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 31px;
+            right: 22px;
+            z-index: 5;
+            width: 10px;
+            height: 2px;
+            background: @color-secondary;
+            transform: rotate(45deg);
+            transform-origin: right center;
+            transition: transform-origin .3s;
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+    > .item-depth {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 55;
+        width: @menu-width;
+        height: 100%;
+        background: #fff;
+        transform: translateX(-100%);
+        transition: transform .3s;
+    }
+    &.is-active {
+        > .item-depth {
+            transform: translateX(0);
+        }
+    }
+
+    /* Retour
+       ========================================================================== */
+    .item-back {
+        &:extend(.togglemenu-close all);
+
+        .item-btn {
+            float: left;
+
+            &:before,
+            &:after {
+                transform-origin: 0 center;
+            }
+        }
+        .item-title {
+            float: left;
+            padding-left: 20px;
+            color: #fff;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+    }
+}

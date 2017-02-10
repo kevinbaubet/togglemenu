@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+@color-primary: #ff5a60;
+@color-secondary: #303748;
+@menu-width: 150px;
+
+/* ==========================================================================
+   TogglemenuHover
+   ========================================================================== */
+.togglemenu-hover {
+    .item-depth {
+        margin: 0;
+        padding: 0;
+    }
+    .item-nav {
+        position: relative;
+        list-style: none;
+
+        a {
+            display: block;
+            padding: 10px 20px;
+            color: @color-secondary;
+            font-size: 1.5em;
+            text-decoration: none;
+            background: #fff;
+            transition: .3s;
+
+            &:hover {
+                color: #fff;
+                background-color: @color-primary;
+            }
+        }
+    }
+    .depth-1 > .item-nav {
+        position: relative;
+        display: inline-block;
+
+        + .item-nav {
+            margin-left: 10px;
+        }
+    }
+
+    .is-parent {
+        > .item-depth {
+            position: absolute;
+            top: 44px;
+            left: 0;
+            z-index: -1;
+            width: @menu-width;
+            max-height: 0;
+            overflow: hidden;
+            transition: .3s;
+
+            &.depth-3 {
+                top: 0;
+                left: @menu-width;
+            }
+        }
+
+        &.is-active {
+            > .item-depth {
+                z-index: 50;
+                max-height: 1000px;
+                overflow: visible;
+            }
+        }
+    }
+
+    .is-active > a {
+        color: #fff;
+        background-color: @color-primary;
+    }
+
+    .depth-2 {
+        .is-parent {
+            > a {
+                position: relative;
+
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 18px;
+                    right: 9px;
+                    z-index: 5;
+                    width: 10px;
+                    height: 2px;
+                    background: @color-secondary;
+                    transform: rotate(45deg);
+                    transition: background-color .3s;
+                }
+                &:after {
+                    top: 24px;
+                    transform: rotate(-45deg);
+                }
+            }
+            &.is-active > a,
+            > a:hover {
+                &:before,
+                &:after {
+                    background-color: #fff;
+                }
+            }
+        }
+    }
+}

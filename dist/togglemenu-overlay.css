@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+/* ==========================================================================
+   Navigation overlay
+   ========================================================================== */
+.nav--togglemenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  z-index: 1005;
+  overflow: hidden;
+  transform: translateY(100%) skewY(-8deg);
+  transition: transform .6s;
+}
+.nav--togglemenuOverlay:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 150%;
+  background-color: rgba(24, 27, 34, 0.9);
+}
+.is-togglemenuOpen .nav--togglemenuOverlay {
+  transform: translateY(-25%) skewY(-8deg);
+  overflow: visible;
+}
+/* ==========================================================================
+   TogglemenuOverlay
+   ========================================================================== */
+.togglemenu-overlay .togglemenu-toggle {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1050;
+  padding: 15px 50px 15px 20px;
+  line-height: .7;
+  font-size: 1.5em;
+}
+.togglemenu-overlay .togglemenu-toggle span {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+}
+.togglemenu-overlay .togglemenu-toggle span:before,
+.togglemenu-overlay .togglemenu-toggle span:after {
+  transition: .3s;
+}
+.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle {
+  background-color: #ff5a60;
+}
+.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span {
+  width: 0;
+}
+.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:before,
+.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:after {
+  top: 0;
+  right: 20px;
+  transform: rotate(-45deg);
+}
+.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:after {
+  top: -3px;
+  transform: rotate(45deg);
+}
+.togglemenu-overlay .togglemenu-menu {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%) skewY(8deg);
+}
+.togglemenu-overlay .togglemenu-menu .item-depth .item-depth {
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+  border-left: 1px solid rgba(48, 55, 72, 0.2);
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0;
+  transition: .3s;
+}
+.togglemenu-overlay .togglemenu-menu .item-depth .is-active > .item-depth {
+  z-index: 5;
+  transform: translate3d(0, -50%, 0);
+  opacity: 1;
+}
+.togglemenu-overlay .togglemenu-menu .item-nav a {
+  color: #fff;
+  text-transform: uppercase;
+  transition: color .3s;
+}
+.togglemenu-overlay .togglemenu-menu .item-nav a:hover,
+.togglemenu-overlay .togglemenu-menu .item-nav.is-active > a {
+  color: #ff5a60;
+}
+.togglemenu-overlay .togglemenu-menu .item-nav + .item-nav > a {
+  border: 0;
+}
+.togglemenu-overlay .togglemenu-menu .depth-1 > .item-nav {
+  width: 20%;
+  margin-left: 15%;
+}
+.togglemenu-overlay .togglemenu-menu .depth-2 {
+  left: 35%;
+  width: 20%;
+}
+.togglemenu-overlay .togglemenu-menu .depth-3 {
+  left: 100%;
+  width: 100%;
+}
+.togglemenu-overlay .togglemenu-menu .is-parent > a {
+  position: relative;
+}
+.togglemenu-overlay .togglemenu-menu .is-parent > a:before,
+.togglemenu-overlay .togglemenu-menu .is-parent > a:after {
+  content: "";
+  position: absolute;
+  top: 27px;
+  right: 19px;
+  z-index: 5;
+  width: 10px;
+  height: 2px;
+  background: #303748;
+  transform: rotate(45deg);
+  transition: background-color 0.3s;
+}
+.togglemenu-overlay .togglemenu-menu .is-parent > a:after {
+  top: 33px;
+  transform: rotate(-45deg);
+}
+.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:before,
+.togglemenu-overlay .togglemenu-menu .is-parent > a:hover:before,
+.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:after,
+.togglemenu-overlay .togglemenu-menu .is-parent > a:hover:after {
+  background-color: #fff;
+}

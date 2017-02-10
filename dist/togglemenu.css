@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+/* ==========================================================================
+   Toggle
+   ========================================================================== */
+.togglemenu-toggle {
+  padding: 20px;
+  color: #fff;
+  border: 0;
+  background: #181b22;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.togglemenu-toggle:hover {
+  background-color: #ff5a60;
+}
+.togglemenu-toggle span {
+  display: block;
+  width: 20px;
+  height: 3px;
+  text-indent: -9999px;
+  font-size: 0;
+  background: #fff;
+}
+.togglemenu-toggle span:before,
+.togglemenu-toggle span:after {
+  content: "";
+  display: block;
+  position: relative;
+  top: -8px;
+  width: 20px;
+  height: 3px;
+  background: #fff;
+}
+.togglemenu-toggle span:after {
+  top: 5px;
+}
+/* ==========================================================================
+   Togglemenu
+   ========================================================================== */
+.togglemenu-copy {
+  display: none;
+}

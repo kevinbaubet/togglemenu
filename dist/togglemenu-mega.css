@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+/* ==========================================================================
+   TogglemenuMega
+   ========================================================================== */
+.togglemenu-mega {
+  /* Close
+       ========================================================================== */
+}
+.togglemenu-mega .item-depth {
+  margin: 0;
+  padding: 0;
+}
+.togglemenu-mega .item-nav {
+  list-style: none;
+}
+.togglemenu-mega .item-nav a {
+  display: block;
+  padding: 10px 20px;
+  color: #303748;
+  font-size: 1.5em;
+  text-decoration: none;
+  background: #fff;
+  transition: .3s;
+}
+.togglemenu-mega .item-nav a:hover {
+  color: #fff;
+  background-color: #ff5a60;
+}
+.togglemenu-mega .depth-1 > .item-nav {
+  display: inline-block;
+}
+.togglemenu-mega .depth-1 > .item-nav + .item-nav {
+  margin-left: 10px;
+}
+.togglemenu-mega .togglemenu-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  display: inline-block;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  text-indent: -9999px;
+  background: #303748;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.togglemenu-mega .togglemenu-close:hover {
+  background-color: #ff5a60;
+}
+.togglemenu-mega .togglemenu-close:before,
+.togglemenu-mega .togglemenu-close:after {
+  content: "";
+  position: absolute;
+  top: 46%;
+  left: 28%;
+  width: 22px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(45deg);
+}
+.togglemenu-mega .togglemenu-close:after {
+  transform: rotate(-45deg);
+}
+.togglemenuMega-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity .3s;
+  cursor: pointer;
+}
+.is-togglemenuOpen .togglemenuMega-overlay {
+  z-index: 45;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+/* ==========================================================================
+   Navigation mega
+   ========================================================================== */
+.nav--mega {
+  position: relative;
+  z-index: 48;
+}
+.nav--mega .title--h3 {
+  padding-left: 20px;
+}
+.nav--mega .megamenu {
+  position: absolute;
+  top: 95px;
+  left: 0;
+  z-index: -1;
+  height: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.nav--mega .is-active > a {
+  color: #fff;
+  background-color: #ff5a60;
+}
+.nav--mega .is-active > .megamenu {
+  height: auto;
+  z-index: 50;
+  overflow: visible;
+  opacity: 1;
+}
+.nav--mega .item-menu {
+  padding: 20px;
+  box-sizing: border-box;
+}
+.nav--mega .menu-primary {
+  width: 60%;
+}
+.nav--mega .menu-primary > .item-depth {
+  float: left;
+  width: 50%;
+}
+.nav--mega .menu-primary > .item-depth .item-depth a {
+  padding-left: 40px;
+  font-size: 1em;
+}
+.nav--mega .menu-secondary,
+.nav--mega .menu-tertiary {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background: #596685;
+}
+.nav--mega .menu-secondary .title--h3,
+.nav--mega .menu-tertiary .title--h3 {
+  color: #fff;
+}
+.nav--mega .menu-secondary .item-nav a,
+.nav--mega .menu-tertiary .item-nav a {
+  color: #fff;
+  background: none;
+}
+.nav--mega .menu-secondary .item-nav a:hover,
+.nav--mega .menu-tertiary .item-nav a:hover {
+  background-color: #303748;
+}
+.nav--mega .menu-secondary {
+  right: 20%;
+  background-color: #444e67;
+}

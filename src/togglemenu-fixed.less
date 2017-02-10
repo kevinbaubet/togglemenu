@@ -1,0 +1,280 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+@color-primary: #ff5a60;
+@color-secondary: #303748;
+@color-tertiary: #181b22;
+@menu-width: 100px;
+
+/* ==========================================================================
+   Navigation fixed
+   ========================================================================== */
+.nav--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2050;
+    height: 100%;
+    width: @menu-width;
+    background: #fff;
+    transition: width .3s;
+
+    .title {
+        margin-top: 20px;
+        height: 42px;
+        text-align: center;
+    }
+
+    .is-togglemenuOpen & {
+        width: @menu-width*2;
+    }
+
+    > .item-depth {
+        margin: 0;
+        padding: 0;
+        width: @menu-width;
+        transition: width .3s;
+        overflow: hidden;
+
+        .is-togglemenuOpen & {
+            width: @menu-width*2;
+            overflow: visible;
+        }
+
+        .item-nav {
+            display: block;
+            float: none;
+        }
+
+        a {
+            display: block;
+            line-height: 1.15;
+            color: #fff;
+            font-size: 1.2em;
+            transition: .3s;
+
+            &:hover {
+                color: @color-primary;
+            }
+        }
+
+        // 1er niveau
+        &.depth-1 {
+            padding-top: 50px;
+
+            > .item-nav {
+                counter-increment: depthitem;
+
+                > a {
+                    position: relative;
+                    display: inline-block;
+                    padding: 15px;
+                    min-height: 50px;
+                    line-height: 60px;
+                    text-align: center;
+                    text-decoration: none;
+                    text-transform: uppercase;
+
+                    &:before {
+                        content: counter(depthitem);
+                        position: relative;
+                        left: 20%;
+                        display: block;
+                        width: 60px;
+                        height: 60px;
+                        color: #fff;
+                        font-size: 28px;
+                        background-color: @color-secondary;
+                        border-radius: 50%;
+                        transform: translateX(-50%);
+                        transition: background-color .3s;
+                    }
+
+                    .is-togglemenuOpen & {
+                        min-height: 80px;
+
+                        &:before {
+                            left: 50%;
+                        }
+                    }
+                }
+                &.is-active a,
+                a:hover {
+                    &:before {
+                        background-color: @color-primary;
+                    }
+                    span:after {
+                        background-color: @color-secondary;
+                    }
+                }
+                span {
+                    display: block;
+                    height: 0;
+                    line-height: 1.2;
+                    width: @menu-width*2 - 30px;
+                    color: @color-secondary;
+                    transform: translateX(-10%);
+                    transition: .3s;
+                    opacity: 0;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: -15px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 16px;
+                        height: 2px;
+                        background: darken(@color-primary, 10%);
+                        transition: .3s;
+                    }
+                    .is-togglemenuOpen & {
+                        height: auto;
+                        margin: 15px 0;
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            }
+        }
+
+        // 2ème niveau
+        .depth-2 {
+            position: absolute;
+            top: 0;
+            left: @menu-width*2;
+            z-index: -1;
+            padding: 120px 30px 30px;
+            width: @menu-width*2;
+            height: 100%;
+            background-color: rgba(red(@color-secondary), green(@color-secondary), blue(@color-secondary), .95);
+            opacity: 0;
+            transform: translateX(-150%);
+            transition: .3s;
+            box-sizing: border-box;
+
+            .item-nav {
+                margin-bottom: 20px;
+
+                &.is-parent > a {
+                    position: relative;
+
+                    &:before,
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 6px;
+                        right: 0;
+                        z-index: 5;
+                        width: 7px;
+                        height: 2px;
+                        background: #fff;
+                        transform: rotate(-45deg);
+                        transition: transform .3s;
+                    }
+                    &:after {
+                        right: 4px;
+                        transform: rotate(45deg);
+                    }
+                }
+                &.is-active > a {
+                    &:before {
+                        transform: rotate(45deg);
+                    }
+                    &:after {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+
+            .is-active {
+                > .depth-3 {
+                    display: block;
+                }
+            }
+        }
+        .is-active .depth-2 {
+            opacity: 1;
+            z-index: 45;
+            transform: translateX(0);
+
+            .item-nav + .item-nav {
+                margin-top: 20px 15px;
+            }
+        }
+
+        // 3ème niveau
+        .depth-3 {
+            display: none;
+            padding: 15px;
+
+            .item-nav {
+                margin-bottom: 15px;
+            }
+
+            a {
+                color: darken(#fff, 10%);
+
+                &:hover {
+                    color: @color-primary;
+                }
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   ToggleMenuFixed
+   ========================================================================== */
+.togglemenu-fixed {
+    /* Contexte de page
+       ========================================================================== */
+    .page {
+        margin: 0;
+        padding-left: @menu-width*2;
+        box-sizing: border-box;
+        transition: padding-left .3s;
+
+        .is-togglemenuOpen& {
+            padding-left: @menu-width*3;
+        }
+    }
+
+    /* Toggle
+       ========================================================================== */
+    .togglemenu-toggle {
+        position: absolute;
+        top: 80px;
+        right: -12px;
+        z-index: 55;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        background: @color-primary;
+        border: 0;
+        border-radius: 50%;
+        transition: .3s;
+
+        .is-togglemenuOpen& {
+            transform: rotateY(180deg);
+        }
+
+        span {
+            width: auto;
+            height: 0;
+            background: none;
+
+            &:before,
+            &:after {
+                top: -4px;
+                left: 5px;
+                width: 11px;
+                transform: rotate(45deg);
+            }
+            &:after {
+                top: -1px;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}

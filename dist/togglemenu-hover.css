@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+/* ==========================================================================
+   TogglemenuHover
+   ========================================================================== */
+.togglemenu-hover .item-depth {
+  margin: 0;
+  padding: 0;
+}
+.togglemenu-hover .item-nav {
+  position: relative;
+  list-style: none;
+}
+.togglemenu-hover .item-nav a {
+  display: block;
+  padding: 10px 20px;
+  color: #303748;
+  font-size: 1.5em;
+  text-decoration: none;
+  background: #fff;
+  transition: .3s;
+}
+.togglemenu-hover .item-nav a:hover {
+  color: #fff;
+  background-color: #ff5a60;
+}
+.togglemenu-hover .depth-1 > .item-nav {
+  position: relative;
+  display: inline-block;
+}
+.togglemenu-hover .depth-1 > .item-nav + .item-nav {
+  margin-left: 10px;
+}
+.togglemenu-hover .is-parent > .item-depth {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  z-index: -1;
+  width: 150px;
+  max-height: 0;
+  overflow: hidden;
+  transition: .3s;
+}
+.togglemenu-hover .is-parent > .item-depth.depth-3 {
+  top: 0;
+  left: 150px;
+}
+.togglemenu-hover .is-parent.is-active > .item-depth {
+  z-index: 50;
+  max-height: 1000px;
+  overflow: visible;
+}
+.togglemenu-hover .is-active > a {
+  color: #fff;
+  background-color: #ff5a60;
+}
+.togglemenu-hover .depth-2 .is-parent > a {
+  position: relative;
+}
+.togglemenu-hover .depth-2 .is-parent > a:before,
+.togglemenu-hover .depth-2 .is-parent > a:after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 9px;
+  z-index: 5;
+  width: 10px;
+  height: 2px;
+  background: #303748;
+  transform: rotate(45deg);
+  transition: background-color 0.3s;
+}
+.togglemenu-hover .depth-2 .is-parent > a:after {
+  top: 24px;
+  transform: rotate(-45deg);
+}
+.togglemenu-hover .depth-2 .is-parent.is-active > a:before,
+.togglemenu-hover .depth-2 .is-parent > a:hover:before,
+.togglemenu-hover .depth-2 .is-parent.is-active > a:after,
+.togglemenu-hover .depth-2 .is-parent > a:hover:after {
+  background-color: #fff;
+}
