@@ -32,6 +32,7 @@
             },
             toggle: undefined
         },
+        closeOnEscape: true,
         classes: {
             open: 'is-{prefix}Open',
             active: 'is-active',
@@ -208,14 +209,16 @@
                     var item = $(this);
 
                     // Events
-                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function(event) {
-                        event.preventDefault();
+                    if (self.elements.itemLink !== null) {
+                        self.elements.itemLink(item).on('click.togglemenu.itemLink', function(event) {
+                            event.preventDefault();
 
-                        if (!self.isOpen) {
-                            self.toggle();
-                        }
-                        self.toggleSubmenu(item);
-                    });
+                            if (!self.isOpen) {
+                                self.toggle();
+                            }
+                            self.toggleSubmenu(item);
+                        });
+                    }
 
                     // User callback
                     if (self.settings.afterItemHandler !== undefined) {
@@ -233,12 +236,25 @@
          * Ouverture/fermeture du ToggleMenu
          */
         toggle: function() {
-            // Statut
-            this.ToggleMenu.elements.body.toggleClass(this.settings.classes.open);
-            this.isOpen = (this.ToggleMenu.elements.body.hasClass(this.settings.classes.open));
+            var self = this;
 
-            if (!this.isOpen) {
-                this.closeSubmenus();
+            // Statut
+            self.ToggleMenu.elements.body.toggleClass(self.settings.classes.open);
+            self.isOpen = (self.ToggleMenu.elements.body.hasClass(self.settings.classes.open));
+
+            // A la fermeture du menu, on ferme tous les sous-menus
+            if (!self.isOpen) {
+                self.closeSubmenus();
+                $(document).off('keyup.togglemenuOverlay');
+            }
+
+            // Si le menu est ouvert, on ajoute un événement pour le fermer avec "echap"
+            if (self.settings.closeOnEscape && self.isOpen) {
+                $(document).one('keyup.togglemenuOverlay', function (keyupEvent) {
+                    if (keyupEvent.keyCode === 27) {
+                        self.toggle();
+                    }
+                });
             }
 
             // User callback
@@ -320,6 +336,7 @@
             self.elements.items.each(function() {
                 self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
             });
+            $(document).off('keyup.togglemenuOverlay');
 
             // Suppression des classes "copy"
             $.each(self.elements.content, function(type, element) {

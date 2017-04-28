@@ -31,6 +31,7 @@
             close: undefined
         },
         overlay: true,
+        closeOnEscape: true,
         classes: {
             open: 'is-{prefix}Open',
             active: 'is-active'
@@ -185,21 +186,32 @@
          * @param jQueryObject item Élément parent
          */
         toggleSubmenu: function(item) {
-            this.closeSubmenus(item);
+            var self = this;
+            
+            self.closeSubmenus(item);
 
             if (item !== undefined) {
-                item.toggleClass(this.settings.classes.active);
+                item.toggleClass(self.settings.classes.active);
 
-                if (this.settings.overlay) {
-                    this.ToggleMenu.elements.body.toggleClass(this.settings.classes.open);
+                if (self.settings.overlay) {
+                    self.ToggleMenu.elements.body.toggleClass(self.settings.classes.open);
+                }
+
+                // Fermeture avec "echap"
+                if (self.settings.closeOnEscape) {
+                    $(document).one('keyup.togglemenuMega', function (keyupEvent) {
+                        if (keyupEvent.keyCode === 27) {
+                            self.toggleSubmenu();
+                        }
+                    });
                 }
             }
 
 
             // User callback
-            if (this.settings.onToggleSubmenu !== undefined) {
-                this.settings.onToggleSubmenu.call({
-                    ToggleMenuMega: this,
+            if (self.settings.onToggleSubmenu !== undefined) {
+                self.settings.onToggleSubmenu.call({
+                    ToggleMenuMega: self,
                     item: item
                 });
             }
@@ -257,6 +269,7 @@
             self.elements.items.each(function() {
                 self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
             });
+            $(document).off('keyup.togglemenuMega');
         }
     };
 })(jQuery);
