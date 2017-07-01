@@ -63,13 +63,13 @@
                 self.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
                 if (self.elements.toggle.length === 0) {
-                    self.ToggleMenu.setLog('error', 'Element "toggle" not found.');
+                    self.ToggleMenu.setLog('error', 'Missing elements.toggle parameter');
                     return false;
                 }
             }
 
             if (self.elements.menu === undefined) {
-                self.ToggleMenu.setLog('error', 'Missing element "elements.menu" in options.');
+                self.ToggleMenu.setLog('error', 'Missing element.menu parameter');
                 return false;
             }
 

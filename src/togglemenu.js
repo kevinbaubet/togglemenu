@@ -184,7 +184,7 @@
          * Utils
          */
         setLog: function(type, log) {
-            console[type](log);
+            console[type]('ToggleMenu: ' + log);
         },
         replacePrefixClass: function() {
             var self = this;

@@ -55,12 +55,12 @@
             this.ToggleMenu.replacePrefixClass.call(this);
 
             if (this.elements.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing element "elements.menu" in options.');
+                this.ToggleMenu.setLog('error', 'Missing elements.menu parameter');
                 return false;
             }
 
             if (this.elements.items === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing element "elements.items" in options.');
+                this.ToggleMenu.setLog('error', 'Missing elements.items parameter');
                 return false;
             }
 

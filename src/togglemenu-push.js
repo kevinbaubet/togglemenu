@@ -74,13 +74,13 @@
                 this.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
                 if (this.elements.toggle.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Element "toggle" not found.');
+                    this.ToggleMenu.setLog('error', 'Missing elements.toggle parameter');
                     return false;
                 }
             }
 
             if (this.elements.content.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing element "menu" in options.');
+                this.ToggleMenu.setLog('error', 'Missing element.content.menu parameter');
                 return false;
             }
 
@@ -88,7 +88,7 @@
                 this.elements.page = this.ToggleMenu.elements.body.children('div:first');
 
                 if (this.elements.page.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Element "page" not found.');
+                    this.ToggleMenu.setLog('error', 'Missing element.page parameter');
                     return false;
                 }
             }

@@ -56,7 +56,7 @@
          */
         prepareOptions: function() {
             if (this.elements.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing element "elements.menu" in options.');
+                this.ToggleMenu.setLog('error', 'Missing elements.menu parameter');
                 return false;
             }
 
@@ -75,7 +75,7 @@
                 }
 
                 if (this.elements.itemsLink.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Missing element "elements.itemsLink" in options.');
+                    this.ToggleMenu.setLog('error', 'Missing elements.itemsLink parameter');
                     return false;
                 }
             }
