@@ -333,9 +333,11 @@
             $.each(self.events, function(element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function() {
-                self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
-            });
+            if (self.elements.itemLink !== null) {
+                self.elements.items.each(function () {
+                    self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
+                });
+            }
             $(document).off('keyup.togglemenuOverlay');
 
             // Suppression des classes "copy"

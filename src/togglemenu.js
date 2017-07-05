@@ -1,7 +1,7 @@
 /**
  * ToggleMenu
  *
- * @version 2.0 (10/02/2017)
+ * @version 2.1 (05/07/2017)
  */
 (function($) {
     'use strict';
@@ -73,7 +73,6 @@
         addDisplay: function(display, options) {
             // On stop l'initialisation si le display est déjà initialisé
             if (this.isCurrentDisplay(display)) {
-                this.setLog('log', 'Display "' + display + '" is already defined.');
                 return false;
             }
 

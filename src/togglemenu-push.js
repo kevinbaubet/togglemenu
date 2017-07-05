@@ -42,6 +42,7 @@
             }
         },
         layout: 'accordion',
+        backLink: false,
         classes: {
             open: 'is-{prefix}Open',
             active: 'is-active',
@@ -129,7 +130,7 @@
         wrap: function() {
             // Wrapper global
             this.elements.wrapper = $('<nav>', {
-                class: 'nav nav--' + this.settings.classes.prefix + 'Push'
+                'class': 'nav nav--' + this.settings.classes.prefix + 'Push'
             });
 
             // User callback
@@ -175,7 +176,7 @@
                 if (content !== undefined && content !== null) {
                     content.appendTo(self.elements.wrapper);
                     content.wrap($('<div>', {
-                        class: self.settings.classes.prefix + '-' + type
+                        'class': self.settings.classes.prefix + '-' + type
                     }));
 
                     // Ajout des éléments
@@ -297,19 +298,26 @@
                 } else {
                     // Container
                     content = $('<li>', {
-                        class: self.settings.classes.back
+                        'class': self.settings.classes.back
                     });
 
                     // Bouton
                     $('<button>', {
-                        class: 'item-btn'
+                        'class': 'item-btn'
                     }).appendTo(content);
 
                     // Titre
-                    $('<span>', {
-                        class: 'item-title',
+                    var title = $('<span>', {
+                        'class': 'item-title',
                         html: self.elements.itemLink(item).text()
                     }).appendTo(content);
+
+                    // Lien sur le titre
+                    if (self.settings.backLink) {
+                        title.wrapInner($('<a>', {
+                            href: self.elements.itemLink(item).attr('href')
+                        }));
+                    }
                 }
 
                 if (content !== null) {
