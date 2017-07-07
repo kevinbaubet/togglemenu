@@ -1,7 +1,7 @@
 /**
  * ToggleMenu
  *
- * @version 2.1 (05/07/2017)
+ * @version 2.1.0 (07/07/2017)
  */
 (function($) {
     'use strict';
