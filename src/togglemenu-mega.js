@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
     'use strict';
 
-    $.ToggleMenuMega = function(ToggleMenu, options) {
+    $.ToggleMenuMega = function (ToggleMenu, options) {
         // Héritage
         this.ToggleMenu = ToggleMenu;
 
@@ -25,7 +25,7 @@
         elements: {
             menu: undefined,
             items: undefined,
-            itemLink: function(item) {
+            itemLink: function (item) {
                 return item.children('a');
             },
             close: undefined
@@ -50,7 +50,7 @@
          *
          * @return bool
          */
-        prepareOptions: function() {
+        prepareOptions: function () {
             // Classes
             this.ToggleMenu.replacePrefixClass.call(this);
 
@@ -70,7 +70,7 @@
         /**
          * Initialisation
          */
-        load: function() {
+        load: function () {
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
@@ -97,7 +97,7 @@
         /**
          * Créer un overlay
          */
-        addOverlay: function() {
+        addOverlay: function () {
             this.elements.overlay = $('<div>', {
                 class: this.settings.classes.prefix + 'Mega-overlay'
             });
@@ -117,26 +117,26 @@
         /**
          * Supprime l'overlay
          */
-        removeOverlay: function() {
+        removeOverlay: function () {
             this.elements.overlay.remove();
         },
 
         /**
          * Gestionnaire des événements
          */
-        eventsHandler: function() {
+        eventsHandler: function () {
             var self = this;
 
             // Fermeture
             if (self.elements.close !== undefined) {
-                self.elements.close.on((self.events.close = 'click.togglemenu.close'), function() {
+                self.elements.close.on((self.events.close = 'click.togglemenu.close'), function () {
                     self.toggleSubmenu();
                 });
             }
 
             // Overlay
             if (self.settings.overlay) {
-                self.elements.overlay.on((self.events.overlay = 'click.togglemenu.overlay'), function() {
+                self.elements.overlay.on((self.events.overlay = 'click.togglemenu.overlay'), function () {
                     self.toggleSubmenu();
                 });
             }
@@ -154,15 +154,15 @@
         /**
          * Gestionnaire des éléments parent
          */
-        itemsHandler: function() {
+        itemsHandler: function () {
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function() {
+                self.elements.items.each(function () {
                     var item = $(this);
 
                     // Events
-                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function(event) {
+                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function (event) {
                         event.preventDefault();
 
                         self.toggleSubmenu(item);
@@ -185,7 +185,7 @@
          *
          * @param jQueryObject item Élément parent
          */
-        toggleSubmenu: function(item) {
+        toggleSubmenu: function (item) {
             var self = this;
             
             self.closeSubmenus(item);
@@ -222,7 +222,7 @@
          *
          * @param jQueryObject item Élément parent (optionnel)
          */
-        closeSubmenus: function(item) {
+        closeSubmenus: function (item) {
             var active = (item !== undefined) ? item.siblings('.' + this.settings.classes.active) : this.elements.items;
             var activeChildren = active.find('.' + this.settings.classes.active);
 
@@ -254,7 +254,7 @@
         /**
          * Destroy
          */
-        unload: function() {
+        unload: function () {
             var self = this;
 
             // Suppression des éléments
@@ -263,10 +263,10 @@
             }
 
             // Désactivation des events
-            $.each(self.events, function(element, event) {
+            $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function() {
+            self.elements.items.each(function () {
                 self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
             });
             $(document).off('keyup.togglemenuMega');

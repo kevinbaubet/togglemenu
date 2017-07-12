@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
     'use strict';
 
-    $.ToggleMenuFixed = function(ToggleMenu, options) {
+    $.ToggleMenuFixed = function (ToggleMenu, options) {
         // Héritage
         this.ToggleMenu = ToggleMenu;
 
@@ -26,7 +26,7 @@
         elements: {
             menu: undefined,
             items: undefined,
-            itemLink: function(item) {
+            itemLink: function (item) {
                 return item.children('a');
             },
             toggle: undefined
@@ -50,11 +50,11 @@
          *
          * @return bool
          */
-        prepareOptions: function() {
+        prepareOptions: function () {
             var self = this;
 
             // Classes
-            $.each(self.settings.classes, function(key, value) {
+            $.each(self.settings.classes, function (key, value) {
                 self.settings.classes[key] = value.replace(/\$prefix/, self.settings.classes.prefix);
             });
 
@@ -75,6 +75,9 @@
 
             if (self.elements.items === undefined) {
                 self.elements.items = self.ToggleMenu.getItemsParent(self.elements.menu.find('li'));
+
+            } else if (typeof self.elements.items === 'function') {
+                self.elements.items = self.elements.items(content);
             }
 
             return true;
@@ -83,7 +86,7 @@
         /**
          * Initialisation
          */
-        load: function() {
+        load: function () {
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
@@ -107,16 +110,16 @@
         /**
          * Gestionnaire des événements
          */
-        eventsHandler: function() {
+        eventsHandler: function () {
             var self = this;
 
             // Bouton toggle
             if (self.settings.toggle) {
-                self.elements.toggle.on((self.events.toggle = 'click.togglemenu.toggle'), function() {
+                self.elements.toggle.on((self.events.toggle = 'click.togglemenu.toggle'), function () {
                     self.toggle();
                 });
             } else {
-                self.elements.menu.on((self.events.menu = 'mouseenter.togglemenu.toggle mouseleave.togglemenu.toggle'), function() {
+                self.elements.menu.on((self.events.menu = 'mouseenter.togglemenu.toggle mouseleave.togglemenu.toggle'), function () {
                     self.toggle();
                 });
             }
@@ -134,15 +137,15 @@
         /**
          * Gestionnaire des éléments parent
          */
-        itemsHandler: function() {
+        itemsHandler: function () {
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function() {
+                self.elements.items.each(function () {
                     var item = $(this);
 
                     // Events
-                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function(event) {
+                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function (event) {
                         event.preventDefault();
 
                         if (!self.isOpen) {
@@ -166,7 +169,7 @@
         /**
          * Ouverture/fermeture du ToggleMenu
          */
-        toggle: function() {
+        toggle: function () {
             // Statut
             this.ToggleMenu.elements.body.toggleClass(this.settings.classes.open);
             this.isOpen = (this.ToggleMenu.elements.body.hasClass(this.settings.classes.open));
@@ -190,7 +193,7 @@
          *
          * @param jQueryObject item Élément parent
          */
-        toggleSubmenu: function(item) {
+        toggleSubmenu: function (item) {
             this.closeSubmenus(item);
 
             item.toggleClass(this.settings.classes.active);
@@ -209,7 +212,7 @@
          *
          * @param jQueryObject item Élément parent (optionnel)
          */
-        closeSubmenus: function(item) {
+        closeSubmenus: function (item) {
             var active = (item !== undefined) ? item.siblings('.' + this.settings.classes.active) : this.elements.items;
             var activeChildren = active.find('.' + this.settings.classes.active);
 
@@ -236,7 +239,7 @@
         /**
          * Destroy
          */
-        unload: function() {
+        unload: function () {
             var self = this;
 
             // Fermeture du menu
@@ -245,10 +248,10 @@
             }
 
             // Désactivation des events
-            $.each(self.events, function(element, event) {
+            $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function() {
+            self.elements.items.each(function () {
                 self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
             });
         }

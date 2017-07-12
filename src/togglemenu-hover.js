@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
     'use strict';
 
-    $.ToggleMenuHover = function(ToggleMenu, options) {
+    $.ToggleMenuHover = function (ToggleMenu, options) {
         // Héritage
         this.ToggleMenu = ToggleMenu;
 
@@ -54,7 +54,7 @@
          *
          * @return bool
          */
-        prepareOptions: function() {
+        prepareOptions: function () {
             if (this.elements.menu === undefined) {
                 this.ToggleMenu.setLog('error', 'Missing elements.menu parameter');
                 return false;
@@ -86,7 +86,7 @@
         /**
          * Initialisation
          */
-        load: function() {
+        load: function () {
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
@@ -109,10 +109,10 @@
         /**
          * Gestionnaire des événements
          */
-        eventsHandler: function() {
+        eventsHandler: function () {
             var self = this;
 
-            self.elements.items.on((self.events.items = 'focus.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu'), function(event) {
+            self.elements.items.on((self.events.items = 'focus.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu'), function (event) {
                 var options = {
                     event: $.extend({}, event),
                     item: this,
@@ -130,13 +130,13 @@
                     self.setTrackPosition('previous', options.event);
 
                     // Puis on met à jour cette position pour faire une comparaison
-                    options.$item.on('mousemove.togglemenu', function() {
+                    options.$item.on('mousemove.togglemenu', function () {
                         self.setTrackPosition('current', options.event);
                     });
 
                     // Comparaison des positions si l'état hover n'est pas activé
                     if (options.item.hoverState !== true) {
-                        options.item.hoverTimeout = setTimeout(function() {
+                        options.item.hoverTimeout = setTimeout(function () {
                             self.comparePosition(options);
                         }, self.settings.interval);
                     }
@@ -148,7 +148,7 @@
 
                     // S'il y a un état hover sur l'item, on execute onOut() après un délai
                     if (options.item.hoverState === true) {
-                        options.item.hoverTimeout = setTimeout(function() {
+                        options.item.hoverTimeout = setTimeout(function () {
                             options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
                             options.item.hoverState = false;
 
@@ -160,7 +160,7 @@
 
             // Désativation du click sur les items parent
             if (self.settings.disableItemsClick) {
-                self.elements.itemsLink.on((self.events.itemsLink = 'click.togglemenu'), function(event) {
+                self.elements.itemsLink.on((self.events.itemsLink = 'click.togglemenu'), function (event) {
                     event.preventDefault();
                 });
             }
@@ -181,7 +181,7 @@
          * @param  string type  Type de position : previous ou current
          * @param  object event Événement courant
          */
-        setTrackPosition: function(type, event) {
+        setTrackPosition: function (type, event) {
             type = (type === 'previous') ? 'previousPosition' : 'currentPosition';
             this[type].x = event.pageX;
             this[type].y = event.pageY;
@@ -193,7 +193,7 @@
          * @param  object options Options de l'item à comparer {event, item, $item}
          * @return function
          */
-        comparePosition: function(options) {
+        comparePosition: function (options) {
             var self = this;
             options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
 
@@ -210,7 +210,7 @@
                 self.previousPosition.y = self.currentPosition.y;
 
                 // Rappel de la méthode
-                options.item.hoverTimeout = setTimeout(function() {
+                options.item.hoverTimeout = setTimeout(function () {
                     self.comparePosition(options);
                 }, self.settings.interval);
             }
@@ -221,7 +221,7 @@
          *
          * @param {ToggleMenuHover, options de l'item}
          */
-        onOver: function() {
+        onOver: function () {
             this.$item.addClass(this.ToggleMenuHover.settings.classes.active);
 
             if (this.ToggleMenuHover.settings.onOver !== undefined) {
@@ -234,7 +234,7 @@
          *
          * @param {ToggleMenuHover, options de l'item}
          */
-        onOut: function() {
+        onOut: function () {
             this.$item.removeClass(this.ToggleMenuHover.settings.classes.active);
 
             if (this.ToggleMenuHover.settings.onOut !== undefined) {
@@ -245,11 +245,11 @@
         /**
          * Destroy
          */
-        unload: function() {
+        unload: function () {
             var self = this;
 
             // Désactivation des events
-            $.each(self.events, function(element, event) {
+            $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
         }

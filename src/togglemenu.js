@@ -1,12 +1,12 @@
 /**
  * ToggleMenu
  *
- * @version 2.1.0 (07/07/2017)
+ * @version 2.1.1 (12/07/2017)
  */
-(function($) {
+(function ($) {
     'use strict';
 
-    $.ToggleMenu = function(options) {
+    $.ToggleMenu = function (options) {
         // Éléments
         this.elements = {
             body: $('body')
@@ -41,7 +41,7 @@
          * @param string display Nom du display
          * @param object options Options utilisateur du display
          */
-        setDisplay: function(display, options) {
+        setDisplay: function (display, options) {
             // Si un display est déjà initilisé, on l'enlève
             this.removeDisplay();
 
@@ -54,7 +54,7 @@
          * @param string display Nom du display
          * @param object options Options du display
          */
-        setOptions: function(display, options) {
+        setOptions: function (display, options) {
             this.options[display] = options;
         },
 
@@ -63,14 +63,14 @@
          *
          * @return bool
          */
-        isCurrentDisplay: function(display) {
+        isCurrentDisplay: function (display) {
             return (this.display.current === display);
         },
 
         /**
          * Ajout d'un display
          */
-        addDisplay: function(display, options) {
+        addDisplay: function (display, options) {
             // On stop l'initialisation si le display est déjà initialisé
             if (this.isCurrentDisplay(display)) {
                 return false;
@@ -113,7 +113,7 @@
          *
          * @return bool
          */
-        removeDisplay: function() {
+        removeDisplay: function () {
             if (this.display.current !== null) {
                 this.elements.body.removeClass(this.settings.classes.prefix + '-' + this.display.current);
 
@@ -143,7 +143,7 @@
          * @param  string display Nom du display
          * @return string
          */
-        getDisplayClassName: function(display) {
+        getDisplayClassName: function (display) {
             return 'ToggleMenu' + display.charAt(0).toUpperCase() + display.substr(1);
         },
 
@@ -152,7 +152,7 @@
          *
          * @return object
          */
-        getInstance: function() {
+        getInstance: function () {
             return this.instance;
         },
 
@@ -162,11 +162,11 @@
          * @param  jQuery object search Élément jQuery dans lequel la recherche d'éléments parents sera effectée
          * @return jQuery object
          */
-        getItemsParent: function(search) {
+        getItemsParent: function (search) {
             var itemsParent = [];
 
             if (search.length) {
-                search.each(function(i, item) {
+                search.each(function (i, item) {
                     var li = $(item);
                     var ul = li.children('ul');
 
@@ -182,13 +182,13 @@
         /**
          * Utils
          */
-        setLog: function(type, log) {
+        setLog: function (type, log) {
             console[type]('ToggleMenu: ' + log);
         },
-        replacePrefixClass: function() {
+        replacePrefixClass: function () {
             var self = this;
 
-            $.each(self.settings.classes, function(key, value) {
+            $.each(self.settings.classes, function (key, value) {
                 if (typeof value === 'string') {
                     self.settings.classes[key] = value.replace(/{prefix}/, self.settings.classes.prefix);
                 }
