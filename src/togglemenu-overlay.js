@@ -143,6 +143,7 @@
                 // Copie du contenu
                 if (typeof element === 'object' && element.length) {
                     content = element.clone();
+                    content.removeAttr('id');
                     element.addClass(self.settings.classes.copy);
                 }
 
