@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta content="width=device-width, user-scalable=no, maximum-scale=1.0, initial-scale=1" name="viewport">
         <title>ToggleMenu</title>
         <link rel="stylesheet" href="demo.css" />
         
@@ -72,7 +73,7 @@
                 });
 
                 // A l'init
-                ToggleMenu.setDisplay('hover');
+                ToggleMenu.setDisplay(elements.demoType.val());
 
                 // Au changement sur le <select>
                 elements.demoType.on('change', function() {
@@ -81,7 +82,7 @@
             });
         </script>
     </head>
-    <body class="togglemenu-hover">
+    <body>
         <div class="page">
             <h1>Toggle Menu</h1>
 
@@ -96,7 +97,7 @@
                 </select>
             </div>
 
-            <nav id="nav--hover" class="nav nav--hover">
+            <nav id="nav--hover" class="nav nav--hover is-hidden">
                 <h2 class="title title--h2">Navigation hover</h2>
 
                 <ul class="item-depth depth-1">

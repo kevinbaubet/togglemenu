@@ -45,6 +45,7 @@
         backLink: false,
         classes: {
             open: 'is-{prefix}Open',
+            submenuOpen: 'is-{prefix}SubmenuOpen',
             active: 'is-active',
             copy: '{prefix}-copy',
             back: 'item-back'
@@ -153,7 +154,7 @@
         },
 
         /**
-         * Ajout les contenus dans le wrapper
+         * Ajout des contenus dans le wrapper
          */
         addContent: function () {
             var self = this;
@@ -289,7 +290,7 @@
         },
 
         /**
-         * Ajoute du contenu pour un item
+         * Ajout du contenu pour un item
          *
          * @param jQueryObject item Élément parent
          */
@@ -347,7 +348,7 @@
         },
 
         /**
-         * Ouverture/fermeture du ToggleMenu
+         * Ouverture/fermeture du menu
          */
         toggle: function () {
             var self = this;
@@ -389,9 +390,14 @@
          * @param jQueryObject item Élément parent
          */
         toggleSubmenu: function (item) {
+            // States
             this.closeSubmenus(item);
-
             item.toggleClass(this.settings.classes.active);
+
+            if (item.layout !== undefined && item.layout === 'panel') {
+                this.elements.wrapper.scrollTop(0);
+                this.ToggleMenu.elements.body.toggleClass(this.settings.classes.submenuOpen);
+            }
 
             // User callback
             if (this.settings.onToggleSubmenu !== undefined) {
@@ -414,6 +420,11 @@
             // Suppression de l'état actif sur les frères
             if (active.length) {
                 active.removeClass(this.settings.classes.active);
+
+                // Suppression de l'état d'ouverture d'un sous-menu
+                if (this.ToggleMenu.elements.body.hasClass(this.settings.classes.submenuOpen)) {
+                    this.ToggleMenu.elements.body.removeClass(this.settings.classes.submenuOpen);
+                }
             }
 
             // Si un frère a un enfant actif

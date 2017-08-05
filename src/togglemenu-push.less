@@ -77,6 +77,7 @@
     .item-depth {
         margin: 0;
         padding: 0;
+        overflow: hidden;
     }
     .item-nav {
         list-style: none;
@@ -226,5 +227,13 @@
             font-size: 1.4em;
             font-weight: bold;
         }
+    }
+}
+.is-togglemenuSubmenuOpen {
+    .nav--togglemenuPush {
+        overflow: hidden;
+    }
+    .l-panel > .item-depth {
+        overflow-y: auto;
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "togglemenu",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "main": "./dist/togglemenu.min.js",
   "repository": "https://github.com/keverage/togglemenu.git",
   "author": "Kévin Baubet <contact@kevinbaubet.fr>",
