@@ -37,6 +37,11 @@
          * @param object options Options utilisateur du display
          */
         setDisplay: function (display, options) {
+            // On stop si le display courant est le même que le nouveau demandé
+            if (this.isCurrentDisplay(display)) {
+                return false;
+            }
+
             // Si un display est déjà initilisé, on l'enlève
             this.removeDisplay();
 

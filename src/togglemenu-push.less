@@ -79,7 +79,7 @@
         padding: 0;
         overflow: hidden;
     }
-    .item-nav {
+    .nav-item {
         list-style: none;
 
         a {
@@ -92,7 +92,7 @@
             text-decoration: none;
         }
 
-        + .item-nav > a {
+        + .nav-item > a {
             border-top: 1px solid fade(@color-secondary, 10%);
         }
     }
@@ -106,6 +106,7 @@
 
     .is-togglemenuOpen& {
         position: fixed;
+        width: 100%;
         transform: translateX(@menu-width) scale(.9);
         user-select: none;
     }
@@ -121,13 +122,13 @@
         overflow: hidden;
         transition: max-height ease-out .3s;
 
-        > .item-nav {
+        > .nav-item {
             > a {
                 padding-top: 0;
                 font-weight: normal;
             }
 
-            + .item-nav > a {
+            + .nav-item > a {
                 border: 0;
             }
         }

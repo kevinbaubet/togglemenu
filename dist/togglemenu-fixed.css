@@ -33,7 +33,7 @@
   width: 200px;
   overflow: visible;
 }
-.nav--fixed > .item-depth .item-nav {
+.nav--fixed > .item-depth .nav-item {
   display: block;
   float: none;
 }
@@ -50,10 +50,10 @@
 .nav--fixed > .item-depth.depth-1 {
   padding-top: 50px;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav {
+.nav--fixed > .item-depth.depth-1 > .nav-item {
   counter-increment: depthitem;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav > a {
+.nav--fixed > .item-depth.depth-1 > .nav-item > a {
   position: relative;
   display: inline-block;
   padding: 15px;
@@ -63,7 +63,7 @@
   text-decoration: none;
   text-transform: uppercase;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav > a:before {
+.nav--fixed > .item-depth.depth-1 > .nav-item > a:before {
   content: counter(depthitem);
   position: relative;
   left: 20%;
@@ -77,21 +77,21 @@
   transform: translateX(-50%);
   transition: background-color 0.3s;
 }
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .item-nav > a {
+.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item > a {
   min-height: 80px;
 }
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .item-nav > a:before {
+.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item > a:before {
   left: 50%;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav.is-active a:before,
-.nav--fixed > .item-depth.depth-1 > .item-nav a:hover:before {
+.nav--fixed > .item-depth.depth-1 > .nav-item.is-active a:before,
+.nav--fixed > .item-depth.depth-1 > .nav-item a:hover:before {
   background-color: #ff5a60;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav.is-active a span:after,
-.nav--fixed > .item-depth.depth-1 > .item-nav a:hover span:after {
+.nav--fixed > .item-depth.depth-1 > .nav-item.is-active a span:after,
+.nav--fixed > .item-depth.depth-1 > .nav-item a:hover span:after {
   background-color: #303748;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav span {
+.nav--fixed > .item-depth.depth-1 > .nav-item span {
   display: block;
   height: 0;
   line-height: 1.2;
@@ -101,7 +101,7 @@
   transition: .3s;
   opacity: 0;
 }
-.nav--fixed > .item-depth.depth-1 > .item-nav span:after {
+.nav--fixed > .item-depth.depth-1 > .nav-item span:after {
   content: "";
   position: absolute;
   bottom: -15px;
@@ -112,7 +112,7 @@
   background: #ff272f;
   transition: .3s;
 }
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .item-nav span {
+.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item span {
   height: auto;
   margin: 15px 0;
   opacity: 1;
@@ -132,14 +132,14 @@
   transition: .3s;
   box-sizing: border-box;
 }
-.nav--fixed > .item-depth .depth-2 .item-nav {
+.nav--fixed > .item-depth .depth-2 .nav-item {
   margin-bottom: 20px;
 }
-.nav--fixed > .item-depth .depth-2 .item-nav.is-parent > a {
+.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a {
   position: relative;
 }
-.nav--fixed > .item-depth .depth-2 .item-nav.is-parent > a:before,
-.nav--fixed > .item-depth .depth-2 .item-nav.is-parent > a:after {
+.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:before,
+.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
   content: "";
   position: absolute;
   top: 6px;
@@ -151,14 +151,14 @@
   transform: rotate(-45deg);
   transition: transform .3s;
 }
-.nav--fixed > .item-depth .depth-2 .item-nav.is-parent > a:after {
+.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
   right: 4px;
   transform: rotate(45deg);
 }
-.nav--fixed > .item-depth .depth-2 .item-nav.is-active > a:before {
+.nav--fixed > .item-depth .depth-2 .nav-item.is-active > a:before {
   transform: rotate(45deg);
 }
-.nav--fixed > .item-depth .depth-2 .item-nav.is-active > a:after {
+.nav--fixed > .item-depth .depth-2 .nav-item.is-active > a:after {
   transform: rotate(-45deg);
 }
 .nav--fixed > .item-depth .depth-2 .is-active > .depth-3 {
@@ -169,14 +169,14 @@
   z-index: 45;
   transform: translateX(0);
 }
-.nav--fixed > .item-depth .is-active .depth-2 .item-nav + .item-nav {
+.nav--fixed > .item-depth .is-active .depth-2 .nav-item + .nav-item {
   margin-top: 20px 15px;
 }
 .nav--fixed > .item-depth .depth-3 {
   display: none;
   padding: 15px;
 }
-.nav--fixed > .item-depth .depth-3 .item-nav {
+.nav--fixed > .item-depth .depth-3 .nav-item {
   margin-bottom: 15px;
 }
 .nav--fixed > .item-depth .depth-3 a {

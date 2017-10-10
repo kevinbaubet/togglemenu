@@ -12,10 +12,10 @@
   margin: 0;
   padding: 0;
 }
-.togglemenu-mega .item-nav {
+.togglemenu-mega .nav-item {
   list-style: none;
 }
-.togglemenu-mega .item-nav a {
+.togglemenu-mega .nav-item a {
   display: block;
   padding: 10px 20px;
   color: #303748;
@@ -24,14 +24,14 @@
   background: #fff;
   transition: .3s;
 }
-.togglemenu-mega .item-nav a:hover {
+.togglemenu-mega .nav-item a:hover {
   color: #fff;
   background-color: #ff5a60;
 }
-.togglemenu-mega .depth-1 > .item-nav {
+.togglemenu-mega .depth-1 > .nav-item {
   display: inline-block;
 }
-.togglemenu-mega .depth-1 > .item-nav + .item-nav {
+.togglemenu-mega .depth-1 > .nav-item + .nav-item {
   margin-left: 10px;
 }
 .togglemenu-mega .togglemenu-close {
@@ -146,13 +146,13 @@
 .nav--mega .menu-tertiary .title--h3 {
   color: #fff;
 }
-.nav--mega .menu-secondary .item-nav a,
-.nav--mega .menu-tertiary .item-nav a {
+.nav--mega .menu-secondary .nav-item a,
+.nav--mega .menu-tertiary .nav-item a {
   color: #fff;
   background: none;
 }
-.nav--mega .menu-secondary .item-nav a:hover,
-.nav--mega .menu-tertiary .item-nav a:hover {
+.nav--mega .menu-secondary .nav-item a:hover,
+.nav--mega .menu-tertiary .nav-item a:hover {
   background-color: #303748;
 }
 .nav--mega .menu-secondary {

@@ -8,11 +8,11 @@
   margin: 0;
   padding: 0;
 }
-.togglemenu-hover .item-nav {
+.togglemenu-hover .nav-item {
   position: relative;
   list-style: none;
 }
-.togglemenu-hover .item-nav a {
+.togglemenu-hover .nav-item a {
   display: block;
   padding: 10px 20px;
   color: #303748;
@@ -21,15 +21,15 @@
   background: #fff;
   transition: .3s;
 }
-.togglemenu-hover .item-nav a:hover {
+.togglemenu-hover .nav-item a:hover {
   color: #fff;
   background-color: #ff5a60;
 }
-.togglemenu-hover .depth-1 > .item-nav {
+.togglemenu-hover .depth-1 > .nav-item {
   position: relative;
   display: inline-block;
 }
-.togglemenu-hover .depth-1 > .item-nav + .item-nav {
+.togglemenu-hover .depth-1 > .nav-item + .nav-item {
   margin-left: 10px;
 }
 .togglemenu-hover .is-parent > .item-depth {

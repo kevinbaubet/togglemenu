@@ -27,7 +27,7 @@
         z-index: -1;
         width: 100%;
         height: 150%;
-        background-color: rgba(red(@color-tertiary), green(@color-tertiary), blue(@color-tertiary), .9);
+        background-color: fade(@color-tertiary, 90%);
     }
 
     .is-togglemenuOpen & {
@@ -90,6 +90,8 @@
         transform: translateY(-50%) skewY(8deg);
 
         .item-depth {
+            overflow: visible;
+
             .item-depth {
                 position: absolute;
                 top: 50%;
@@ -105,8 +107,9 @@
                 opacity: 1;
             }
         }
-        .item-nav {
+        .nav-item {
             a {
+                position: relative;
                 color: #fff;
                 text-transform: uppercase;
                 transition: color .3s;
@@ -115,13 +118,13 @@
             &.is-active > a {
                 color: @color-primary;
             }
-            + .item-nav > a {
+            + .nav-item > a {
                 border: 0;
             }
         }
 
         .depth-1 {
-            > .item-nav {
+            > .nav-item {
                 width: 20%;
                 margin-left: 15%;
             }

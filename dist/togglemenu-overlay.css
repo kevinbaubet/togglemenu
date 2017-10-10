@@ -75,6 +75,9 @@
   width: 100%;
   transform: translateY(-50%) skewY(8deg);
 }
+.togglemenu-overlay .togglemenu-menu .item-depth {
+  overflow: visible;
+}
 .togglemenu-overlay .togglemenu-menu .item-depth .item-depth {
   position: absolute;
   top: 50%;
@@ -89,19 +92,20 @@
   transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
-.togglemenu-overlay .togglemenu-menu .item-nav a {
+.togglemenu-overlay .togglemenu-menu .nav-item a {
+  position: relative;
   color: #fff;
   text-transform: uppercase;
   transition: color .3s;
 }
-.togglemenu-overlay .togglemenu-menu .item-nav a:hover,
-.togglemenu-overlay .togglemenu-menu .item-nav.is-active > a {
+.togglemenu-overlay .togglemenu-menu .nav-item a:hover,
+.togglemenu-overlay .togglemenu-menu .nav-item.is-active > a {
   color: #ff5a60;
 }
-.togglemenu-overlay .togglemenu-menu .item-nav + .item-nav > a {
+.togglemenu-overlay .togglemenu-menu .nav-item + .nav-item > a {
   border: 0;
 }
-.togglemenu-overlay .togglemenu-menu .depth-1 > .item-nav {
+.togglemenu-overlay .togglemenu-menu .depth-1 > .nav-item {
   width: 20%;
   margin-left: 15%;
 }
