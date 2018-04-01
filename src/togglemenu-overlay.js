@@ -1,12 +1,12 @@
 (function ($) {
     'use strict';
 
-    $.ToggleMenuOverlay = function (ToggleMenu, options) {
+    $.ToggleMenuOverlay = function (toggleMenu, options) {
         // Héritage
-        this.ToggleMenu = ToggleMenu;
+        this.toggleMenu = toggleMenu;
 
         // Config
-        $.extend(true, (this.settings = {}), this.ToggleMenu.settings, $.ToggleMenuOverlay.defaults, options);
+        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuOverlay.defaults, options);
 
         // Éléments
         this.elements = this.settings.elements;
@@ -17,8 +17,10 @@
 
         // Init
         if (this.prepareOptions()) {
-            this.load();
+            return this.load();
         }
+
+        return false;
     };
 
     $.ToggleMenuOverlay.defaults = {
@@ -56,20 +58,20 @@
          */
         prepareOptions: function () {
             // Classes
-            this.ToggleMenu.replacePrefixClass.call(this);
+            this.toggleMenu.replacePrefixClass.call(this);
 
             // Éléments
             if (this.elements.toggle === undefined) {
                 this.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
                 if (this.elements.toggle.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Missing elements.toggle parameter');
+                    this.toggleMenu.setLog('error', 'Missing elements.toggle parameter');
                     return false;
                 }
             }
 
             if (this.elements.content.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing elements.content.menu parameter');
+                this.toggleMenu.setLog('error', 'Missing elements.content.menu parameter');
                 return false;
             }
 
@@ -83,7 +85,7 @@
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
-                    ToggleMenuOverlay: this
+                    toggleMenuOverlay: this
                 });
             }
 
@@ -96,10 +98,12 @@
             // User callback
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
-                    ToggleMenuOverlay: this,
+                    toggleMenuOverlay: this,
                     elements: this.elements
                 });
             }
+
+            return this;
         },
 
         /**
@@ -114,13 +118,15 @@
             // User callback
             if (this.settings.beforeWrap !== undefined) {
                 this.settings.beforeWrap.call({
-                    ToggleMenuOverlay: this,
+                    toggleMenuOverlay: this,
                     wrapper: this.elements.wrapper
                 });
             }
 
             // Ajout du wrapper
-            this.elements.wrapper.appendTo(this.ToggleMenu.elements.body);
+            this.elements.wrapper.appendTo(this.toggleMenu.elements.body);
+
+            return this;
         },
 
         /**
@@ -128,6 +134,8 @@
          */
         unWrap: function () {
             this.elements.wrapper.remove();
+
+            return this;
         },
 
         /**
@@ -160,7 +168,7 @@
                         self.elements[type] = content.parent();
 
                         if (self.elements.items === undefined) {
-                            self.elements.items = self.ToggleMenu.getItemsParent(content.find('li'));
+                            self.elements.items = self.toggleMenu.getItemsParent(content.find('li'));
 
                         } else if (typeof self.elements.items === 'function') {
                             self.elements.items = self.elements.items(content);
@@ -171,7 +179,7 @@
                 // User callback
                 if (self.settings.onAddContent !== undefined) {
                     self.settings.onAddContent.call({
-                        ToggleMenuOverlay: self,
+                        toggleMenuOverlay: self,
                         type: type,
                         element: element,
                         content: content,
@@ -179,6 +187,8 @@
                     });
                 }
             });
+
+            return self;
         },
 
         /**
@@ -195,11 +205,13 @@
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
-                    ToggleMenuOverlay: self,
+                    toggleMenuOverlay: self,
                     elements: self.elements,
                     events: self.events
                 });
             }
+
+            return self;
         },
 
         /**
@@ -209,8 +221,8 @@
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function () {
-                    var item = $(this);
+                self.elements.items.each(function (i, item) {
+                    item = $(item);
 
                     // Events
                     if (self.elements.itemLink !== null) {
@@ -227,48 +239,52 @@
                     // User callback
                     if (self.settings.afterItemHandler !== undefined) {
                         self.settings.afterItemHandler.call({
-                            ToggleMenuOverlay: self,
+                            toggleMenuOverlay: self,
                             elements: self.elements,
                             item: item
                         });
                     }
                 });
             }
+
+            return self;
         },
 
         /**
-         * Ouverture/fermeture du ToggleMenu
+         * Ouverture/fermeture du toggleMenu
          */
         toggle: function () {
             var self = this;
 
             // Statut
-            self.ToggleMenu.elements.body.toggleClass(self.settings.classes.open);
-            self.isOpen = (self.ToggleMenu.elements.body.hasClass(self.settings.classes.open));
+            self.toggleMenu.elements.body.toggleClass(self.settings.classes.open);
+            self.isOpen = (self.toggleMenu.elements.body.hasClass(self.settings.classes.open));
 
             // A la fermeture du menu, on ferme tous les sous-menus
             if (!self.isOpen) {
                 self.closeSubmenus();
-                $(document).off('keyup.togglemenuOverlay');
+                $(document).off('keydown.togglemenuOverlay');
             }
 
             // Si le menu est ouvert, on ajoute un événement pour le fermer avec "echap"
             if (self.settings.closeOnEscape && self.isOpen) {
-                $(document).one('keyup.togglemenuOverlay', function (keyupEvent) {
-                    if (keyupEvent.keyCode === 27) {
+                $(document).one('keydown.togglemenuOverlay', function (event) {
+                    if (event.keyCode === 27) {
                         self.toggle();
                     }
                 });
             }
 
             // User callback
-            if (this.settings.onToggle !== undefined) {
-                this.settings.onToggle.call({
-                    ToggleMenuOverlay: this,
-                    body: this.ToggleMenu.elements.body,
-                    isOpen: this.isOpen
+            if (self.settings.onToggle !== undefined) {
+                self.settings.onToggle.call({
+                    toggleMenuOverlay: self,
+                    body: self.toggleMenu.elements.body,
+                    isOpen: self.isOpen
                 });
             }
+
+            return self;
         },
 
         /**
@@ -284,10 +300,12 @@
             // User callback
             if (this.settings.onToggleSubmenu !== undefined) {
                 this.settings.onToggleSubmenu.call({
-                    ToggleMenuOverlay: this,
+                    toggleMenuOverlay: this,
                     item: item
                 });
             }
+
+            return this;
         },
 
         /**
@@ -317,6 +335,8 @@
                     itemChildren.removeClass(this.settings.classes.active);
                 }
             }
+
+            return this;
         },
 
         /**
@@ -338,16 +358,18 @@
                 self.elements[element].off(event);
             });
             if (self.elements.itemLink !== null) {
-                self.elements.items.each(function () {
-                    self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
+                self.elements.items.each(function (i, item) {
+                    self.elements.itemLink($(item)).off('click.togglemenu.itemLink');
                 });
             }
-            $(document).off('keyup.togglemenuOverlay');
+            $(document).off('keydown.togglemenuOverlay');
 
             // Suppression des classes "copy"
             $.each(self.elements.content, function (type, element) {
                 element.removeClass(self.settings.classes.copy);
             });
+
+            return self;
         }
     };
 })(jQuery);

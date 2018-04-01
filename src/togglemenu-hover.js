@@ -1,12 +1,12 @@
 (function ($) {
     'use strict';
 
-    $.ToggleMenuHover = function (ToggleMenu, options) {
+    $.ToggleMenuHover = function (toggleMenu, options) {
         // Héritage
-        this.ToggleMenu = ToggleMenu;
+        this.toggleMenu = toggleMenu;
 
         // Config
-        $.extend(true, (this.settings = {}), this.ToggleMenu.settings, $.ToggleMenuHover.defaults, options);
+        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuHover.defaults, options);
 
         // Éléments
         this.elements = this.settings.elements;
@@ -25,8 +25,10 @@
 
         // Init
         if (this.prepareOptions()) {
-            this.load();
+            return this.load();
         }
+
+        return false;
     };
 
     $.ToggleMenuHover.defaults = {
@@ -40,7 +42,7 @@
         },
         disableItemsClick: false,
         interval: 100,
-        timeout: 0,
+        timeout: 200,
         onLoad: undefined,
         afterEventsHandler: undefined,
         onComplete: undefined,
@@ -56,12 +58,12 @@
          */
         prepareOptions: function () {
             if (this.elements.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing elements.menu parameter');
+                this.toggleMenu.setLog('error', 'Missing elements.menu parameter');
                 return false;
             }
 
             if (this.elements.items === undefined) {
-                this.elements.items = this.ToggleMenu.getItemsParent(this.elements.menu.find('li'));
+                this.elements.items = this.toggleMenu.getItemsParent(this.elements.menu.find('li'));
             }
 
             // Si aucun élément parent, pas besoin du display
@@ -75,7 +77,7 @@
                 }
 
                 if (this.elements.itemsLink.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Missing elements.itemsLink parameter');
+                    this.toggleMenu.setLog('error', 'Missing elements.itemsLink parameter');
                     return false;
                 }
             }
@@ -90,7 +92,7 @@
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
-                    ToggleMenuHover: this
+                    toggleMenuHover: this
                 });
             }
 
@@ -100,10 +102,12 @@
             // User callback
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
-                    ToggleMenuHover: this,
+                    toggleMenuHover: this,
                     elements: this.elements
                 });
             }
+
+            return this;
         },
 
         /**
@@ -112,11 +116,11 @@
         eventsHandler: function () {
             var self = this;
 
-            self.elements.items.on((self.events.items = 'focus.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu'), function (event) {
+            self.elements.items.on((self.events.items = 'focusin.togglemenu focusout.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu'), function (event) {
                 var options = {
                     event: $.extend({}, event),
                     item: this,
-                    $item: $(this)
+                    $item: $(event.currentTarget)
                 };
 
                 // Clear le timeout de l'item
@@ -125,7 +129,7 @@
                 }
 
                 // Hover
-                if (options.event.type === 'mouseenter' || options.event.type === 'focus') {
+                if (options.event.type === 'mouseenter' || options.event.type === 'focusin') {
                     // On enregistre la position inital de la souris
                     self.setTrackPosition('previous', options.event);
 
@@ -152,7 +156,7 @@
                             options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
                             options.item.hoverState = false;
 
-                            return self.onOut.call($.extend({ToggleMenuHover: self}, options));
+                            return self.onOut.call($.extend({toggleMenuHover: self}, options));
                         }, self.settings.timeout);
                     }
                 }
@@ -168,11 +172,13 @@
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
-                    ToggleMenuHover: self,
+                    toggleMenuHover: self,
                     elements: self.elements,
                     events: self.events
                 });
             }
+
+            return self;
         },
 
         /**
@@ -185,6 +191,8 @@
             type = (type === 'previous') ? 'previousPosition' : 'currentPosition';
             this[type].x = event.pageX;
             this[type].y = event.pageY;
+
+            return this;
         },
 
         /**
@@ -202,7 +210,7 @@
                 options.$item.off('mousemove.togglemenu');
                 options.item.hoverState = true;
 
-                return self.onOver.call($.extend({ToggleMenuHover: self}, options));
+                return self.onOver.call($.extend({toggleMenuHover: self}, options));
 
             } else {
                 // On défini les positions précédentes comme actuelles
@@ -214,32 +222,38 @@
                     self.comparePosition(options);
                 }, self.settings.interval);
             }
+
+            return self;
         },
 
         /**
          * Callback au hover
          *
-         * @param {ToggleMenuHover, options de l'item}
+         * @param {toggleMenuHover, options de l'item}
          */
         onOver: function () {
-            this.$item.addClass(this.ToggleMenuHover.settings.classes.active);
+            this.$item.addClass(this.toggleMenuHover.settings.classes.active);
 
-            if (this.ToggleMenuHover.settings.onOver !== undefined) {
-                this.ToggleMenuHover.settings.onOver.call(this);
+            if (this.toggleMenuHover.settings.onOver !== undefined) {
+                this.toggleMenuHover.settings.onOver.call(this);
             }
+
+            return this;
         },
 
         /**
          * Callback au leave
          *
-         * @param {ToggleMenuHover, options de l'item}
+         * @param {toggleMenuHover, options de l'item}
          */
         onOut: function () {
-            this.$item.removeClass(this.ToggleMenuHover.settings.classes.active);
+            this.$item.removeClass(this.toggleMenuHover.settings.classes.active);
 
-            if (this.ToggleMenuHover.settings.onOut !== undefined) {
-                this.ToggleMenuHover.settings.onOut.call(this);
+            if (this.toggleMenuHover.settings.onOut !== undefined) {
+                this.toggleMenuHover.settings.onOut.call(this);
             }
+
+            return this;
         },
 
         /**
@@ -252,6 +266,8 @@
             $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
+
+            return self;
         }
     };
 })(jQuery);

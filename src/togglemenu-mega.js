@@ -1,12 +1,12 @@
 (function ($) {
     'use strict';
 
-    $.ToggleMenuMega = function (ToggleMenu, options) {
+    $.ToggleMenuMega = function (toggleMenu, options) {
         // Héritage
-        this.ToggleMenu = ToggleMenu;
+        this.toggleMenu = toggleMenu;
 
         // Config
-        $.extend(true, (this.settings = {}), this.ToggleMenu.settings, $.ToggleMenuMega.defaults, options);
+        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuMega.defaults, options);
 
         // Éléments
         this.elements = this.settings.elements;
@@ -17,8 +17,10 @@
 
         // Init
         if (this.prepareOptions()) {
-            this.load();
+            return this.load();
         }
+
+        return false;
     };
 
     $.ToggleMenuMega.defaults = {
@@ -52,15 +54,15 @@
          */
         prepareOptions: function () {
             // Classes
-            this.ToggleMenu.replacePrefixClass.call(this);
+            this.toggleMenu.replacePrefixClass.call(this);
 
             if (this.elements.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing elements.menu parameter');
+                this.toggleMenu.setLog('error', 'Missing elements.menu parameter');
                 return false;
             }
 
             if (this.elements.items === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing elements.items parameter');
+                this.toggleMenu.setLog('error', 'Missing elements.items parameter');
                 return false;
             }
 
@@ -74,7 +76,7 @@
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
-                    ToggleMenuMega: this
+                    toggleMenuMega: this
                 });
             }
 
@@ -88,10 +90,12 @@
             // User callback
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
-                    ToggleMenuMega: this,
+                    toggleMenuMega: this,
                     elements: this.elements
                 });
             }
+
+            return this;
         },
 
         /**
@@ -105,13 +109,15 @@
             // User callback
             if (this.settings.beforeAddOverlay !== undefined) {
                 this.settings.beforeAddOverlay.call({
-                    ToggleMenuMega: this,
+                    toggleMenuMega: this,
                     overlay: this.elements.overlay
                 });
             }
 
             // Ajout de l'overlay
-            this.elements.overlay.appendTo(this.ToggleMenu.elements.body);
+            this.elements.overlay.appendTo(this.toggleMenu.elements.body);
+
+            return this;
         },
 
         /**
@@ -119,6 +125,8 @@
          */
         removeOverlay: function () {
             this.elements.overlay.remove();
+
+            return this;
         },
 
         /**
@@ -144,11 +152,13 @@
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
-                    ToggleMenuMega: self,
+                    toggleMenuMega: self,
                     elements: self.elements,
                     events: self.events
                 });
             }
+
+            return self;
         },
 
         /**
@@ -158,26 +168,27 @@
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function () {
-                    var item = $(this);
+                self.elements.items.each(function (i, item) {
+                    item = $(item);
 
                     // Events
                     self.elements.itemLink(item).on('click.togglemenu.itemLink', function (event) {
                         event.preventDefault();
-
                         self.toggleSubmenu(item);
                     });
 
                     // User callback
                     if (self.settings.afterItemHandler !== undefined) {
                         self.settings.afterItemHandler.call({
-                            ToggleMenuMega: self,
+                            toggleMenuMega: self,
                             elements: self.elements,
                             item: item
                         });
                     }
                 });
             }
+
+            return self;
         },
 
         /**
@@ -194,7 +205,7 @@
                 item.toggleClass(self.settings.classes.active);
 
                 if (self.settings.overlay) {
-                    self.ToggleMenu.elements.body.toggleClass(self.settings.classes.open);
+                    self.toggleMenu.elements.body.toggleClass(self.settings.classes.open);
                 }
 
                 // Fermeture avec "echap"
@@ -207,14 +218,15 @@
                 }
             }
 
-
             // User callback
             if (self.settings.onToggleSubmenu !== undefined) {
                 self.settings.onToggleSubmenu.call({
-                    ToggleMenuMega: self,
+                    toggleMenuMega: self,
                     item: item
                 });
             }
+
+            return self;
         },
 
         /**
@@ -232,7 +244,7 @@
 
                 // Overlay
                 if (this.settings.overlay) {
-                    this.ToggleMenu.elements.body.removeClass(this.settings.classes.open);
+                    this.toggleMenu.elements.body.removeClass(this.settings.classes.open);
                 }
             }
 
@@ -249,6 +261,8 @@
                     itemChildren.removeClass(this.settings.classes.active);
                 }
             }
+
+            return this;
         },
 
         /**
@@ -266,10 +280,12 @@
             $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function () {
-                self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
+            self.elements.items.each(function (i, item) {
+                self.elements.itemLink($(item)).off('click.togglemenu.itemLink');
             });
             $(document).off('keyup.togglemenuMega');
+
+            return self;
         }
     };
 })(jQuery);

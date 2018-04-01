@@ -26,7 +26,7 @@
   transition: .3s;
 }
 
-.togglemenu-hover .nav-item a:hover {
+.togglemenu-hover .nav-item a:hover, .togglemenu-hover .nav-item a:focus {
   color: #fff;
   background-color: #ff5a60;
 }

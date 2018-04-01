@@ -56,6 +56,8 @@
          */
         setOptions: function (display, options) {
             this.options[display] = options;
+
+            return this;
         },
 
         /**
@@ -106,6 +108,8 @@
             if (this.settings.onDisplayComplete !== undefined) {
                 this.settings.onDisplayComplete.call(this);
             }
+
+            return this;
         },
 
         /**
@@ -130,11 +134,9 @@
                 // On remet le display courant par défaut
                 this.display.current = null;
                 delete this.display.className;
-
-                return true;
             }
 
-            return false;
+            return this;
         },
 
         /**
@@ -167,11 +169,10 @@
 
             if (search.length) {
                 search.each(function (i, item) {
-                    var li = $(item);
-                    var ul = li.children('ul');
+                    item = $(item);
 
-                    if (ul.length) {
-                        itemsParent.push(li.get(0));
+                    if (item.children('ul').length) {
+                        itemsParent.push(item.get(0));
                     }
                 });
             }

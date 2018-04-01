@@ -1,12 +1,12 @@
 (function ($) {
     'use strict';
 
-    $.ToggleMenuFixed = function (ToggleMenu, options) {
+    $.ToggleMenuFixed = function (toggleMenu, options) {
         // Héritage
-        this.ToggleMenu = ToggleMenu;
+        this.toggleMenu = toggleMenu;
 
         // Config
-        $.extend(true, (this.settings = {}), this.ToggleMenu.settings, $.ToggleMenuFixed.defaults, options);
+        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuFixed.defaults, options);
 
         // Éléments
         this.elements = this.settings.elements;
@@ -18,8 +18,10 @@
 
         // Init
         if (this.prepareOptions()) {
-            this.load();
+            return this.load();
         }
+
+        return false;
     };
 
     $.ToggleMenuFixed.defaults = {
@@ -33,7 +35,7 @@
         },
         toggle: true,
         classes: {
-            open: 'is-$prefixOpen',
+            open: 'is-{prefix}Open',
             active: 'is-active'
         },
         onLoad: undefined,
@@ -55,7 +57,7 @@
 
             // Classes
             $.each(self.settings.classes, function (key, value) {
-                self.settings.classes[key] = value.replace(/\$prefix/, self.settings.classes.prefix);
+                self.settings.classes[key] = value.replace(/{prefix}/, self.settings.classes.prefix);
             });
 
             // Éléments
@@ -63,18 +65,18 @@
                 self.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
                 if (self.elements.toggle.length === 0) {
-                    self.ToggleMenu.setLog('error', 'Missing elements.toggle parameter');
+                    self.toggleMenu.setLog('error', 'Missing elements.toggle parameter');
                     return false;
                 }
             }
 
             if (self.elements.menu === undefined) {
-                self.ToggleMenu.setLog('error', 'Missing element.menu parameter');
+                self.toggleMenu.setLog('error', 'Missing element.menu parameter');
                 return false;
             }
 
             if (self.elements.items === undefined) {
-                self.elements.items = self.ToggleMenu.getItemsParent(self.elements.menu.find('li'));
+                self.elements.items = self.toggleMenu.getItemsParent(self.elements.menu.find('li'));
 
             } else if (typeof self.elements.items === 'function') {
                 self.elements.items = self.elements.items(content);
@@ -90,7 +92,7 @@
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
-                    ToggleMenuFixed: this
+                    toggleMenuFixed: this
                 });
             }
 
@@ -101,10 +103,12 @@
             // User callback
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
-                    ToggleMenuFixed: this,
+                    toggleMenuFixed: this,
                     elements: this.elements
                 });
             }
+
+            return this;
         },
 
         /**
@@ -127,11 +131,13 @@
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
-                    ToggleMenuFixed: self,
+                    toggleMenuFixed: self,
                     elements: self.elements,
                     events: self.events
                 });
             }
+
+            return self;
         },
 
         /**
@@ -141,8 +147,8 @@
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function () {
-                    var item = $(this);
+                self.elements.items.each(function (i, item) {
+                    item = $(item);
 
                     // Events
                     self.elements.itemLink(item).on('click.togglemenu.itemLink', function (event) {
@@ -157,7 +163,7 @@
                     // User callback
                     if (self.settings.afterItemHandler !== undefined) {
                         self.settings.afterItemHandler.call({
-                            ToggleMenuFixed: self,
+                            toggleMenuFixed: self,
                             elements: self.elements,
                             item: item
                         });
@@ -167,12 +173,12 @@
         },
 
         /**
-         * Ouverture/fermeture du ToggleMenu
+         * Ouverture/fermeture du toggleMenu
          */
         toggle: function () {
             // Statut
-            this.ToggleMenu.elements.body.toggleClass(this.settings.classes.open);
-            this.isOpen = (this.ToggleMenu.elements.body.hasClass(this.settings.classes.open));
+            this.toggleMenu.elements.body.toggleClass(this.settings.classes.open);
+            this.isOpen = (this.toggleMenu.elements.body.hasClass(this.settings.classes.open));
 
             if (!this.isOpen) {
                 this.closeSubmenus();
@@ -181,8 +187,8 @@
             // User callback
             if (this.settings.onToggle !== undefined) {
                 this.settings.onToggle.call({
-                    ToggleMenuFixed: this,
-                    body: this.ToggleMenu.elements.body,
+                    toggleMenuFixed: this,
+                    body: this.toggleMenu.elements.body,
                     isOpen: this.isOpen
                 });
             }
@@ -201,7 +207,7 @@
             // User callback
             if (this.settings.onToggleSubmenu !== undefined) {
                 this.settings.onToggleSubmenu.call({
-                    ToggleMenuFixed: this,
+                    toggleMenuFixed: this,
                     item: item
                 });
             }
@@ -251,9 +257,11 @@
             $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function () {
-                self.elements.itemLink($(this)).off('click.togglemenu.itemLink');
+            self.elements.items.each(function (i, item) {
+                self.elements.itemLink($(item)).off('click.togglemenu.itemLink');
             });
+
+            return self;
         }
     };
 })(jQuery);

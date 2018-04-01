@@ -107,8 +107,9 @@ $menu-width: 300px;
     }
     &.is-togglemenuOpen .page {
         position: fixed;
+        margin: 2px 0 0 5%;
         width: 100%;
-        transform: translateX($menu-width) scale(.9);
+        transform: translateX($menu-width);
         user-select: none;
     }
 }

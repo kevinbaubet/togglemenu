@@ -26,7 +26,8 @@ $menu-width: 150px;
             background: #fff;
             transition: .3s;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 color: #fff;
                 background-color: $color-primary;
             }

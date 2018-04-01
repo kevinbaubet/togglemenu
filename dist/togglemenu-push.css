@@ -122,10 +122,11 @@
 
 .togglemenu-push.is-togglemenuOpen .page {
   position: fixed;
+  margin: 0.125rem 0 0 5%;
   width: 100%;
-  -webkit-transform: translateX(300px) scale(0.9);
-      -ms-transform: translateX(300px) scale(0.9);
-          transform: translateX(300px) scale(0.9);
+  -webkit-transform: translateX(300px);
+      -ms-transform: translateX(300px);
+          transform: translateX(300px);
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;

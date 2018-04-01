@@ -1,12 +1,12 @@
 (function ($) {
     'use strict';
 
-    $.ToggleMenuPush = function (ToggleMenu, options) {
+    $.ToggleMenuPush = function (toggleMenu, options) {
         // Héritage
-        this.ToggleMenu = ToggleMenu;
+        this.toggleMenu = toggleMenu;
 
         // Config
-        $.extend(true, (this.settings = {}), this.ToggleMenu.settings, $.ToggleMenuPush.defaults, options);
+        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuPush.defaults, options);
 
         // Éléments
         this.elements = this.settings.elements;
@@ -18,8 +18,10 @@
 
         // Init
         if (this.prepareOptions()) {
-            this.load();
+            return this.load();
         }
+
+        return false;
     };
 
     $.ToggleMenuPush.defaults = {
@@ -69,28 +71,28 @@
          */
         prepareOptions: function () {
             // Classes
-            this.ToggleMenu.replacePrefixClass.call(this);
+            this.toggleMenu.replacePrefixClass.call(this);
 
             // Éléments
             if (this.elements.toggle === undefined) {
                 this.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
                 if (this.elements.toggle.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Missing elements.toggle parameter');
+                    this.toggleMenu.setLog('error', 'Missing elements.toggle parameter');
                     return false;
                 }
             }
 
             if (this.elements.content.menu === undefined) {
-                this.ToggleMenu.setLog('error', 'Missing element.content.menu parameter');
+                this.toggleMenu.setLog('error', 'Missing element.content.menu parameter');
                 return false;
             }
 
             if (this.elements.page === undefined) {
-                this.elements.page = this.ToggleMenu.elements.body.children('div:first');
+                this.elements.page = this.toggleMenu.elements.body.children('div:first');
 
                 if (this.elements.page.length === 0) {
-                    this.ToggleMenu.setLog('error', 'Missing element.page parameter');
+                    this.toggleMenu.setLog('error', 'Missing element.page parameter');
                     return false;
                 }
             }
@@ -105,7 +107,7 @@
             // User callback
             if (this.settings.onLoad !== undefined) {
                 this.settings.onLoad.call({
-                    ToggleMenuPush: this
+                    toggleMenuPush: this
                 });
             }
 
@@ -118,11 +120,13 @@
             // User callback
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
-                    ToggleMenuPush: this,
+                    toggleMenuPush: this,
                     elements: this.elements,
                     wrapper: this.elements.wrapper
                 });
             }
+
+            return this;
         },
 
         /**
@@ -137,13 +141,15 @@
             // User callback
             if (this.settings.beforeWrap !== undefined) {
                 this.settings.beforeWrap.call({
-                    ToggleMenuPush: this,
+                    toggleMenuPush: this,
                     wrapper: this.elements.wrapper
                 });
             }
 
             // Ajout du wrapper
-            this.elements.wrapper.appendTo(this.ToggleMenu.elements.body);
+            this.elements.wrapper.appendTo(this.toggleMenu.elements.body);
+
+            return this;
         },
 
         /**
@@ -151,6 +157,8 @@
          */
         unWrap: function () {
             this.elements.wrapper.remove();
+
+            return this;
         },
 
         /**
@@ -188,7 +196,7 @@
                     }
                     if (type === 'menu') {
                         if (self.elements.items === undefined) {
-                            self.elements.items = self.ToggleMenu.getItemsParent(content.find('li'));
+                            self.elements.items = self.toggleMenu.getItemsParent(content.find('li'));
 
                         } else if (typeof self.elements.items === 'function') {
                             self.elements.items = self.elements.items(content);
@@ -199,7 +207,7 @@
                 // User callback
                 if (self.settings.onAddContent !== undefined) {
                     self.settings.onAddContent.call({
-                        ToggleMenuPush: self,
+                        toggleMenuPush: self,
                         type: type,
                         element: element,
                         content: content,
@@ -207,6 +215,8 @@
                     });
                 }
             });
+
+            return self;
         },
 
         /**
@@ -230,11 +240,13 @@
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
-                    ToggleMenuPush: self,
+                    toggleMenuPush: self,
                     elements: self.elements,
                     events: self.events
                 });
             }
+
+            return self;
         },
 
         /**
@@ -244,8 +256,8 @@
             var self = this;
 
             if (self.elements.items.length) {
-                self.elements.items.each(function () {
-                    var item = $(this);
+                self.elements.items.each(function (i, item) {
+                    item = $(item);
 
                     // Ajout du layout
                     item.layout = self.getItemLayout(item);
@@ -264,13 +276,15 @@
                     // User callback
                     if (self.settings.afterItemHandler !== undefined) {
                         self.settings.afterItemHandler.call({
-                            ToggleMenuPush: self,
+                            toggleMenuPush: self,
                             elements: self.elements,
                             item: item
                         });
                     }
                 });
             }
+
+            return self;
         },
 
         /**
@@ -338,13 +352,15 @@
                     // User callback
                     if (self.settings.onAddItemContent !== undefined) {
                         self.settings.onAddItemContent.call({
-                            ToggleMenuPush: self,
+                            toggleMenuPush: self,
                             item: item,
                             itemContent: content
                         });
                     }
                 }
             }
+
+            return self;
         },
 
         /**
@@ -354,8 +370,8 @@
             var self = this;
 
             // Statut
-            self.ToggleMenu.elements.body.toggleClass(self.settings.classes.open);
-            self.isOpen = (self.ToggleMenu.elements.body.hasClass(self.settings.classes.open));
+            self.toggleMenu.elements.body.toggleClass(self.settings.classes.open);
+            self.isOpen = (self.toggleMenu.elements.body.hasClass(self.settings.classes.open));
 
             // Événement
             setTimeout(function () {
@@ -376,12 +392,14 @@
             // User callback
             if (self.settings.onToggle !== undefined) {
                 self.settings.onToggle.call({
-                    ToggleMenuPush: self,
-                    body: self.ToggleMenu.elements.body,
+                    toggleMenuPush: self,
+                    body: self.toggleMenu.elements.body,
                     page: self.elements.page,
                     isOpen: self.isOpen
                 });
             }
+
+            return self;
         },
 
         /**
@@ -396,16 +414,18 @@
 
             if (item.layout !== undefined && item.layout === 'panel') {
                 this.elements.wrapper.scrollTop(0);
-                this.ToggleMenu.elements.body.toggleClass(this.settings.classes.submenuOpen);
+                this.toggleMenu.elements.body.toggleClass(this.settings.classes.submenuOpen);
             }
 
             // User callback
             if (this.settings.onToggleSubmenu !== undefined) {
                 this.settings.onToggleSubmenu.call({
-                    ToggleMenuPush: this,
+                    toggleMenuPush: this,
                     item: item
                 });
             }
+
+            return this;
         },
 
         /**
@@ -422,8 +442,8 @@
                 active.removeClass(this.settings.classes.active);
 
                 // Suppression de l'état d'ouverture d'un sous-menu
-                if (this.ToggleMenu.elements.body.hasClass(this.settings.classes.submenuOpen)) {
-                    this.ToggleMenu.elements.body.removeClass(this.settings.classes.submenuOpen);
+                if (this.toggleMenu.elements.body.hasClass(this.settings.classes.submenuOpen)) {
+                    this.toggleMenu.elements.body.removeClass(this.settings.classes.submenuOpen);
                 }
             }
 
@@ -440,6 +460,8 @@
                     itemChildren.removeClass(this.settings.classes.active);
                 }
             }
+
+            return this;
         },
 
         /**
@@ -460,8 +482,8 @@
             $.each(self.events, function (element, event) {
                 self.elements[element].off(event);
             });
-            self.elements.items.each(function () {
-                var item = $(this);
+            self.elements.items.each(function (i, item) {
+                item = $(item);
 
                 self.elements.itemLink(item).off('click.togglemenu.itemLink');
 
@@ -476,6 +498,8 @@
                     element.removeClass(self.settings.classes.copy);
                 }
             });
+
+            return self;
         }
     };
 })(jQuery);
