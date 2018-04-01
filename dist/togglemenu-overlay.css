@@ -12,9 +12,16 @@
   height: 200%;
   z-index: 1005;
   overflow: hidden;
-  transform: translateY(100%) skewY(-8deg);
+  -webkit-transform: translateY(100%) skewY(-8deg);
+      -ms-transform: translateY(100%) skewY(-8deg);
+          transform: translateY(100%) skewY(-8deg);
+  -webkit-transition: -webkit-transform .6s;
+  transition: -webkit-transform .6s;
+  -o-transition: transform .6s;
   transition: transform .6s;
+  transition: transform .6s, -webkit-transform .6s;
 }
+
 .nav--togglemenuOverlay:before {
   content: "";
   position: fixed;
@@ -25,10 +32,14 @@
   height: 150%;
   background-color: rgba(24, 27, 34, 0.9);
 }
+
 .is-togglemenuOpen .nav--togglemenuOverlay {
-  transform: translateY(-25%) skewY(-8deg);
+  -webkit-transform: translateY(-25%) skewY(-8deg);
+      -ms-transform: translateY(-25%) skewY(-8deg);
+          transform: translateY(-25%) skewY(-8deg);
   overflow: visible;
 }
+
 /* ==========================================================================
    TogglemenuOverlay
    ========================================================================== */
@@ -37,91 +48,122 @@
   top: 50px;
   right: 50px;
   z-index: 1050;
-  padding: 15px 50px 15px 20px;
+  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
   line-height: .7;
   font-size: 1.5em;
 }
+
 .togglemenu-overlay .togglemenu-toggle span {
   position: absolute;
   right: 20px;
   top: 50%;
   z-index: 5;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
-.togglemenu-overlay .togglemenu-toggle span:before,
-.togglemenu-overlay .togglemenu-toggle span:after {
+
+.togglemenu-overlay .togglemenu-toggle span:before, .togglemenu-overlay .togglemenu-toggle span:after {
+  -webkit-transition: .3s;
+  -o-transition: .3s;
   transition: .3s;
 }
-.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle {
+
+.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle {
   background-color: #ff5a60;
 }
-.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span {
+
+.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span {
   width: 0;
 }
-.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:before,
-.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:after {
+
+.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:before, .togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:after {
   top: 0;
   right: 20px;
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
-.is-togglemenuOpen.togglemenu-overlay .togglemenu-toggle span:after {
+
+.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:after {
   top: -3px;
-  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
 }
+
 .togglemenu-overlay .togglemenu-menu {
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
-  transform: translateY(-50%) skewY(8deg);
+  -webkit-transform: translateY(-50%) skewY(8deg);
+      -ms-transform: translateY(-50%) skewY(8deg);
+          transform: translateY(-50%) skewY(8deg);
 }
+
 .togglemenu-overlay .togglemenu-menu .item-depth {
   overflow: visible;
 }
+
 .togglemenu-overlay .togglemenu-menu .item-depth .item-depth {
   position: absolute;
   top: 50%;
   z-index: -1;
   border-left: 1px solid rgba(48, 55, 72, 0.2);
-  transform: translate3d(-50%, -50%, 0);
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
   opacity: 0;
+  -webkit-transition: .3s;
+  -o-transition: .3s;
   transition: .3s;
 }
+
 .togglemenu-overlay .togglemenu-menu .item-depth .is-active > .item-depth {
   z-index: 5;
-  transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+          transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
+
 .togglemenu-overlay .togglemenu-menu .nav-item a {
   position: relative;
   color: #fff;
   text-transform: uppercase;
+  -webkit-transition: color .3s;
+  -o-transition: color .3s;
   transition: color .3s;
 }
+
 .togglemenu-overlay .togglemenu-menu .nav-item a:hover,
 .togglemenu-overlay .togglemenu-menu .nav-item.is-active > a {
   color: #ff5a60;
 }
+
 .togglemenu-overlay .togglemenu-menu .nav-item + .nav-item > a {
   border: 0;
 }
+
 .togglemenu-overlay .togglemenu-menu .depth-1 > .nav-item {
   width: 20%;
   margin-left: 15%;
 }
+
 .togglemenu-overlay .togglemenu-menu .depth-2 {
   left: 35%;
   width: 20%;
 }
+
 .togglemenu-overlay .togglemenu-menu .depth-3 {
   left: 100%;
   width: 100%;
 }
+
 .togglemenu-overlay .togglemenu-menu .is-parent > a {
   position: relative;
 }
-.togglemenu-overlay .togglemenu-menu .is-parent > a:before,
-.togglemenu-overlay .togglemenu-menu .is-parent > a:after {
+
+.togglemenu-overlay .togglemenu-menu .is-parent > a:before, .togglemenu-overlay .togglemenu-menu .is-parent > a:after {
   content: "";
   position: absolute;
   top: 27px;
@@ -130,16 +172,23 @@
   width: 10px;
   height: 2px;
   background: #303748;
-  transform: rotate(45deg);
-  transition: background-color 0.3s;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: background-color .3s;
+  -o-transition: background-color .3s;
+  transition: background-color .3s;
 }
+
 .togglemenu-overlay .togglemenu-menu .is-parent > a:after {
   top: 33px;
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
-.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:before,
+
+.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:before, .togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:after,
 .togglemenu-overlay .togglemenu-menu .is-parent > a:hover:before,
-.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:after,
 .togglemenu-overlay .togglemenu-menu .is-parent > a:hover:after {
   background-color: #fff;
 }

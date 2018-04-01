@@ -5,16 +5,20 @@
    Toggle
    ========================================================================== */
 .togglemenu-toggle {
-  padding: 20px;
+  padding: 1.25rem;
   color: #fff;
   border: 0;
   background: #181b22;
   cursor: pointer;
-  transition: background-color 0.3s;
+  -webkit-transition: background-color .3s;
+  -o-transition: background-color .3s;
+  transition: background-color .3s;
 }
+
 .togglemenu-toggle:hover {
   background-color: #ff5a60;
 }
+
 .togglemenu-toggle span {
   display: block;
   width: 20px;
@@ -23,8 +27,8 @@
   font-size: 0;
   background: #fff;
 }
-.togglemenu-toggle span:before,
-.togglemenu-toggle span:after {
+
+.togglemenu-toggle span:before, .togglemenu-toggle span:after {
   content: "";
   display: block;
   position: relative;
@@ -33,9 +37,11 @@
   height: 3px;
   background: #fff;
 }
+
 .togglemenu-toggle span:after {
   top: 5px;
 }
+
 /* ==========================================================================
    Togglemenu
    ========================================================================== */

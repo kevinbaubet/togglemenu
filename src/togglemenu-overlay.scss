@@ -1,9 +1,9 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-@color-primary: #ff5a60;
-@color-secondary: #303748;
-@color-tertiary: #181b22;
+$color-primary: #ff5a60;
+$color-secondary: #303748;
+$color-tertiary: #181b22;
 
 /* ==========================================================================
    Navigation overlay
@@ -27,7 +27,7 @@
         z-index: -1;
         width: 100%;
         height: 150%;
-        background-color: fade(@color-tertiary, 90%);
+        background-color: rgba($color-tertiary, .9);
     }
 
     .is-togglemenuOpen & {
@@ -61,23 +61,22 @@
                 transition: .3s;
             }
         }
+    }
+    &.is-togglemenuOpen .togglemenu-toggle {
+        background-color: $color-primary;
 
-        .is-togglemenuOpen& {
-            background-color: @color-primary;
+        span {
+            width: 0;
 
-            span {
-                width: 0;
-
-                &:before,
-                &:after {
-                    top: 0;
-                    right: 20px;
-                    transform: rotate(-45deg);
-                }
-                &:after {
-                    top: -3px;
-                    transform: rotate(45deg);
-                }
+            &:before,
+            &:after {
+                top: 0;
+                right: 20px;
+                transform: rotate(-45deg);
+            }
+            &:after {
+                top: -3px;
+                transform: rotate(45deg);
             }
         }
     }
@@ -96,7 +95,7 @@
                 position: absolute;
                 top: 50%;
                 z-index: -1;
-                border-left: 1px solid fade(@color-secondary, 20%);
+                border-left: 1px solid rgba($color-secondary, .2);
                 transform: translate3d(-50%, -50%, 0);
                 opacity: 0;
                 transition: .3s;
@@ -116,7 +115,7 @@
             }
             a:hover,
             &.is-active > a {
-                color: @color-primary;
+                color: $color-primary;
             }
             + .nav-item > a {
                 border: 0;
@@ -151,7 +150,7 @@
                     z-index: 5;
                     width: 10px;
                     height: 2px;
-                    background: @color-secondary;
+                    background: $color-secondary;
                     transform: rotate(45deg);
                     transition: background-color .3s;
                 }
