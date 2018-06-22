@@ -171,7 +171,7 @@
                 search.each(function (i, item) {
                     item = $(item);
 
-                    if (item.children('ul').length) {
+                    if (item.find('ul').length) {
                         itemsParent.push(item.get(0));
                     }
                 });

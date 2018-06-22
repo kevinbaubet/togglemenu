@@ -1,10 +1,10 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-$color-primary: #ff5a60;
-$color-secondary: #303748;
-$color-tertiary: #181b22;
-$menu-width: 300px;
+$color--primary: #ff5a60;
+$color--secondary: #303748;
+$color--tertiary: #181b22;
+$menu--width: 300px;
 
 /* ==========================================================================
    Navigation push
@@ -14,8 +14,8 @@ $menu-width: 300px;
     top: 0;
     left: 0;
     z-index: 50;
-    width: $menu-width;
-    height: 100%;
+    width: $menu--width;
+    height: 100vh;
     background: #fff;
     overflow: auto;
     overflow-x: hidden;
@@ -36,7 +36,7 @@ $menu-width: 300px;
 }
 .togglemenu-close {
     padding: 20px;
-    background: $color-tertiary;
+    background: $color--tertiary;
     overflow: hidden;
 
     button {
@@ -48,13 +48,13 @@ $menu-width: 300px;
         height: 50px;
         color: #fff;
         text-indent: -9999px;
-        background: $color-secondary;
+        background: $color--secondary;
         border: 0;
         cursor: pointer;
         transition: background-color .3s;
 
         &:hover {
-            background-color: $color-primary;
+            background-color: $color--primary;
         }
 
         &:before,
@@ -86,14 +86,14 @@ $menu-width: 300px;
             position: relative;
             display: block;
             padding: 20px;
-            color: $color-secondary;
+            color: $color--secondary;
             font-size: 1.5em;
             font-weight: bold;
             text-decoration: none;
         }
 
         + .nav-item > a {
-            border-top: 1px solid rgba($color-secondary, .1);
+            border-top: 1px solid rgba($color--secondary, .1);
         }
     }
 }
@@ -109,7 +109,7 @@ $menu-width: 300px;
         position: fixed;
         margin: 2px 0 0 5%;
         width: 100%;
-        transform: translateX($menu-width);
+        transform: translateX($menu--width);
         user-select: none;
     }
 }
@@ -146,7 +146,7 @@ $menu-width: 300px;
             z-index: 5;
             width: 10px;
             height: 2px;
-            background: $color-secondary;
+            background: $color--secondary;
             transform: rotate(45deg);
             transform-origin: center -3px;
             transition: transform-origin .3s;
@@ -184,7 +184,7 @@ $menu-width: 300px;
             z-index: 5;
             width: 10px;
             height: 2px;
-            background: $color-secondary;
+            background: $color--secondary;
             transform: rotate(45deg);
             transform-origin: right center;
             transition: transform-origin .3s;
@@ -198,7 +198,7 @@ $menu-width: 300px;
         top: 0;
         left: 0;
         z-index: 55;
-        width: $menu-width;
+        width: $menu--width;
         height: 100%;
         background: #fff;
         transform: translateX(-100%);

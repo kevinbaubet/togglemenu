@@ -1,9 +1,9 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-$color-primary: #ff5a60;
-$color-secondary: #303748;
-$color-tertiary: #181b22;
+$color--primary: #ff5a60;
+$color--secondary: #303748;
+$color--tertiary: #181b22;
 
 /* ==========================================================================
    Toggle
@@ -12,12 +12,12 @@ $color-tertiary: #181b22;
     padding: 20px;
     color: #fff;
     border: 0;
-    background: $color-tertiary;
+    background: $color--tertiary;
     cursor: pointer;
     transition: background-color .3s;
 
     &:hover {
-        background-color: $color-primary;
+        background-color: $color--primary;
     }
 
     span {

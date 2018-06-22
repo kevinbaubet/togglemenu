@@ -35,7 +35,7 @@
         elements: {
             menu: undefined,
             items: undefined,
-            itemsLink: undefined
+            itemLink: '> a'
         },
         classes: {
             active: 'is-active'
@@ -69,17 +69,6 @@
             // Si aucun élément parent, pas besoin du display
             if (this.elements.items.length === 0) {
                 return false;
-            }
-
-            if (this.settings.disableItemsClick) {
-                if (this.elements.itemsLink === undefined) {
-                    this.elements.itemsLink = this.elements.items.children('a');
-                }
-
-                if (this.elements.itemsLink.length === 0) {
-                    this.toggleMenu.setLog('error', 'Missing elements.itemsLink parameter');
-                    return false;
-                }
             }
 
             return true;
@@ -164,7 +153,7 @@
 
             // Désativation du click sur les items parent
             if (self.settings.disableItemsClick) {
-                self.elements.itemsLink.on((self.events.itemsLink = 'click.togglemenu'), function (event) {
+                self.elements.items.on((self.events.itemsLink = 'click.togglemenu'), self.elements.itemLink, function (event) {
                     event.preventDefault();
                 });
             }

@@ -1,9 +1,9 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-$color-primary: #ff5a60;
-$color-secondary: #303748;
-$color-tertiary: #181b22;
+$color--primary: #ff5a60;
+$color--secondary: #303748;
+$color--tertiary: #181b22;
 
 /* ==========================================================================
    TogglemenuMega
@@ -19,7 +19,7 @@ $color-tertiary: #181b22;
         a {
             display: block;
             padding: 10px 20px;
-            color: $color-secondary;
+            color: $color--secondary;
             font-size: 1.5em;
             text-decoration: none;
             background: #fff;
@@ -27,7 +27,7 @@ $color-tertiary: #181b22;
 
             &:hover {
                 color: #fff;
-                background-color: $color-primary;
+                background-color: $color--primary;
             }
         }
     }
@@ -52,13 +52,13 @@ $color-tertiary: #181b22;
         height: 50px;
         color: #fff;
         text-indent: -9999px;
-        background: $color-secondary;
+        background: $color--secondary;
         border: 0;
         cursor: pointer;
         transition: background-color .3s;
 
         &:hover {
-            background-color: $color-primary;
+            background-color: $color--primary;
         }
 
         &:before,
@@ -124,7 +124,7 @@ $color-tertiary: #181b22;
     .is-active {
         > a {
             color: #fff;
-            background-color: $color-primary;
+            background-color: $color--primary;
         }
         > .megamenu {
             height: auto;
@@ -159,7 +159,7 @@ $color-tertiary: #181b22;
         right: 0;
         width: 20%;
         height: 100%;
-        background: lighten($color-secondary, 20%);
+        background: lighten($color--secondary, 20%);
 
         .title--h3 {
             color: #fff;
@@ -171,13 +171,13 @@ $color-tertiary: #181b22;
                 background: none;
 
                 &:hover {
-                    background-color: $color-secondary;
+                    background-color: $color--secondary;
                 }
             }
         }
     }
     .menu-secondary {
         right: 20%;
-        background-color: lighten($color-secondary, 10%);
+        background-color: lighten($color--secondary, 10%);
     }
 }

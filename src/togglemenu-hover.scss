@@ -1,9 +1,9 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-$color-primary: #ff5a60;
-$color-secondary: #303748;
-$menu-width: 150px;
+$color--primary: #ff5a60;
+$color--secondary: #303748;
+$menu--width: 150px;
 
 /* ==========================================================================
    TogglemenuHover
@@ -20,7 +20,7 @@ $menu-width: 150px;
         a {
             display: block;
             padding: 10px 20px;
-            color: $color-secondary;
+            color: $color--secondary;
             font-size: 1.5em;
             text-decoration: none;
             background: #fff;
@@ -29,7 +29,7 @@ $menu-width: 150px;
             &:hover,
             &:focus {
                 color: #fff;
-                background-color: $color-primary;
+                background-color: $color--primary;
             }
         }
     }
@@ -48,14 +48,14 @@ $menu-width: 150px;
             top: 44px;
             left: 0;
             z-index: -1;
-            width: $menu-width;
+            width: $menu--width;
             max-height: 0;
             overflow: hidden;
             transition: .3s;
 
             &.depth-3 {
                 top: 0;
-                left: $menu-width;
+                left: $menu--width;
             }
         }
 
@@ -70,7 +70,7 @@ $menu-width: 150px;
 
     .is-active > a {
         color: #fff;
-        background-color: $color-primary;
+        background-color: $color--primary;
     }
 
     .depth-2 {
@@ -87,7 +87,7 @@ $menu-width: 150px;
                     z-index: 5;
                     width: 10px;
                     height: 2px;
-                    background: $color-secondary;
+                    background: $color--secondary;
                     transform: rotate(45deg);
                     transition: background-color .3s;
                 }

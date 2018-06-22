@@ -76,8 +76,14 @@
                 toggleMenu.setDisplay(elements.demoType.val());
 
                 // Au changement sur le <select>
-                elements.demoType.on('change', function () {
-                    toggleMenu.setDisplay($(this).val());
+                elements.demoType.on('change', function (event) {
+                    let val = $(event.currentTarget).val();
+
+                    if (val === 'disable') {
+                        toggleMenu.removeDisplay();
+                    } else {
+                        toggleMenu.setDisplay(val);
+                    }
                 });
             });
         </script>
@@ -89,7 +95,8 @@
             <div class="demo-type">
                 <label for="demo-type">Type de menu :</label>
                 <select id="demo-type" name="demo-type">
-                    <option value="hover">Hover</option>
+                    <option value="disable">- Aucun -</option>
+                    <option value="hover" selected>Hover</option>
                     <option value="push">Push</option>
                     <option value="fixed">Fixed</option>
                     <option value="overlay">Overlay</option>
