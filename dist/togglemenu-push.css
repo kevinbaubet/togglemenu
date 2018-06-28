@@ -2,6 +2,46 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
+/* Contexte de page
+   ========================================================================== */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.togglemenu-push {
+  overflow-x: hidden;
+}
+
+.togglemenu-push .page {
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  -o-transition: transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+}
+
+.is-togglemenuOpen .page {
+  position: fixed;
+  -webkit-transform: translateX(-280px);
+      -ms-transform: translateX(-280px);
+          transform: translateX(-280px);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 100vw;
+}
+
+.is-togglemenuOpen .nav--togglemenuPush {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-box-shadow: -5px 0 24px rgba(0, 0, 0, 0.24);
+          box-shadow: -5px 0 24px rgba(0, 0, 0, 0.24);
+}
+
 /* ==========================================================================
    Navigation push
    ========================================================================== */
@@ -10,7 +50,7 @@
   top: 0;
   left: 0;
   z-index: 50;
-  width: 300px;
+  width: 280px;
   height: 100vh;
   background: #fff;
   overflow: auto;
@@ -23,23 +63,21 @@
   -o-transition: transform .3s;
   transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;
-  -webkit-box-shadow: 0 5px 24px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 5px 24px rgba(0, 0, 0, 0.24);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .is-togglemenuOpen .nav--togglemenuPush {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
           transform: translateX(0);
+  -webkit-box-shadow: 0 5px 24px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 5px 24px rgba(0, 0, 0, 0.24);
 }
 
 /* ==========================================================================
-   TogglemenuPush
+   TogglemenuPush btn close
    ========================================================================== */
-.togglemenu-push {
-  overflow-x: hidden;
-}
-
 .togglemenu-close, .l-panel .item-back {
   padding: 1.25rem;
   background: #181b22;
@@ -86,6 +124,9 @@
           transform: rotate(-45deg);
 }
 
+/* ==========================================================================
+   TogglemenuPush menu
+   ========================================================================== */
 .togglemenu-menu .item-depth {
   margin: 0;
   padding: 0;
@@ -108,29 +149,6 @@
 
 .togglemenu-menu .nav-item + .nav-item > a {
   border-top: 1px solid rgba(48, 55, 72, 0.1);
-}
-
-/* Contexte de page
-   ========================================================================== */
-.togglemenu-push .page {
-  -webkit-transition: -webkit-transform .3s;
-  transition: -webkit-transform .3s;
-  -o-transition: transform .3s;
-  transition: transform .3s;
-  transition: transform .3s, -webkit-transform .3s;
-}
-
-.togglemenu-push.is-togglemenuOpen .page {
-  position: fixed;
-  margin: 0.125rem 0 0 5%;
-  width: 100%;
-  -webkit-transform: translateX(300px);
-      -ms-transform: translateX(300px);
-          transform: translateX(300px);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 /* ==========================================================================
@@ -235,7 +253,7 @@
   top: 0;
   left: 0;
   z-index: 55;
-  width: 300px;
+  width: 280px;
   height: 100%;
   background: #fff;
   -webkit-transform: translateX(-100%);

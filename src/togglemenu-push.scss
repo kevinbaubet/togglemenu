@@ -4,7 +4,36 @@
 $color--primary: #ff5a60;
 $color--secondary: #303748;
 $color--tertiary: #181b22;
-$menu--width: 300px;
+$menu-push--width: 280px;
+
+
+/* Contexte de page
+   ========================================================================== */
+html,
+body { // Fix iPad container
+    width: 100%;
+    overflow-x: hidden;
+}
+.togglemenu-push { // Container
+    overflow-x: hidden;
+
+    .page {
+        transition: transform .3s;
+    }
+}
+.is-togglemenuOpen { // Menu opened
+    .page {
+        position: fixed;
+        transform: translateX(-$menu-push--width);
+        user-select: none;
+        width: 100vw;
+    }
+    .nav--togglemenuPush {
+        transform: translateX(0);
+        box-shadow: -5px 0 24px rgba(#000, .24);
+    }
+}
+
 
 /* ==========================================================================
    Navigation push
@@ -14,26 +43,24 @@ $menu--width: 300px;
     top: 0;
     left: 0;
     z-index: 50;
-    width: $menu--width;
+    width: $menu-push--width;
     height: 100vh;
     background: #fff;
     overflow: auto;
     overflow-x: hidden;
     transform: translateX(-100%);
     transition: transform .3s;
-    box-shadow: 0 5px 24px rgba(#000, .24);
+    box-sizing: border-box;
 
     .is-togglemenuOpen & {
         transform: translateX(0);
+        box-shadow: 0 5px 24px rgba(#000, .24);
     }
 }
 
 /* ==========================================================================
-   TogglemenuPush
+   TogglemenuPush btn close
    ========================================================================== */
-.togglemenu-push {
-    overflow-x: hidden;
-}
 .togglemenu-close {
     padding: 20px;
     background: $color--tertiary;
@@ -73,6 +100,10 @@ $menu--width: 300px;
         }
     }
 }
+
+/* ==========================================================================
+   TogglemenuPush menu
+   ========================================================================== */
 .togglemenu-menu {
     .item-depth {
         margin: 0;
@@ -92,25 +123,9 @@ $menu--width: 300px;
             text-decoration: none;
         }
 
-        + .nav-item > a {
+        & + .nav-item > a {
             border-top: 1px solid rgba($color--secondary, .1);
         }
-    }
-}
-
-
-/* Contexte de page
-   ========================================================================== */
-.togglemenu-push {
-    .page {
-        transition: transform .3s;
-    }
-    &.is-togglemenuOpen .page {
-        position: fixed;
-        margin: 2px 0 0 5%;
-        width: 100%;
-        transform: translateX($menu--width);
-        user-select: none;
     }
 }
 
@@ -118,7 +133,7 @@ $menu--width: 300px;
    Layout accordéon
    ========================================================================== */
 .l-accordion {
-    > .item-depth {
+    & > .item-depth {
         padding-left: 20px;
         max-height: 0;
         overflow: hidden;
@@ -198,7 +213,7 @@ $menu--width: 300px;
         top: 0;
         left: 0;
         z-index: 55;
-        width: $menu--width;
+        width: $menu-push--width;
         height: 100%;
         background: #fff;
         transform: translateX(-100%);
