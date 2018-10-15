@@ -51,11 +51,6 @@ body { // Fix iPad container
     transform: translateX(-100%);
     transition: transform .3s;
     box-sizing: border-box;
-
-    .is-togglemenuOpen & {
-        transform: translateX(0);
-        box-shadow: 0 5px 24px rgba(#000, .24);
-    }
 }
 
 /* ==========================================================================
