@@ -13,11 +13,9 @@
   z-index: 1005;
   overflow: hidden;
   -webkit-transform: translateY(100%) skewY(-8deg);
-      -ms-transform: translateY(100%) skewY(-8deg);
           transform: translateY(100%) skewY(-8deg);
   -webkit-transition: -webkit-transform .6s;
   transition: -webkit-transform .6s;
-  -o-transition: transform .6s;
   transition: transform .6s;
   transition: transform .6s, -webkit-transform .6s;
 }
@@ -35,7 +33,6 @@
 
 .is-togglemenuOpen .nav--togglemenuOverlay {
   -webkit-transform: translateY(-25%) skewY(-8deg);
-      -ms-transform: translateY(-25%) skewY(-8deg);
           transform: translateY(-25%) skewY(-8deg);
   overflow: visible;
 }
@@ -59,13 +56,11 @@
   top: 50%;
   z-index: 5;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
           transform: translateY(-50%);
 }
 
 .togglemenu-overlay .togglemenu-toggle span:before, .togglemenu-overlay .togglemenu-toggle span:after {
   -webkit-transition: .3s;
-  -o-transition: .3s;
   transition: .3s;
 }
 
@@ -81,14 +76,12 @@
   top: 0;
   right: 20px;
   -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
 .togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:after {
   top: -3px;
   -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
@@ -98,7 +91,6 @@
   left: 0;
   width: 100%;
   -webkit-transform: translateY(-50%) skewY(8deg);
-      -ms-transform: translateY(-50%) skewY(8deg);
           transform: translateY(-50%) skewY(8deg);
 }
 
@@ -115,7 +107,6 @@
           transform: translate3d(-50%, -50%, 0);
   opacity: 0;
   -webkit-transition: .3s;
-  -o-transition: .3s;
   transition: .3s;
 }
 
@@ -131,7 +122,6 @@
   color: #fff;
   text-transform: uppercase;
   -webkit-transition: color .3s;
-  -o-transition: color .3s;
   transition: color .3s;
 }
 
@@ -173,17 +163,14 @@
   height: 2px;
   background: #303748;
   -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
           transform: rotate(45deg);
   -webkit-transition: background-color .3s;
-  -o-transition: background-color .3s;
   transition: background-color .3s;
 }
 
 .togglemenu-overlay .togglemenu-menu .is-parent > a:after {
   top: 33px;
   -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 

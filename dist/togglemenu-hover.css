@@ -22,7 +22,6 @@
   text-decoration: none;
   background: #fff;
   -webkit-transition: .3s;
-  -o-transition: .3s;
   transition: .3s;
 }
 
@@ -49,7 +48,6 @@
   max-height: 0;
   overflow: hidden;
   -webkit-transition: .3s;
-  -o-transition: .3s;
   transition: .3s;
 }
 
@@ -83,17 +81,14 @@
   height: 2px;
   background: #303748;
   -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
           transform: rotate(45deg);
   -webkit-transition: background-color .3s;
-  -o-transition: background-color .3s;
   transition: background-color .3s;
 }
 
 .togglemenu-hover .depth-2 .is-parent > a:after {
   top: 24px;
   -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
