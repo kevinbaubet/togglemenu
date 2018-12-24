@@ -4,12 +4,6 @@
    ========================================================================== */
 /* Contexte de page
    ========================================================================== */
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
 .togglemenu-push {
   overflow-x: hidden;
 }
@@ -21,7 +15,7 @@ body {
   transition: transform .3s, -webkit-transform .3s;
 }
 
-.is-togglemenuOpen .page {
+.togglemenu-push.is-togglemenuOpen .page {
   position: fixed;
   -webkit-transform: translateX(-280px);
           transform: translateX(-280px);
@@ -32,7 +26,7 @@ body {
   width: 100vw;
 }
 
-.is-togglemenuOpen .nav--togglemenuPush {
+.togglemenu-push.is-togglemenuOpen .nav--togglemenuPush {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   -webkit-box-shadow: -5px 0 24px rgba(0, 0, 0, 0.24);

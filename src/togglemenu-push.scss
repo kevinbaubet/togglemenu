@@ -9,28 +9,23 @@ $menu-push--width: 280px;
 
 /* Contexte de page
    ========================================================================== */
-html,
-body { // Fix iPad container
-    width: 100%;
-    overflow-x: hidden;
-}
 .togglemenu-push { // Container
     overflow-x: hidden;
 
     .page {
         transition: transform .3s;
     }
-}
-.is-togglemenuOpen { // Menu opened
-    .page {
-        position: fixed;
-        transform: translateX(-$menu-push--width);
-        user-select: none;
-        width: 100vw;
-    }
-    .nav--togglemenuPush {
-        transform: translateX(0);
-        box-shadow: -5px 0 24px rgba(#000, .24);
+    &.is-togglemenuOpen { // Menu opened
+        .page {
+            position: fixed;
+            transform: translateX(-$menu-push--width);
+            user-select: none;
+            width: 100vw;
+        }
+        .nav--togglemenuPush {
+            transform: translateX(0);
+            box-shadow: -5px 0 24px rgba(#000, .24);
+        }
     }
 }
 

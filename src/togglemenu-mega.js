@@ -103,7 +103,7 @@
          */
         addOverlay: function () {
             this.elements.overlay = $('<div>', {
-                class: this.settings.classes.prefix + 'Mega-overlay'
+                'class': this.settings.classes.prefix + 'Mega-overlay'
             });
 
             // User callback
