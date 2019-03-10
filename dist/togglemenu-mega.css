@@ -4,21 +4,21 @@
 /* ==========================================================================
    TogglemenuMega
    ========================================================================== */
-.togglemenu-mega {
+.togglemenu--mega {
   /* Close
        ========================================================================== */
 }
 
-.togglemenu-mega .item-depth {
+.togglemenu--mega .item-depth {
   margin: 0;
   padding: 0;
 }
 
-.togglemenu-mega .nav-item {
+.togglemenu--mega .nav-item {
   list-style: none;
 }
 
-.togglemenu-mega .nav-item a {
+.togglemenu--mega .nav-item a {
   display: block;
   padding: 0.625rem 1.25rem;
   color: #303748;
@@ -29,20 +29,20 @@
   transition: .3s;
 }
 
-.togglemenu-mega .nav-item a:hover {
+.togglemenu--mega .nav-item a:hover {
   color: #fff;
   background-color: #ff5a60;
 }
 
-.togglemenu-mega .depth-1 > .nav-item {
+.togglemenu--mega .depth-1 > .nav-item {
   display: inline-block;
 }
 
-.togglemenu-mega .depth-1 > .nav-item + .nav-item {
+.togglemenu--mega .depth-1 > .nav-item + .nav-item {
   margin-left: 0.625rem;
 }
 
-.togglemenu-mega .togglemenu-close {
+.togglemenu--mega .togglemenu-close {
   position: absolute;
   top: 0;
   right: 0;
@@ -60,11 +60,11 @@
   transition: background-color .3s;
 }
 
-.togglemenu-mega .togglemenu-close:hover {
+.togglemenu--mega .togglemenu-close:hover {
   background-color: #ff5a60;
 }
 
-.togglemenu-mega .togglemenu-close:before, .togglemenu-mega .togglemenu-close:after {
+.togglemenu--mega .togglemenu-close:before, .togglemenu--mega .togglemenu-close:after {
   content: "";
   position: absolute;
   top: 46%;
@@ -76,12 +76,12 @@
           transform: rotate(45deg);
 }
 
-.togglemenu-mega .togglemenu-close:after {
+.togglemenu--mega .togglemenu-close:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.togglemenuMega-overlay {
+.togglemenu-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -95,7 +95,7 @@
   cursor: pointer;
 }
 
-.is-togglemenuOpen .togglemenuMega-overlay {
+.is-togglemenu-open .togglemenu-overlay {
   z-index: 45;
   width: 100%;
   height: 100%;
@@ -105,16 +105,16 @@
 /* ==========================================================================
    Navigation mega
    ========================================================================== */
-.nav--mega {
+.togglemenu--mega {
   position: relative;
   z-index: 48;
 }
 
-.nav--mega .title--h3 {
+.togglemenu--mega .title--h3 {
   padding-left: 1.25rem;
 }
 
-.nav--mega .megamenu {
+.togglemenu--mega .megamenu {
   position: absolute;
   top: 95px;
   left: 0;
@@ -130,40 +130,40 @@
   transition: opacity .3s;
 }
 
-.nav--mega .is-active > a {
+.togglemenu--mega .is-active > a {
   color: #fff;
   background-color: #ff5a60;
 }
 
-.nav--mega .is-active > .megamenu {
+.togglemenu--mega .is-active > .megamenu {
   height: auto;
   z-index: 50;
   overflow: visible;
   opacity: 1;
 }
 
-.nav--mega .item-menu {
+.togglemenu--mega .item-menu {
   padding: 1.25rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.nav--mega .menu-primary {
+.togglemenu--mega .menu-primary {
   width: 60%;
 }
 
-.nav--mega .menu-primary > .item-depth {
+.togglemenu--mega .menu-primary > .item-depth {
   float: left;
   width: 50%;
 }
 
-.nav--mega .menu-primary > .item-depth .item-depth a {
+.togglemenu--mega .menu-primary > .item-depth .item-depth a {
   padding-left: 2.5rem;
   font-size: 1em;
 }
 
-.nav--mega .menu-secondary,
-.nav--mega .menu-tertiary {
+.togglemenu--mega .menu-secondary,
+.togglemenu--mega .menu-tertiary {
   position: absolute;
   top: 0;
   right: 0;
@@ -172,23 +172,23 @@
   background: #596685;
 }
 
-.nav--mega .menu-secondary .title--h3,
-.nav--mega .menu-tertiary .title--h3 {
+.togglemenu--mega .menu-secondary .title--h3,
+.togglemenu--mega .menu-tertiary .title--h3 {
   color: #fff;
 }
 
-.nav--mega .menu-secondary .nav-item a,
-.nav--mega .menu-tertiary .nav-item a {
+.togglemenu--mega .menu-secondary .nav-item a,
+.togglemenu--mega .menu-tertiary .nav-item a {
   color: #fff;
   background: none;
 }
 
-.nav--mega .menu-secondary .nav-item a:hover,
-.nav--mega .menu-tertiary .nav-item a:hover {
+.togglemenu--mega .menu-secondary .nav-item a:hover,
+.togglemenu--mega .menu-tertiary .nav-item a:hover {
   background-color: #303748;
 }
 
-.nav--mega .menu-secondary {
+.togglemenu--mega .menu-secondary {
   right: 20%;
   background-color: #444e67;
 }

@@ -2,7 +2,66 @@
    Variables
    ========================================================================== */
 /* ==========================================================================
-   Navigation fixed
+   ToggleMenu Fixed
+   ========================================================================== */
+/* Contexte de page
+   ========================================================================== */
+body .page {
+  margin: 0;
+  padding-left: 12.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: padding-left .3s;
+  transition: padding-left .3s;
+}
+
+body.is-togglemenu-open .page {
+  padding-left: 18.75rem;
+}
+
+/* Toggle
+   ========================================================================== */
+.togglemenu-toggle {
+  position: absolute;
+  top: 80px;
+  right: -12px;
+  z-index: 55;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background: #ff5a60;
+  border: 0;
+  border-radius: 50%;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.is-togglemenu-open .togglemenu-toggle {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.togglemenu-toggle span {
+  width: auto;
+  height: 0;
+  background: none;
+}
+
+.togglemenu-toggle span:before, .togglemenu-toggle span:after {
+  top: -4px;
+  left: 7px;
+  width: 11px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.togglemenu-toggle span:after {
+  top: -1px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+/* Menu
    ========================================================================== */
 .togglemenu--fixed {
   position: fixed;
@@ -35,7 +94,7 @@
   overflow: hidden;
 }
 
-.is-togglemenuOpen .togglemenu--fixed > .item-depth {
+.is-togglemenu-open .togglemenu--fixed > .item-depth {
   width: 200px;
   overflow: visible;
 }
@@ -94,11 +153,11 @@
   transition: background-color .3s;
 }
 
-.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a {
+.is-togglemenu-open .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a {
   min-height: 80px;
 }
 
-.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a:before {
+.is-togglemenu-open .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a:before {
   left: 50%;
 }
 
@@ -139,7 +198,7 @@
   transition: .3s;
 }
 
-.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item span {
+.is-togglemenu-open .togglemenu--fixed > .item-depth.depth-1 > .nav-item span {
   height: auto;
   margin: 0.938rem 0;
   opacity: 1;
@@ -236,67 +295,4 @@
 
 .togglemenu--fixed > .item-depth .depth-3 a:hover {
   color: #ff5a60;
-}
-
-/* ==========================================================================
-   ToggleMenuFixed
-   ========================================================================== */
-body {
-  /* Contexte de page
-       ========================================================================== */
-  /* Toggle
-       ========================================================================== */
-}
-
-body .page {
-  margin: 0;
-  padding-left: 12.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-transition: padding-left .3s;
-  transition: padding-left .3s;
-}
-
-body.is-togglemenu-open .page {
-  padding-left: 18.75rem;
-}
-
-body .togglemenu-toggle {
-  position: absolute;
-  top: 80px;
-  right: -12px;
-  z-index: 55;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  background: #ff5a60;
-  border: 0;
-  border-radius: 50%;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-body .togglemenu-toggle span {
-  width: auto;
-  height: 0;
-  background: none;
-}
-
-body .togglemenu-toggle span:before, body .togglemenu-toggle span:after {
-  top: -4px;
-  left: 7px;
-  width: 11px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-body .togglemenu-toggle span:after {
-  top: -1px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-}
-
-body.is-togglemenu-open .togglemenu-toggle {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
 }

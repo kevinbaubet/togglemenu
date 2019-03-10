@@ -6,7 +6,54 @@ $color--secondary: #303748;
 $color--tertiary: #181b22;
 
 /* ==========================================================================
-   Navigation overlay
+   Togglemenu overlay
+   ========================================================================== */
+
+/* Toggle
+   ========================================================================== */
+.togglemenu-toggle {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    z-index: 1050;
+    padding: 15px 50px 15px 20px;
+    line-height: .7;
+    font-size: 1.5em;
+
+    span {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        z-index: 5;
+        transform: translateY(-50%);
+
+        &:before,
+        &:after {
+            transition: .3s;
+        }
+    }
+
+    .is-togglemenu-open & {
+        background-color: $color--primary;
+
+        span {
+            width: 0;
+
+            &:before,
+            &:after {
+                top: 0;
+                right: 20px;
+                transform: rotate(-45deg);
+            }
+            &:after {
+                top: -3px;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
+/* Menu
    ========================================================================== */
 .togglemenu--overlay {
     position: fixed;
@@ -43,6 +90,8 @@ $color--tertiary: #181b22;
         transform: translateY(-50%) skewY(8deg);
 
         .item-depth {
+            margin: 0;
+            padding: 0;
             overflow: visible;
 
             .item-depth {
@@ -61,18 +110,27 @@ $color--tertiary: #181b22;
             }
         }
         .nav-item {
+            list-style: none;
+
+            + .nav-item > a {
+                border: 0;
+            }
+
             a {
                 position: relative;
+                display: block;
+                padding: 20px;
                 color: #fff;
+                font-size: 1.5em;
+                font-weight: bold;
+                text-decoration: none;
                 text-transform: uppercase;
                 transition: color .3s;
             }
+
             a:hover,
             &.is-active > a {
                 color: $color--primary;
-            }
-            + .nav-item > a {
-                border: 0;
             }
         }
 
@@ -119,51 +177,6 @@ $color--tertiary: #181b22;
                 &:after {
                     background-color: #fff;
                 }
-            }
-        }
-    }
-}
-
-/* ==========================================================================
-   Toggle btn
-   ========================================================================== */
-.togglemenu-toggle {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    z-index: 1050;
-    padding: 15px 50px 15px 20px;
-    line-height: .7;
-    font-size: 1.5em;
-
-    span {
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        z-index: 5;
-        transform: translateY(-50%);
-
-        &:before,
-        &:after {
-            transition: .3s;
-        }
-    }
-
-    .is-togglemenu-open & {
-        background-color: $color--primary;
-
-        span {
-            width: 0;
-
-            &:before,
-            &:after {
-                top: 0;
-                right: 20px;
-                transform: rotate(-45deg);
-            }
-            &:after {
-                top: -3px;
-                transform: rotate(45deg);
             }
         }
     }

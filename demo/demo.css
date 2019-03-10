@@ -8,7 +8,7 @@ body {
 .page {
     position: relative;
     width: 90%;
-    margin: 50px auto;
+    padding: 50px 5%;
 }
 body:after {
     content: "";
@@ -23,6 +23,30 @@ body:after {
 }
 .clear {
     clear: both;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, .5);
+}
+footer ul {
+    display: flex;
+    justify-content: center;
+}
+footer li {
+    list-style: none;
+}
+footer a {
+    display: block;
+    padding: 10px;
+    color: #303748;
+}
+footer a.is-active,
+footer a:hover {
+    text-decoration: none;
 }
 
 /* Titres */
@@ -43,13 +67,29 @@ h2 {
 /* Form */
 .demo-type {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 15px 30px;
     margin-bottom: 20px;
     background: #fff;
     border: 0;
     border-radius: 10px;
+    min-width: 280px;
 }
-label {
+.demo-type p {
     color: #868395;
+    font-size: 1.6em;
     font-weight: bold;
+}
+.demo-type li {
+    font-weight: bold;
+}
+.demo-type a {
+    display: block;
+    padding: 4px;
+    font-size: 1.4em;
+    color: #868395;
+    text-decoration: none;
+}
+.demo-type a:hover {
+    color: #ff5a60;
+    text-decoration: underline;
 }

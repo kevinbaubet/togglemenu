@@ -6,21 +6,23 @@ $color--secondary: #303748;
 $color--tertiary: #181b22;
 $menu-push--width: 280px;
 
+/* ==========================================================================
+   Togglemenu push
+   ========================================================================== */
 
 /* Contexte de page
    ========================================================================== */
-body { // Container
+body {
     overflow-x: hidden;
 
     .page {
-        transition: transform .3s;
+        transition: .3s;
     }
-    &.is-togglemenu-open { // Menu opened
+    &.is-togglemenu-open {
         .page {
             position: fixed;
-            transform: translateX(-$menu-push--width);
-            user-select: none;
             width: 100vw;
+            transform: translateX($menu-push--width);
         }
         .togglemenu--push {
             transform: translateX(0);
@@ -29,9 +31,7 @@ body { // Container
     }
 }
 
-
-/* ==========================================================================
-   Navigation push
+/* Menu
    ========================================================================== */
 .togglemenu--push {
     position: absolute;
@@ -71,8 +71,7 @@ body { // Container
     }
 }
 
-/* ==========================================================================
-   TogglemenuPush btn close
+/* Close
    ========================================================================== */
 .togglemenu-close {
     padding: 20px;
@@ -114,8 +113,7 @@ body { // Container
     }
 }
 
-/* ==========================================================================
-   Layout accordéon
+/* Layout accordéon
    ========================================================================== */
 .l-accordion {
     & > .item-depth {
@@ -170,8 +168,7 @@ body { // Container
     }
 }
 
-/* ==========================================================================
-   Layout panel
+/* Layout panel
    ========================================================================== */
 .l-panel {
     > a {

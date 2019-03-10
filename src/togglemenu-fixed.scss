@@ -7,7 +7,62 @@ $color--tertiary: #181b22;
 $menu--width: 100px;
 
 /* ==========================================================================
-   Navigation fixed
+   ToggleMenu Fixed
+   ========================================================================== */
+
+/* Contexte de page
+   ========================================================================== */
+body {
+    .page {
+        margin: 0;
+        padding-left: $menu--width*2;
+        box-sizing: border-box;
+        transition: padding-left .3s;
+    }
+    &.is-togglemenu-open .page {
+        padding-left: $menu--width*3;
+    }
+}
+
+/* Toggle
+   ========================================================================== */
+.togglemenu-toggle {
+    position: absolute;
+    top: 80px;
+    right: -12px;
+    z-index: 55;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background: $color--primary;
+    border: 0;
+    border-radius: 50%;
+    transition: .3s;
+
+    .is-togglemenu-open & {
+        transform: rotateY(180deg);
+    }
+
+    span {
+        width: auto;
+        height: 0;
+        background: none;
+
+        &:before,
+        &:after {
+            top: -4px;
+            left: 7px;
+            width: 11px;
+            transform: rotate(45deg);
+        }
+        &:after {
+            top: -1px;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+/* Menu
    ========================================================================== */
 .togglemenu--fixed {
     position: fixed;
@@ -36,7 +91,7 @@ $menu--width: 100px;
         transition: width .3s;
         overflow: hidden;
 
-        .is-togglemenuOpen & {
+        .is-togglemenu-open & {
             width: $menu--width*2;
             overflow: visible;
         }
@@ -90,7 +145,7 @@ $menu--width: 100px;
                         transition: background-color .3s;
                     }
 
-                    .is-togglemenuOpen & {
+                    .is-togglemenu-open & {
                         min-height: 80px;
 
                         &:before {
@@ -128,7 +183,7 @@ $menu--width: 100px;
                         background: darken($color--primary, 10%);
                         transition: .3s;
                     }
-                    .is-togglemenuOpen & {
+                    .is-togglemenu-open & {
                         height: auto;
                         margin: 15px 0;
                         opacity: 1;
@@ -220,59 +275,5 @@ $menu--width: 100px;
                 }
             }
         }
-    }
-}
-
-/* ==========================================================================
-   ToggleMenuFixed
-   ========================================================================== */
-body {
-    /* Contexte de page
-       ========================================================================== */
-    .page {
-        margin: 0;
-        padding-left: $menu--width*2;
-        box-sizing: border-box;
-        transition: padding-left .3s;
-    }
-    &.is-togglemenu-open .page {
-        padding-left: $menu--width*3;
-    }
-
-    /* Toggle
-       ========================================================================== */
-    .togglemenu-toggle {
-        position: absolute;
-        top: 80px;
-        right: -12px;
-        z-index: 55;
-        padding: 0;
-        width: 24px;
-        height: 24px;
-        background: $color--primary;
-        border: 0;
-        border-radius: 50%;
-        transition: .3s;
-
-        span {
-            width: auto;
-            height: 0;
-            background: none;
-
-            &:before,
-            &:after {
-                top: -4px;
-                left: 7px;
-                width: 11px;
-                transform: rotate(45deg);
-            }
-            &:after {
-                top: -1px;
-                transform: rotate(-45deg);
-            }
-        }
-    }
-    &.is-togglemenu-open .togglemenu-toggle {
-        transform: rotateY(180deg);
     }
 }

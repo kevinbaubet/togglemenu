@@ -2,7 +2,56 @@
    Variables
    ========================================================================== */
 /* ==========================================================================
-   Navigation overlay
+   Togglemenu overlay
+   ========================================================================== */
+/* Toggle
+   ========================================================================== */
+.togglemenu-toggle {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1050;
+  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
+  line-height: .7;
+  font-size: 1.5em;
+}
+
+.togglemenu-toggle span {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  z-index: 5;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.togglemenu-toggle span:before, .togglemenu-toggle span:after {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.is-togglemenu-open .togglemenu-toggle {
+  background-color: #ff5a60;
+}
+
+.is-togglemenu-open .togglemenu-toggle span {
+  width: 0;
+}
+
+.is-togglemenu-open .togglemenu-toggle span:before, .is-togglemenu-open .togglemenu-toggle span:after {
+  top: 0;
+  right: 20px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.is-togglemenu-open .togglemenu-toggle span:after {
+  top: -3px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+/* Menu
    ========================================================================== */
 .togglemenu--overlay {
   position: fixed;
@@ -47,6 +96,8 @@
 }
 
 .togglemenu--overlay .togglemenu-menu .item-depth {
+  margin: 0;
+  padding: 0;
   overflow: visible;
 }
 
@@ -69,9 +120,22 @@
   opacity: 1;
 }
 
+.togglemenu--overlay .togglemenu-menu .nav-item {
+  list-style: none;
+}
+
+.togglemenu--overlay .togglemenu-menu .nav-item + .nav-item > a {
+  border: 0;
+}
+
 .togglemenu--overlay .togglemenu-menu .nav-item a {
   position: relative;
+  display: block;
+  padding: 1.25rem;
   color: #fff;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: color .3s;
   transition: color .3s;
@@ -80,10 +144,6 @@
 .togglemenu--overlay .togglemenu-menu .nav-item a:hover,
 .togglemenu--overlay .togglemenu-menu .nav-item.is-active > a {
   color: #ff5a60;
-}
-
-.togglemenu--overlay .togglemenu-menu .nav-item + .nav-item > a {
-  border: 0;
 }
 
 .togglemenu--overlay .togglemenu-menu .depth-1 > .nav-item {
@@ -130,52 +190,4 @@
 .togglemenu--overlay .togglemenu-menu .is-parent > a:hover:before,
 .togglemenu--overlay .togglemenu-menu .is-parent > a:hover:after {
   background-color: #fff;
-}
-
-/* ==========================================================================
-   Toggle btn
-   ========================================================================== */
-.togglemenu-toggle {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  z-index: 1050;
-  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
-  line-height: .7;
-  font-size: 1.5em;
-}
-
-.togglemenu-toggle span {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  z-index: 5;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-
-.togglemenu-toggle span:before, .togglemenu-toggle span:after {
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.is-togglemenu-open .togglemenu-toggle {
-  background-color: #ff5a60;
-}
-
-.is-togglemenu-open .togglemenu-toggle span {
-  width: 0;
-}
-
-.is-togglemenu-open .togglemenu-toggle span:before, .is-togglemenu-open .togglemenu-toggle span:after {
-  top: 0;
-  right: 20px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-}
-
-.is-togglemenu-open .togglemenu-toggle span:after {
-  top: -3px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
 }
