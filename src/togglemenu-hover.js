@@ -112,7 +112,7 @@
         eventsHandler: function () {
             var self = this;
 
-            self.elements.items.on(self.events.items = 'focusin.togglemenu focusout.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu', function (event) {
+            self.getElements().items.on(self.events.items = 'focusin.togglemenu focusout.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu', function (event) {
                 var options = {
                     event: $.extend({}, event),
                     item: this,
@@ -160,7 +160,7 @@
 
             // Désativation du click sur les items parent
             if (self.settings.disableItemsClick) {
-                self.elements.items.on(self.events.itemsLink = 'click.togglemenu', self.getElements().itemLink, function (event) {
+                self.getElements().items.on(self.events.itemsLink = 'click.togglemenu', self.getElements().itemLink, function (event) {
                     event.preventDefault();
                 });
             }

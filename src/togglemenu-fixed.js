@@ -77,7 +77,7 @@
             if (self.getElements().items === undefined) {
                 self.elements.items = self.getItemsParent(self.getElements().menu.find('li'));
 
-            } else if (typeof self.elements.items === 'function') {
+            } else if (typeof self.getElements().items === 'function') {
                 self.elements.items = self.getElements().items();
             }
 
@@ -140,10 +140,10 @@
 
             // Bouton toggle
             if (self.settings.toggle) {
-                self.elements.toggle.on(self.events.toggle = 'click.togglemenu.toggle', {self: self}, self.toggle);
+                self.getElements().toggle.on(self.events.toggle = 'click.togglemenu.toggle', {self: self}, self.toggle);
 
             } else {
-                self.elements.menu.on(self.events.menu = 'mouseenter.togglemenu.toggle mouseleave.togglemenu.toggle', {self: self}, self.toggle);
+                self.getElements().menu.on(self.events.menu = 'mouseenter.togglemenu.toggle mouseleave.togglemenu.toggle', {self: self}, self.toggle);
             }
 
             // User callback

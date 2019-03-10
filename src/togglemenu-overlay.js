@@ -217,7 +217,7 @@
                         type: type,
                         element: element,
                         content: content,
-                        contentWrapper: self.elements[type]
+                        contentWrapper: self.getElements()[type]
                     });
                 }
             });
@@ -238,7 +238,7 @@
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
                     toggleMenuOverlay: self,
-                    elements: self.elements,
+                    elements: self.getElements(),
                     events: self.events
                 });
             }

@@ -180,7 +180,7 @@
             if (this.settings.beforeWrap !== undefined) {
                 this.settings.beforeWrap.call({
                     toggleMenuPush: this,
-                    wrapper: this.elements.wrapper
+                    wrapper: this.getWrapper()
                 });
             }
 
@@ -249,7 +249,7 @@
                         type: type,
                         element: element,
                         content: content,
-                        contentWrapper: self.elements[type]
+                        contentWrapper: self.getElements()[type]
                     });
                 }
             });
@@ -275,7 +275,7 @@
             if (self.settings.afterEventsHandler !== undefined) {
                 self.settings.afterEventsHandler.call({
                     toggleMenuPush: self,
-                    elements: self.elements,
+                    elements: self.getElements(),
                     events: self.events
                 });
             }
@@ -410,7 +410,7 @@
             // Événement
             self.onReady(function () {
                 if (self.isOpen) {
-                    self.elements.page.on((self.events.page = 'click touchstart'), function (event) {
+                    self.getElements().page.on((self.events.page = 'click touchstart'), function (event) {
                         event.preventDefault();
 
                         if (self.isOpen) {
@@ -418,7 +418,7 @@
                         }
                     });
                 } else {
-                    self.elements.page.off(self.events.page);
+                    self.getElements().page.off(self.events.page);
                     self.closeSubmenus();
                 }
             });
