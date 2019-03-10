@@ -4,7 +4,7 @@
 /* ==========================================================================
    Navigation fixed
    ========================================================================== */
-.nav--fixed {
+.togglemenu--fixed {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,17 +16,17 @@
   transition: width .3s;
 }
 
-.nav--fixed .title {
+.togglemenu--fixed .title {
   margin-top: 1.25rem;
   height: 42px;
   text-align: center;
 }
 
-.is-togglemenuOpen .nav--fixed {
+.is-togglemenu-open .togglemenu--fixed {
   width: 200px;
 }
 
-.nav--fixed > .item-depth {
+.togglemenu--fixed > .item-depth {
   margin: 0;
   padding: 0;
   width: 100px;
@@ -35,17 +35,17 @@
   overflow: hidden;
 }
 
-.is-togglemenuOpen .nav--fixed > .item-depth {
+.is-togglemenuOpen .togglemenu--fixed > .item-depth {
   width: 200px;
   overflow: visible;
 }
 
-.nav--fixed > .item-depth .nav-item {
+.togglemenu--fixed > .item-depth .nav-item {
   display: block;
   float: none;
 }
 
-.nav--fixed > .item-depth a {
+.togglemenu--fixed > .item-depth a {
   display: block;
   line-height: 1.15;
   color: #fff;
@@ -54,19 +54,19 @@
   transition: .3s;
 }
 
-.nav--fixed > .item-depth a:hover {
+.togglemenu--fixed > .item-depth a:hover {
   color: #ff5a60;
 }
 
-.nav--fixed > .item-depth.depth-1 {
+.togglemenu--fixed > .item-depth.depth-1 {
   padding-top: 3.125rem;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item {
   counter-increment: depthitem;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item > a {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item > a {
   position: relative;
   display: inline-block;
   padding: 0.938rem;
@@ -77,7 +77,7 @@
   text-transform: uppercase;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item > a:before {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item > a:before {
   content: counter(depthitem);
   position: relative;
   left: 20%;
@@ -94,25 +94,25 @@
   transition: background-color .3s;
 }
 
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item > a {
+.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a {
   min-height: 80px;
 }
 
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item > a:before {
+.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a:before {
   left: 50%;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item.is-active a:before,
-.nav--fixed > .item-depth.depth-1 > .nav-item a:hover:before {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item.is-active a:before,
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item a:hover:before {
   background-color: #ff5a60;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item.is-active a span:after,
-.nav--fixed > .item-depth.depth-1 > .nav-item a:hover span:after {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item.is-active a span:after,
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item a:hover span:after {
   background-color: #303748;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item span {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item span {
   display: block;
   height: 0;
   line-height: 1.2;
@@ -125,7 +125,7 @@
   opacity: 0;
 }
 
-.nav--fixed > .item-depth.depth-1 > .nav-item span:after {
+.togglemenu--fixed > .item-depth.depth-1 > .nav-item span:after {
   content: "";
   position: absolute;
   bottom: -15px;
@@ -139,7 +139,7 @@
   transition: .3s;
 }
 
-.is-togglemenuOpen .nav--fixed > .item-depth.depth-1 > .nav-item span {
+.is-togglemenuOpen .togglemenu--fixed > .item-depth.depth-1 > .nav-item span {
   height: auto;
   margin: 0.938rem 0;
   opacity: 1;
@@ -147,7 +147,7 @@
           transform: translateX(0);
 }
 
-.nav--fixed > .item-depth .depth-2 {
+.togglemenu--fixed > .item-depth .depth-2 {
   position: absolute;
   top: 0;
   left: 200px;
@@ -165,15 +165,15 @@
           box-sizing: border-box;
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item {
   margin-bottom: 1.25rem;
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item.is-parent > a {
   position: relative;
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:before, .nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item.is-parent > a:before, .togglemenu--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
   content: "";
   position: absolute;
   top: 6px;
@@ -190,65 +190,65 @@
   transition: transform .3s, -webkit-transform .3s;
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item.is-parent > a:after {
   right: 4px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item.is-active > a:before {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item.is-active > a:before {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.nav--fixed > .item-depth .depth-2 .nav-item.is-active > a:after {
+.togglemenu--fixed > .item-depth .depth-2 .nav-item.is-active > a:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.nav--fixed > .item-depth .depth-2 .is-active > .depth-3 {
+.togglemenu--fixed > .item-depth .depth-2 .is-active > .depth-3 {
   display: block;
 }
 
-.nav--fixed > .item-depth .is-active .depth-2 {
+.togglemenu--fixed > .item-depth .is-active .depth-2 {
   opacity: 1;
   z-index: 45;
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
 
-.nav--fixed > .item-depth .is-active .depth-2 .nav-item + .nav-item {
+.togglemenu--fixed > .item-depth .is-active .depth-2 .nav-item + .nav-item {
   margin-top: 1.25rem 0.938rem;
 }
 
-.nav--fixed > .item-depth .depth-3 {
+.togglemenu--fixed > .item-depth .depth-3 {
   display: none;
   padding: 0.938rem;
 }
 
-.nav--fixed > .item-depth .depth-3 .nav-item {
+.togglemenu--fixed > .item-depth .depth-3 .nav-item {
   margin-bottom: 0.938rem;
 }
 
-.nav--fixed > .item-depth .depth-3 a {
+.togglemenu--fixed > .item-depth .depth-3 a {
   color: #e6e6e6;
 }
 
-.nav--fixed > .item-depth .depth-3 a:hover {
+.togglemenu--fixed > .item-depth .depth-3 a:hover {
   color: #ff5a60;
 }
 
 /* ==========================================================================
    ToggleMenuFixed
    ========================================================================== */
-.togglemenu-fixed {
+body {
   /* Contexte de page
        ========================================================================== */
   /* Toggle
        ========================================================================== */
 }
 
-.togglemenu-fixed .page {
+body .page {
   margin: 0;
   padding-left: 12.5rem;
   -webkit-box-sizing: border-box;
@@ -257,11 +257,11 @@
   transition: padding-left .3s;
 }
 
-.togglemenu-fixed.is-togglemenuOpen .page {
+body.is-togglemenu-open .page {
   padding-left: 18.75rem;
 }
 
-.togglemenu-fixed .togglemenu-toggle {
+body .togglemenu-toggle {
   position: absolute;
   top: 80px;
   right: -12px;
@@ -276,13 +276,13 @@
   transition: .3s;
 }
 
-.togglemenu-fixed .togglemenu-toggle span {
+body .togglemenu-toggle span {
   width: auto;
   height: 0;
   background: none;
 }
 
-.togglemenu-fixed .togglemenu-toggle span:before, .togglemenu-fixed .togglemenu-toggle span:after {
+body .togglemenu-toggle span:before, body .togglemenu-toggle span:after {
   top: -4px;
   left: 7px;
   width: 11px;
@@ -290,13 +290,13 @@
           transform: rotate(45deg);
 }
 
-.togglemenu-fixed .togglemenu-toggle span:after {
+body .togglemenu-toggle span:after {
   top: -1px;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.togglemenu-fixed.is-togglemenuOpen .togglemenu-toggle {
+body.is-togglemenu-open .togglemenu-toggle {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }

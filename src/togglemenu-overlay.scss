@@ -8,7 +8,7 @@ $color--tertiary: #181b22;
 /* ==========================================================================
    Navigation overlay
    ========================================================================== */
-.nav--togglemenuOverlay {
+.togglemenu--overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -30,55 +30,9 @@ $color--tertiary: #181b22;
         background-color: rgba($color--tertiary, .9);
     }
 
-    .is-togglemenuOpen & {
+    .is-togglemenu-open & {
         transform: translateY(-25%) skewY(-8deg);
         overflow: visible;
-    }
-}
-
-/* ==========================================================================
-   TogglemenuOverlay
-   ========================================================================== */
-.togglemenu-overlay {
-    .togglemenu-toggle {
-        position: absolute;
-        top: 50px;
-        right: 50px;
-        z-index: 1050;
-        padding: 15px 50px 15px 20px;
-        line-height: .7;
-        font-size: 1.5em;
-
-        span {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            z-index: 5;
-            transform: translateY(-50%);
-
-            &:before,
-            &:after {
-                transition: .3s;
-            }
-        }
-    }
-    &.is-togglemenuOpen .togglemenu-toggle {
-        background-color: $color--primary;
-
-        span {
-            width: 0;
-
-            &:before,
-            &:after {
-                top: 0;
-                right: 20px;
-                transform: rotate(-45deg);
-            }
-            &:after {
-                top: -3px;
-                transform: rotate(45deg);
-            }
-        }
     }
 
     .togglemenu-menu {
@@ -165,6 +119,51 @@ $color--tertiary: #181b22;
                 &:after {
                     background-color: #fff;
                 }
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   Toggle btn
+   ========================================================================== */
+.togglemenu-toggle {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    z-index: 1050;
+    padding: 15px 50px 15px 20px;
+    line-height: .7;
+    font-size: 1.5em;
+
+    span {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        z-index: 5;
+        transform: translateY(-50%);
+
+        &:before,
+        &:after {
+            transition: .3s;
+        }
+    }
+
+    .is-togglemenu-open & {
+        background-color: $color--primary;
+
+        span {
+            width: 0;
+
+            &:before,
+            &:after {
+                top: 0;
+                right: 20px;
+                transform: rotate(-45deg);
+            }
+            &:after {
+                top: -3px;
+                transform: rotate(45deg);
             }
         }
     }

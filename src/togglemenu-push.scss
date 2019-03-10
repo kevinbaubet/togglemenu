@@ -9,20 +9,20 @@ $menu-push--width: 280px;
 
 /* Contexte de page
    ========================================================================== */
-.togglemenu-push { // Container
+body { // Container
     overflow-x: hidden;
 
     .page {
         transition: transform .3s;
     }
-    &.is-togglemenuOpen { // Menu opened
+    &.is-togglemenu-open { // Menu opened
         .page {
             position: fixed;
             transform: translateX(-$menu-push--width);
             user-select: none;
             width: 100vw;
         }
-        .nav--togglemenuPush {
+        .togglemenu--push {
             transform: translateX(0);
             box-shadow: -5px 0 24px rgba(#000, .24);
         }
@@ -33,7 +33,7 @@ $menu-push--width: 280px;
 /* ==========================================================================
    Navigation push
    ========================================================================== */
-.nav--togglemenuPush {
+.togglemenu--push {
     position: absolute;
     top: 0;
     left: 0;
@@ -46,6 +46,29 @@ $menu-push--width: 280px;
     transform: translateX(-100%);
     transition: transform .3s;
     box-sizing: border-box;
+
+    .item-depth {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .nav-item {
+        list-style: none;
+
+        a {
+            position: relative;
+            display: block;
+            padding: 20px;
+            color: $color--secondary;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        & + .nav-item > a {
+            border-top: 1px solid rgba($color--secondary, .1);
+        }
+    }
 }
 
 /* ==========================================================================
@@ -87,34 +110,6 @@ $menu-push--width: 280px;
         }
         &:after {
             transform: rotate(-45deg);
-        }
-    }
-}
-
-/* ==========================================================================
-   TogglemenuPush menu
-   ========================================================================== */
-.togglemenu-menu {
-    .item-depth {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-    .nav-item {
-        list-style: none;
-
-        a {
-            position: relative;
-            display: block;
-            padding: 20px;
-            color: $color--secondary;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        & + .nav-item > a {
-            border-top: 1px solid rgba($color--secondary, .1);
         }
     }
 }
@@ -237,8 +232,8 @@ $menu-push--width: 280px;
         }
     }
 }
-.is-togglemenuSubmenuOpen {
-    .nav--togglemenuPush {
+.is-togglemenu-submenu-open {
+    .togglemenu--push {
         overflow: hidden;
     }
     .l-panel > .item-depth {

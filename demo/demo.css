@@ -53,13 +53,3 @@ label {
     color: #868395;
     font-weight: bold;
 }
-.page > .nav {
-    display: none;
-}
-.togglemenu-hover .nav--hover,
-.togglemenu-push .nav--push,
-.togglemenu-fixed .nav--fixed,
-.togglemenu-overlay .nav--overlay,
-.togglemenu-mega .nav--mega {
-    display: block;
-}

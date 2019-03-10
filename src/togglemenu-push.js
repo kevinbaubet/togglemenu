@@ -4,12 +4,13 @@
     $.ToggleMenuPush = function (toggleMenu, options) {
         // Héritage
         this.toggleMenu = toggleMenu;
+        $.extend($.ToggleMenuPush.prototype, $.ToggleMenu.prototype);
 
         // Config
-        $.extend(true, (this.settings = {}), this.toggleMenu.settings, $.ToggleMenuPush.defaults, options);
+        $.extend(true, this.settings = {}, this.toggleMenu.settings, $.ToggleMenuPush.defaults, options);
 
         // Éléments
-        this.elements = this.settings.elements;
+        this.elements = $.extend(true, {body: $('body')}, this.settings.elements);
         delete this.settings.elements;
 
         // Variables
@@ -17,11 +18,11 @@
         this.isOpen = false;
 
         // Init
-        if (this.prepareOptions()) {
-            return this.load();
+        if (this.prepareUserOptions()) {
+            this.load();
         }
 
-        return false;
+        return this
     };
 
     $.ToggleMenuPush.defaults = {
@@ -46,13 +47,13 @@
         layout: 'accordion',
         backLink: false,
         classes: {
-            open: 'is-{prefix}Open',
-            submenuOpen: 'is-{prefix}SubmenuOpen',
+            open: 'is-{prefix}-open',
+            submenuOpen: 'is-{prefix}-submenu-open',
             active: 'is-active',
             copy: '{prefix}-copy',
             back: 'item-back'
         },
-        onLoad: undefined,
+        beforeLoad: undefined,
         beforeWrap: undefined,
         onAddContent: undefined,
         afterEventsHandler: undefined,
@@ -67,32 +68,32 @@
         /**
          * Préparation des options utilisateur
          *
-         * @return bool
+         * @return {boolean}
          */
-        prepareOptions: function () {
+        prepareUserOptions: function () {
             // Classes
-            this.toggleMenu.replacePrefixClass.call(this);
+            this.replacePrefixClass();
 
             // Éléments
-            if (this.elements.toggle === undefined) {
+            if (this.getElements().toggle === undefined) {
                 this.elements.toggle = $('.' + this.settings.classes.prefix + '-toggle');
 
-                if (this.elements.toggle.length === 0) {
-                    this.toggleMenu.setLog('error', 'Missing elements.toggle parameter');
+                if (this.getElements().toggle.length === 0) {
+                    this.setLog('Missing elements.toggle parameter', 'error');
                     return false;
                 }
             }
 
-            if (this.elements.content.menu === undefined) {
-                this.toggleMenu.setLog('error', 'Missing element.content.menu parameter');
+            if (this.getContentElements().menu === undefined) {
+                this.setLog('Missing elements.content.menu parameter', 'error');
                 return false;
             }
 
-            if (this.elements.page === undefined) {
-                this.elements.page = this.toggleMenu.elements.body.children('div:first');
+            if (this.getElements().page === undefined) {
+                this.elements.page = this.getElements().body.children('div:first');
 
-                if (this.elements.page.length === 0) {
-                    this.toggleMenu.setLog('error', 'Missing element.page parameter');
+                if (this.getElements().page.length === 0) {
+                    this.setLog('Missing elements.page parameter', 'error');
                     return false;
                 }
             }
@@ -105,8 +106,8 @@
          */
         load: function () {
             // User callback
-            if (this.settings.onLoad !== undefined) {
-                this.settings.onLoad.call({
+            if (this.settings.beforeLoad !== undefined) {
+                this.settings.beforeLoad.call({
                     toggleMenuPush: this
                 });
             }
@@ -121,12 +122,49 @@
             if (this.settings.onComplete !== undefined) {
                 this.settings.onComplete.call({
                     toggleMenuPush: this,
-                    elements: this.elements,
-                    wrapper: this.elements.wrapper
+                    elements: this.getElements()
                 });
             }
 
             return this;
+        },
+
+        /**
+         * Destroy
+         */
+        unload: function () {
+            var self = this;
+
+            // Fermeture du menu
+            if (self.isOpen) {
+                self.toggle();
+            }
+
+            // Suppression des éléments
+            self.unWrap();
+
+            // Désactivation des events
+            $.each(self.events, function (element, event) {
+                self.getElements()[element].off(event);
+            });
+            self.getElements().items.each(function (i, item) {
+                item = $(item);
+
+                self.getElements().itemLink(item).off('click.togglemenu.itemLink');
+
+                if (self.getElements().back !== undefined) {
+                    self.getElements().backBtn(item).off('click.togglemenu.backBtn');
+                }
+            });
+
+            // Suppression des classes "copy"
+            $.each(self.getContentElements(), function (type, element) {
+                if (type !== 'close') {
+                    element.removeClass(self.settings.classes.copy);
+                }
+            });
+
+            return self;
         },
 
         /**
@@ -135,7 +173,7 @@
         wrap: function () {
             // Wrapper global
             this.elements.wrapper = $('<nav>', {
-                'class': 'nav nav--' + this.settings.classes.prefix + 'Push'
+                'class': this.settings.classes.prefix + ' ' + this.settings.classes.prefix + '--' + this.toggleMenu.menu.current
             });
 
             // User callback
@@ -147,7 +185,7 @@
             }
 
             // Ajout du wrapper
-            this.elements.wrapper.appendTo(this.toggleMenu.elements.body);
+            this.getWrapper().appendTo(this.getElements().body);
 
             return this;
         },
@@ -156,7 +194,7 @@
          * Supprime le wrapper
          */
         unWrap: function () {
-            this.elements.wrapper.remove();
+            this.getWrapper().remove();
 
             return this;
         },
@@ -168,7 +206,7 @@
             var self = this;
 
             // Contenu utilisateur
-            $.each(self.elements.content, function (type, element) {
+            $.each(self.getContentElements(), function (type, element) {
                 var content = null;
 
                 // Copie du contenu
@@ -184,7 +222,7 @@
 
                 // Ajout du contenu
                 if (content !== undefined && content !== null) {
-                    content.appendTo(self.elements.wrapper);
+                    content.appendTo(self.getWrapper());
                     content.wrap($('<div>', {
                         'class': self.settings.classes.prefix + '-' + type
                     }));
@@ -195,11 +233,11 @@
                         self.elements[type] = content.parent();
                     }
                     if (type === 'menu') {
-                        if (self.elements.items === undefined) {
-                            self.elements.items = self.toggleMenu.getItemsParent(content.find('li'));
+                        if (self.getElements().items === undefined) {
+                            self.elements.items = self.getItemsParent(content.find('li'));
 
-                        } else if (typeof self.elements.items === 'function') {
-                            self.elements.items = self.elements.items(content);
+                        } else if (typeof self.getElements().items === 'function') {
+                            self.elements.items = self.getElements().items(content);
                         }
                     }
                 }
@@ -226,15 +264,11 @@
             var self = this;
 
             // Bouton toggle
-            self.elements.toggle.on((self.events.toggle = 'click.togglemenu.toggle'), function () {
-                self.toggle();
-            });
+            self.getElements().toggle.on((self.events.toggle = 'click.togglemenu.toggle'), {self: self}, self.toggle);
 
             // Bouton close
-            if (self.elements.closeContent !== undefined) {
-                self.elements.closeContent.on((self.events.closeContent = 'click.togglemenu.close'), function () {
-                    self.toggle();
-                });
+            if (self.getElements().closeContent !== undefined) {
+                self.getElements().closeContent.on((self.events.closeContent = 'click.togglemenu.close'), {self: self}, self.toggle);
             }
 
             // User callback
@@ -255,8 +289,8 @@
         itemsHandler: function () {
             var self = this;
 
-            if (self.elements.items.length) {
-                self.elements.items.each(function (i, item) {
+            if (self.getElements().items.length) {
+                self.getElements().items.each(function (i, item) {
                     item = $(item);
 
                     // Ajout du layout
@@ -267,7 +301,7 @@
                     self.addItemContent(item);
 
                     // Events
-                    self.elements.itemLink(item).on('click.togglemenu.itemLink', function (event) {
+                    self.getElements().itemLink(item).on('click.togglemenu.itemLink', function (event) {
                         event.preventDefault();
 
                         self.toggleSubmenu(item);
@@ -277,7 +311,7 @@
                     if (self.settings.afterItemHandler !== undefined) {
                         self.settings.afterItemHandler.call({
                             toggleMenuPush: self,
-                            elements: self.elements,
+                            elements: self.getElements(),
                             item: item
                         });
                     }
@@ -290,8 +324,8 @@
         /**
          * Retourne le layout correspondant à l'item
          *
-         * @param  jQueryObject item Élément parent (optionnel)
-         * @return string
+         * @param  {object} item Élément parent (optionnel)
+         * @return {string}
          */
         getItemLayout: function (item) {
             if (this.settings.layout === 'data' && item !== undefined) {
@@ -306,7 +340,7 @@
         /**
          * Ajout du contenu pour un item
          *
-         * @param jQueryObject item Élément parent
+         * @param {object} item Élément parent
          */
         addItemContent: function (item) {
             var self = this;
@@ -314,8 +348,8 @@
             if (item.layout === 'panel') {
                 var content = null;
 
-                if (self.elements.back !== undefined) {
-                    content = self.elements.back;
+                if (self.getElements().back !== undefined) {
+                    content = self.getElements().back;
                 } else {
                     // Container
                     content = $('<li>', {
@@ -330,22 +364,22 @@
                     // Titre
                     var title = $('<span>', {
                         'class': 'item-title',
-                        html: self.elements.itemLink(item).text()
+                        html: self.getElements().itemLink(item).text()
                     }).appendTo(content);
 
                     // Lien sur le titre
                     if (self.settings.backLink) {
                         title.wrapInner($('<a>', {
-                            href: self.elements.itemLink(item).attr('href')
+                            href: self.getElements().itemLink(item).attr('href')
                         }));
                     }
                 }
 
                 if (content !== null) {
-                    content.prependTo(self.elements.itemContent(item));
+                    content.prependTo(self.getElements().itemContent(item));
 
                     // Event
-                    self.elements.backBtn(content).on('click.togglemenu.backBtn', function () {
+                    self.getElements().backBtn(content).on('click.togglemenu.backBtn', function () {
                         self.toggleSubmenu(item);
                     });
 
@@ -366,15 +400,15 @@
         /**
          * Ouverture/fermeture du menu
          */
-        toggle: function () {
-            var self = this;
+        toggle: function (event) {
+            var self = (event !== undefined && event.data !== undefined && event.data.self !== undefined) ? event.data.self : this;
 
             // Statut
-            self.toggleMenu.elements.body.toggleClass(self.settings.classes.open);
-            self.isOpen = (self.toggleMenu.elements.body.hasClass(self.settings.classes.open));
+            self.getElements().body.toggleClass(self.settings.classes.open);
+            self.isOpen = self.getElements().body.hasClass(self.settings.classes.open);
 
             // Événement
-            setTimeout(function () {
+            self.onReady(function () {
                 if (self.isOpen) {
                     self.elements.page.on((self.events.page = 'click touchstart'), function (event) {
                         event.preventDefault();
@@ -387,14 +421,13 @@
                     self.elements.page.off(self.events.page);
                     self.closeSubmenus();
                 }
-            }, 0);
+            });
 
             // User callback
             if (self.settings.onToggle !== undefined) {
                 self.settings.onToggle.call({
                     toggleMenuPush: self,
-                    body: self.toggleMenu.elements.body,
-                    page: self.elements.page,
+                    elements: self.getElements(),
                     isOpen: self.isOpen
                 });
             }
@@ -405,7 +438,7 @@
         /**
          * Ouverture/fermeture d'un sous-menu
          *
-         * @param jQueryObject item Élément parent
+         * @param {object} item Élément parent
          */
         toggleSubmenu: function (item) {
             // States
@@ -413,8 +446,8 @@
             item.toggleClass(this.settings.classes.active);
 
             if (item.layout !== undefined && item.layout === 'panel') {
-                this.elements.wrapper.scrollTop(0);
-                this.toggleMenu.elements.body.toggleClass(this.settings.classes.submenuOpen);
+                this.getWrapper().scrollTop(0);
+                this.getElements().body.toggleClass(this.settings.classes.submenuOpen);
             }
 
             // User callback
@@ -431,10 +464,10 @@
         /**
          * Fermeture des sous menus
          *
-         * @param jQueryObject item Élément parent (optionnel)
+         * @param {object=undefined} item Élément parent
          */
         closeSubmenus: function (item) {
-            var active = (item !== undefined) ? item.siblings('.' + this.settings.classes.active) : this.elements.items;
+            var active = item !== undefined ? item.siblings('.' + this.settings.classes.active) : this.getElements().items;
             var activeChildren = active.find('.' + this.settings.classes.active);
 
             // Suppression de l'état actif sur les frères
@@ -442,8 +475,8 @@
                 active.removeClass(this.settings.classes.active);
 
                 // Suppression de l'état d'ouverture d'un sous-menu
-                if (this.toggleMenu.elements.body.hasClass(this.settings.classes.submenuOpen)) {
-                    this.toggleMenu.elements.body.removeClass(this.settings.classes.submenuOpen);
+                if (this.getElements().body.hasClass(this.settings.classes.submenuOpen)) {
+                    this.getElements().body.removeClass(this.settings.classes.submenuOpen);
                 }
             }
 
@@ -462,44 +495,6 @@
             }
 
             return this;
-        },
-
-        /**
-         * Destroy
-         */
-        unload: function () {
-            var self = this;
-
-            // Fermeture du menu
-            if (self.isOpen) {
-                self.toggle();
-            }
-
-            // Suppression des éléments
-            self.unWrap();
-
-            // Désactivation des events
-            $.each(self.events, function (element, event) {
-                self.elements[element].off(event);
-            });
-            self.elements.items.each(function (i, item) {
-                item = $(item);
-
-                self.elements.itemLink(item).off('click.togglemenu.itemLink');
-
-                if (self.elements.back !== undefined) {
-                    self.elements.backBtn(item).off('click.togglemenu.backBtn');
-                }
-            });
-
-            // Suppression des classes "copy"
-            $.each(self.elements.content, function (type, element) {
-                if (type !== 'close') {
-                    element.removeClass(self.settings.classes.copy);
-                }
-            });
-
-            return self;
         }
     };
 })(jQuery);

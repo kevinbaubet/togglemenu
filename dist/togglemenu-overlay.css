@@ -4,7 +4,7 @@
 /* ==========================================================================
    Navigation overlay
    ========================================================================== */
-.nav--togglemenuOverlay {
+.togglemenu--overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,7 +20,7 @@
   transition: transform .6s, -webkit-transform .6s;
 }
 
-.nav--togglemenuOverlay:before {
+.togglemenu--overlay:before {
   content: "";
   position: fixed;
   top: 0;
@@ -31,61 +31,13 @@
   background-color: rgba(24, 27, 34, 0.9);
 }
 
-.is-togglemenuOpen .nav--togglemenuOverlay {
+.is-togglemenu-open .togglemenu--overlay {
   -webkit-transform: translateY(-25%) skewY(-8deg);
           transform: translateY(-25%) skewY(-8deg);
   overflow: visible;
 }
 
-/* ==========================================================================
-   TogglemenuOverlay
-   ========================================================================== */
-.togglemenu-overlay .togglemenu-toggle {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  z-index: 1050;
-  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
-  line-height: .7;
-  font-size: 1.5em;
-}
-
-.togglemenu-overlay .togglemenu-toggle span {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  z-index: 5;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-
-.togglemenu-overlay .togglemenu-toggle span:before, .togglemenu-overlay .togglemenu-toggle span:after {
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle {
-  background-color: #ff5a60;
-}
-
-.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span {
-  width: 0;
-}
-
-.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:before, .togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:after {
-  top: 0;
-  right: 20px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-}
-
-.togglemenu-overlay.is-togglemenuOpen .togglemenu-toggle span:after {
-  top: -3px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.togglemenu-overlay .togglemenu-menu {
+.togglemenu--overlay .togglemenu-menu {
   position: absolute;
   top: 50%;
   left: 0;
@@ -94,11 +46,11 @@
           transform: translateY(-50%) skewY(8deg);
 }
 
-.togglemenu-overlay .togglemenu-menu .item-depth {
+.togglemenu--overlay .togglemenu-menu .item-depth {
   overflow: visible;
 }
 
-.togglemenu-overlay .togglemenu-menu .item-depth .item-depth {
+.togglemenu--overlay .togglemenu-menu .item-depth .item-depth {
   position: absolute;
   top: 50%;
   z-index: -1;
@@ -110,14 +62,14 @@
   transition: .3s;
 }
 
-.togglemenu-overlay .togglemenu-menu .item-depth .is-active > .item-depth {
+.togglemenu--overlay .togglemenu-menu .item-depth .is-active > .item-depth {
   z-index: 5;
   -webkit-transform: translate3d(0, -50%, 0);
           transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
 
-.togglemenu-overlay .togglemenu-menu .nav-item a {
+.togglemenu--overlay .togglemenu-menu .nav-item a {
   position: relative;
   color: #fff;
   text-transform: uppercase;
@@ -125,35 +77,35 @@
   transition: color .3s;
 }
 
-.togglemenu-overlay .togglemenu-menu .nav-item a:hover,
-.togglemenu-overlay .togglemenu-menu .nav-item.is-active > a {
+.togglemenu--overlay .togglemenu-menu .nav-item a:hover,
+.togglemenu--overlay .togglemenu-menu .nav-item.is-active > a {
   color: #ff5a60;
 }
 
-.togglemenu-overlay .togglemenu-menu .nav-item + .nav-item > a {
+.togglemenu--overlay .togglemenu-menu .nav-item + .nav-item > a {
   border: 0;
 }
 
-.togglemenu-overlay .togglemenu-menu .depth-1 > .nav-item {
+.togglemenu--overlay .togglemenu-menu .depth-1 > .nav-item {
   width: 20%;
   margin-left: 15%;
 }
 
-.togglemenu-overlay .togglemenu-menu .depth-2 {
+.togglemenu--overlay .togglemenu-menu .depth-2 {
   left: 35%;
   width: 20%;
 }
 
-.togglemenu-overlay .togglemenu-menu .depth-3 {
+.togglemenu--overlay .togglemenu-menu .depth-3 {
   left: 100%;
   width: 100%;
 }
 
-.togglemenu-overlay .togglemenu-menu .is-parent > a {
+.togglemenu--overlay .togglemenu-menu .is-parent > a {
   position: relative;
 }
 
-.togglemenu-overlay .togglemenu-menu .is-parent > a:before, .togglemenu-overlay .togglemenu-menu .is-parent > a:after {
+.togglemenu--overlay .togglemenu-menu .is-parent > a:before, .togglemenu--overlay .togglemenu-menu .is-parent > a:after {
   content: "";
   position: absolute;
   top: 27px;
@@ -168,14 +120,62 @@
   transition: background-color .3s;
 }
 
-.togglemenu-overlay .togglemenu-menu .is-parent > a:after {
+.togglemenu--overlay .togglemenu-menu .is-parent > a:after {
   top: 33px;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:before, .togglemenu-overlay .togglemenu-menu .is-parent.is-active > a:after,
-.togglemenu-overlay .togglemenu-menu .is-parent > a:hover:before,
-.togglemenu-overlay .togglemenu-menu .is-parent > a:hover:after {
+.togglemenu--overlay .togglemenu-menu .is-parent.is-active > a:before, .togglemenu--overlay .togglemenu-menu .is-parent.is-active > a:after,
+.togglemenu--overlay .togglemenu-menu .is-parent > a:hover:before,
+.togglemenu--overlay .togglemenu-menu .is-parent > a:hover:after {
   background-color: #fff;
+}
+
+/* ==========================================================================
+   Toggle btn
+   ========================================================================== */
+.togglemenu-toggle {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1050;
+  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
+  line-height: .7;
+  font-size: 1.5em;
+}
+
+.togglemenu-toggle span {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  z-index: 5;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.togglemenu-toggle span:before, .togglemenu-toggle span:after {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.is-togglemenu-open .togglemenu-toggle {
+  background-color: #ff5a60;
+}
+
+.is-togglemenu-open .togglemenu-toggle span {
+  width: 0;
+}
+
+.is-togglemenu-open .togglemenu-toggle span:before, .is-togglemenu-open .togglemenu-toggle span:after {
+  top: 0;
+  right: 20px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.is-togglemenu-open .togglemenu-toggle span:after {
+  top: -3px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }

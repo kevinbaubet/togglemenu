@@ -2,19 +2,14 @@
     'use strict';
 
     $.ToggleMenu = function (options) {
-        // Éléments
-        this.elements = {
-            body: $('body')
-        };
-
         // Config
-        $.extend((this.settings = {}), $.ToggleMenu.defaults, options);
+        $.extend(this.settings = {}, $.ToggleMenu.defaults, options);
 
         // Variables
-        this.display = {
+        this.menu = {
             current: null
         };
-        this.instance = null;
+        this.instances = [];
         this.options = {};
 
         return this;
@@ -24,145 +19,142 @@
         classes: {
             prefix: 'togglemenu'
         },
-        onDisplayLoad: undefined,
-        onDisplayComplete: undefined,
-        onDisplayUnload: undefined
+        menuBeforeLoad: undefined,
+        menuComplete: undefined,
+        menuUnload: undefined
     };
 
     $.ToggleMenu.prototype = {
         /**
-         * Met en place un display
+         * Switch le menu
          *
-         * @param string display Nom du display
-         * @param object options Options utilisateur du display
+         * @param {string} type Type de menu
+         * @param {object=undefined} options Options du menu
          */
-        setDisplay: function (display, options) {
-            // On stop si le display courant est le même que le nouveau demandé
-            if (this.isCurrentDisplay(display)) {
-                return false;
+        toggleMenu: function (type, options) {
+            // On stop si le menu courant est le même que le nouveau demandé
+            if (this.isCurrentMenu(type)) {
+                return;
             }
 
-            // Si un display est déjà initilisé, on l'enlève
-            this.removeDisplay();
+            // Si un menu est déjà initilisé, on l'enlève
+            this.removeMenu();
 
-            return this.addDisplay(display, options);
+            return this.addMenu(type, options);
         },
 
         /**
-         * Enregistre les options pour un display
+         * Enregistre les options pour un menu
          *
-         * @param string display Nom du display
-         * @param object options Options du display
+         * @param {string} type Type de menu
+         * @param {object} options Options du menu
          */
-        setOptions: function (display, options) {
-            this.options[display] = options;
+        setOptions: function (type, options) {
+            this.options[type] = options;
 
             return this;
         },
 
         /**
-         * Détermine si c'est le display courant
+         * Détermine si c'est le menu courant
          *
-         * @return bool
+         * @return {boolean}
          */
-        isCurrentDisplay: function (display) {
-            return (this.display.current === display);
+        isCurrentMenu: function (type) {
+            return this.menu.current === type;
         },
 
         /**
          * Ajout d'un display
          */
-        addDisplay: function (display, options) {
-            // On stop l'initialisation si le display est déjà initialisé
-            if (this.isCurrentDisplay(display)) {
-                return false;
+        addMenu: function (type, options) {
+            // On stop l'initialisation si le menu est déjà initialisé
+            if (this.isCurrentMenu(type)) {
+                return;
             }
 
             // Formatage du nom de la classe à init
-            this.display.className = this.getDisplayClassName(display);
+            this.menu.className = this.getMenuClassName(type);
 
             // User Callback
-            if (this.settings.onDisplayLoad !== undefined) {
-                this.settings.onDisplayLoad.call(this);
+            if (this.settings.menuBeforeLoad !== undefined) {
+                this.settings.menuBeforeLoad.call(this);
             }
 
             // Si le display est chargé, on l'init
-            if ($[this.display.className] !== undefined) {
+            if ($[this.menu.className] !== undefined) {
                 // On défini le display courant
-                this.display.current = display;
-                this.elements.body.addClass(this.settings.classes.prefix + '-' + display);
+                this.menu.current = type;
 
                 // Options définies ?
-                if (options === undefined && this.options[display] !== undefined) {
-                    options = this.options[display];
+                if (options === undefined && this.options[type] !== undefined) {
+                    options = this.options[type];
                 }
 
                 // Appel de la classe
-                this.instance = new $[this.display.className](this, options);
+                this.instances[type] = new $[this.menu.className](this, options);
 
             } else {
-                this.setLog('error', 'Display "' + this.display.className + '" not found.');
+                this.setLog('Menu "' + type + '" not found. Checks if the file ' + this.menu.className + ' has been loaded.', 'error');
             }
 
             // User Callback
-            if (this.settings.onDisplayComplete !== undefined) {
-                this.settings.onDisplayComplete.call(this);
+            if (this.settings.menuComplete !== undefined) {
+                this.settings.menuComplete.call(this);
             }
 
             return this;
         },
 
         /**
-         * Suppression du display courant
+         * Suppression du menu courant
          *
          * @return bool
          */
-        removeDisplay: function () {
-            if (this.display.current !== null) {
-                this.elements.body.removeClass(this.settings.classes.prefix + '-' + this.display.current);
-
+        removeMenu: function () {
+            if (this.menu.current !== null) {
                 // Appel du unload du display correspondant
-                if ($[this.display.className].prototype.hasOwnProperty('unload')) {
-                    $[this.display.className].prototype.unload.call(this.instance);
+                if ($[this.menu.className].prototype.hasOwnProperty('unload')) {
+                    $[this.menu.className].prototype.unload.call(this.instances[this.menu.current]);
                 }
 
                 // User Callback
-                if (this.settings.onDisplayUnload !== undefined) {
-                    this.settings.onDisplayUnload.call(this);
+                if (this.settings.menuUnload !== undefined) {
+                    this.settings.menuUnload.call(this);
                 }
 
-                // On remet le display courant par défaut
-                this.display.current = null;
-                delete this.display.className;
+                // On remet le menu courant par défaut
+                this.menu.current = null;
+                delete this.menu.className;
             }
 
             return this;
         },
 
         /**
-         * Récupère le nom de la classe du display correspondant
+         * Récupère le nom de la classe du menu correspondant
          *
-         * @param  string display Nom du display
-         * @return string
+         * @param  {string} type Type de menu
+         * @return {string}
          */
-        getDisplayClassName: function (display) {
-            return 'ToggleMenu' + display.charAt(0).toUpperCase() + display.substr(1);
+        getMenuClassName: function (type) {
+            return 'ToggleMenu' + type.charAt(0).toUpperCase() + type.substr(1);
         },
 
         /**
-         * Récupère l'instance en cours
+         * Récupère les instances en cours
          *
-         * @return object
+         * @return {object}
          */
-        getInstance: function () {
-            return this.instance;
+        getInstances: function () {
+            return this.instances;
         },
 
         /**
          * Récupère les éléments parents en fonction d'un contexte
          *
-         * @param  jQuery object search Élément jQuery dans lequel la recherche d'éléments parents sera effectée
-         * @return jQuery object
+         * @param  {object} search Élément jQuery dans lequel la recherche d'éléments parents sera effectée
+         * @return {object}
          */
         getItemsParent: function (search) {
             var itemsParent = [];
@@ -181,11 +173,60 @@
         },
 
         /**
-         * Utils
+         * Une fois ToggleMenu prêt
+         *
+         * @param {function} callback Fonction à exécuter
          */
-        setLog: function (type, log) {
+        onReady: function (callback) {
+            setTimeout(function () {
+                callback();
+            }, 0);
+
+            return this;
+        },
+
+        /**
+         * Retourne tous les éléments de toggleMenu
+         *
+         * @return {object}
+         */
+        getElements: function () {
+            return this.elements;
+        },
+
+        /**
+         * Retourne tous les éléments de contenu
+         *
+         * @return {object}
+         */
+        getContentElements: function () {
+            return this.getElements().content;
+        },
+
+        /**
+         * Retourne le wrapper global
+         *
+         * @return {object}
+         */
+        getWrapper: function () {
+            return this.getElements().wrapper;
+        },
+
+        /**
+         * Créer un log
+         *
+         * @param {string} log
+         * @param {string=undefined} type
+         */
+        setLog: function (log, type) {
+            type = type || 'log';
+
             console[type]('ToggleMenu: ' + log);
         },
+
+        /**
+         * Remplace la chaine {prefix} par la classe de préfix dans toutes les classes
+         */
         replacePrefixClass: function () {
             var self = this;
 

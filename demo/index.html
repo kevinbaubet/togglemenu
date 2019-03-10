@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../dist/togglemenu-hover.css" />
         <link rel="stylesheet" href="../dist/togglemenu.css" />
 
-        <script src="../node_modules/jquery/dist/jquery.min.js" ></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
         <script src="../src/togglemenu-mega.js"></script>
         <script src="../src/togglemenu-overlay.js"></script>
@@ -80,7 +80,7 @@
                     let val = $(event.currentTarget).val();
 
                     if (val === 'disable') {
-                        toggleMenu.removeDisplay();
+                        toggleMenu.removeMenu();
                     } else {
                         toggleMenu.setDisplay(val);
                     }

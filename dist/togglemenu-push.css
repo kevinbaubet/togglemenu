@@ -4,18 +4,18 @@
    ========================================================================== */
 /* Contexte de page
    ========================================================================== */
-.togglemenu-push {
+body {
   overflow-x: hidden;
 }
 
-.togglemenu-push .page {
+body .page {
   -webkit-transition: -webkit-transform .3s;
   transition: -webkit-transform .3s;
   transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;
 }
 
-.togglemenu-push.is-togglemenuOpen .page {
+body.is-togglemenu-open .page {
   position: fixed;
   -webkit-transform: translateX(-280px);
           transform: translateX(-280px);
@@ -26,7 +26,7 @@
   width: 100vw;
 }
 
-.togglemenu-push.is-togglemenuOpen .nav--togglemenuPush {
+body.is-togglemenu-open .togglemenu--push {
   -webkit-transform: translateX(0);
           transform: translateX(0);
   -webkit-box-shadow: -5px 0 24px rgba(0, 0, 0, 0.24);
@@ -36,7 +36,7 @@
 /* ==========================================================================
    Navigation push
    ========================================================================== */
-.nav--togglemenuPush {
+.togglemenu--push {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,6 +54,30 @@
   transition: transform .3s, -webkit-transform .3s;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.togglemenu--push .item-depth {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.togglemenu--push .nav-item {
+  list-style: none;
+}
+
+.togglemenu--push .nav-item a {
+  position: relative;
+  display: block;
+  padding: 1.25rem;
+  color: #303748;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.togglemenu--push .nav-item + .nav-item > a {
+  border-top: 1px solid rgba(48, 55, 72, 0.1);
 }
 
 /* ==========================================================================
@@ -100,33 +124,6 @@
 .togglemenu-close button:after, .l-panel .item-back button:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
-}
-
-/* ==========================================================================
-   TogglemenuPush menu
-   ========================================================================== */
-.togglemenu-menu .item-depth {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.togglemenu-menu .nav-item {
-  list-style: none;
-}
-
-.togglemenu-menu .nav-item a {
-  position: relative;
-  display: block;
-  padding: 1.25rem;
-  color: #303748;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.togglemenu-menu .nav-item + .nav-item > a {
-  border-top: 1px solid rgba(48, 55, 72, 0.1);
 }
 
 /* ==========================================================================
@@ -254,10 +251,10 @@
   font-weight: bold;
 }
 
-.is-togglemenuSubmenuOpen .nav--togglemenuPush {
+.is-togglemenu-submenu-open .togglemenu--push {
   overflow: hidden;
 }
 
-.is-togglemenuSubmenuOpen .l-panel > .item-depth {
+.is-togglemenu-submenu-open .l-panel > .item-depth {
   overflow-y: auto;
 }
