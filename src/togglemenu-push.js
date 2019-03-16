@@ -1,6 +1,14 @@
 (function ($) {
     'use strict';
 
+    /**
+     * ToggleMenuPush
+     *
+     * @param {object} toggleMenu
+     * @param {object=undefined} options
+     *
+     * @return {$.ToggleMenuPush}
+     */
     $.ToggleMenuPush = function (toggleMenu, options) {
         // Héritage
         this.toggleMenu = toggleMenu;
@@ -47,9 +55,7 @@
         layout: 'accordion',
         backLink: false,
         classes: {
-            open: 'is-{prefix}-open',
             submenuOpen: 'is-{prefix}-submenu-open',
-            active: 'is-active',
             copy: '{prefix}-copy',
             back: 'item-back'
         },

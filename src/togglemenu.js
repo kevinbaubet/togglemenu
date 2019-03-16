@@ -1,6 +1,13 @@
 (function ($) {
     'use strict';
 
+    /**
+     * ToggleMenu
+     *
+     * @param {object=undefined} options
+     *
+     * @return {$.ToggleMenu}
+     */
     $.ToggleMenu = function (options) {
         // Config
         $.extend(this.settings = {}, $.ToggleMenu.defaults, options);
@@ -17,7 +24,9 @@
 
     $.ToggleMenu.defaults = {
         classes: {
-            prefix: 'togglemenu'
+            prefix: 'togglemenu',
+            active: 'is-active',
+            open: 'is-{prefix}-open'
         },
         menuBeforeLoad: undefined,
         menuComplete: undefined,
@@ -26,7 +35,7 @@
 
     $.ToggleMenu.prototype = {
         /**
-         * Switch le menu
+         * Switch le menu courant vers un nouveau
          *
          * @param {string} type Type de menu
          * @param {object=undefined} options Options du menu
@@ -65,7 +74,7 @@
         },
 
         /**
-         * Ajout d'un display
+         * Ajout d'un menu
          */
         addMenu: function (type, options) {
             // On stop l'initialisation si le menu est déjà initialisé
@@ -135,6 +144,7 @@
          * Récupère le nom de la classe du menu correspondant
          *
          * @param  {string} type Type de menu
+         *
          * @return {string}
          */
         getMenuClassName: function (type) {
@@ -154,6 +164,7 @@
          * Récupère les éléments parents en fonction d'un contexte
          *
          * @param  {object} search Élément jQuery dans lequel la recherche d'éléments parents sera effectée
+         *
          * @return {object}
          */
         getItemsParent: function (search) {

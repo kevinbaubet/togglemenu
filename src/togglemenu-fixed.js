@@ -1,6 +1,14 @@
 (function ($) {
     'use strict';
 
+    /**
+     * ToggleMenuFixed
+     *
+     * @param {object} toggleMenu
+     * @param {object=undefined} options
+     *
+     * @return {$.ToggleMenuFixed}
+     */
     $.ToggleMenuFixed = function (toggleMenu, options) {
         // Héritage
         this.toggleMenu = toggleMenu;
@@ -35,10 +43,6 @@
             toggle: undefined
         },
         toggle: true,
-        classes: {
-            open: 'is-{prefix}-open',
-            active: 'is-active'
-        },
         beforeLoad: undefined,
         afterEventsHandler: undefined,
         afterItemHandler: undefined,

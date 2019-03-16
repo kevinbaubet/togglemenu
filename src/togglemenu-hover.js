@@ -1,6 +1,14 @@
 (function ($) {
     'use strict';
 
+    /**
+     * ToggleMenuHover
+     *
+     * @param {object} toggleMenu
+     * @param {object=undefined} options
+     *
+     * @return {$.ToggleMenuHover}
+     */
     $.ToggleMenuHover = function (toggleMenu, options) {
         // Héritage
         this.toggleMenu = toggleMenu;
@@ -19,6 +27,7 @@
             current: {x: 0, y: 0}
         };
         this.events = {};
+        this.items = {};
 
         // Init
         if (this.prepareUserOptions()) {
@@ -33,9 +42,6 @@
             menu: undefined,
             items: undefined,
             itemLink: '> a'
-        },
-        classes: {
-            active: 'is-active'
         },
         disableItemsClick: false,
         interval: 100,
@@ -113,46 +119,45 @@
             var self = this;
 
             self.getElements().items.on(self.events.items = 'focusin.togglemenu focusout.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu', function (event) {
-                var options = {
-                    event: $.extend({}, event),
-                    item: this,
-                    $item: $(event.currentTarget)
+                var item = {
+                    storage: this,
+                    element: $(event.currentTarget)
                 };
 
                 // Clear le timeout de l'item
-                if (options.item.hoverTimeout) {
-                    options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
+                if (item.storage.hoverTimeout) {
+                    item.storage.hoverTimeout = clearTimeout(item.storage.hoverTimeout);
                 }
 
                 // Hover
-                if (options.event.type === 'mouseenter' || options.event.type === 'focusin') {
+                if (event.type === 'mouseenter' || event.type === 'focusin') {
                     // On enregistre la position inital de la souris
-                    self.setPosition('previous', options.event);
+                    self.setPosition('previous', {x: event.pageX, y: event.pageY});
 
                     // Puis on met à jour cette position pour faire une comparaison
-                    options.$item.on('mousemove.togglemenu', function () {
-                        self.setPosition('current', options.event);
+                    item.element.on('mousemove.togglemenu', function () {
+                        self.setPosition('current', {x: event.pageX, y: event.pageY});
                     });
 
                     // Comparaison des positions si l'état hover n'est pas activé
-                    if (options.item.hoverState !== true) {
-                        options.item.hoverTimeout = setTimeout(function () {
-                            self.comparePosition(options);
+                    if (item.storage.hoverState !== true) {
+                        item.storage.hoverTimeout = setTimeout(function () {
+                            self.comparePosition(item);
                         }, self.settings.interval);
                     }
                 }
                 // Leave
                 else {
                     // Désactivation de l'event mousemove
-                    options.$item.off('mousemove.togglemenu');
+                    item.element.off('mousemove.togglemenu');
 
                     // S'il y a un état hover sur l'item, on execute onOut() après un délai
-                    if (options.item.hoverState === true) {
-                        options.item.hoverTimeout = setTimeout(function () {
-                            options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
-                            options.item.hoverState = false;
+                    if (item.storage.hoverState === true) {
+                        item.storage.hoverTimeout = setTimeout(function () {
+                            item.storage.hoverTimeout = clearTimeout(item.storage.hoverTimeout);
+                            item.storage.hoverState = false;
 
-                            return self.onOut.call($.extend({toggleMenuHover: self}, options));
+                            return self.onOut(item);
                         }, self.settings.timeout);
                     }
                 }
@@ -180,12 +185,12 @@
         /**
          * Récupération de la position courante de la souris
          *
-         * @param {string} type  Type de position : previous ou current
-         * @param {object} event Événement courant
+         * @param {string} type Type de position : previous ou current
+         * @param {object} pos Positions X,Y
          */
-        setPosition: function (type, event) {
-            this.position[type].x = event.pageX;
-            this.position[type].y = event.pageY;
+        setPosition: function (type, pos) {
+            this.position[type].x = pos.x;
+            this.position[type].y = pos.y;
 
             return this;
         },
@@ -211,27 +216,29 @@
         /**
          * Comparaison de la position courante et précédente
          *
-         * @param {object} options Options de l'item à comparer {event, item, $item}
+         * @param {object} item
          */
-        comparePosition: function (options) {
+        comparePosition: function (item) {
             var self = this;
-            options.item.hoverTimeout = clearTimeout(options.item.hoverTimeout);
+            item.storage.hoverTimeout = clearTimeout(item.storage.hoverTimeout);
 
-            // Si la comparaison des posisitions est inférieure au paramètre de sensibilité, on active l'item
+            // Hover
             if ((Math.abs(self.getPosition('previous', 'x') - self.getPosition('current', 'x')) + Math.abs(self.getPosition('previous', 'y') - self.getPosition('current', 'y'))) < 7) {
-                options.$item.off('mousemove.togglemenu');
-                options.item.hoverState = true;
+                item.element.off('mousemove.togglemenu');
+                item.storage.hoverState = true;
 
-                return self.onOver.call($.extend({toggleMenuHover: self}, options));
+                return self.onOver(item);
 
             } else {
                 // On défini les positions précédentes comme actuelles
-                self.position.previous.x = self.getPosition('current', 'x');
-                self.position.previous.y = self.getPosition('current', 'y');
+                self.setPosition('previous', {
+                    x: self.getPosition('current', 'x'),
+                    y: self.getPosition('current', 'y')
+                });
 
                 // Rappel de la méthode
-                options.item.hoverTimeout = setTimeout(function () {
-                    self.comparePosition(options);
+                item.storage.hoverTimeout = setTimeout(function () {
+                    self.comparePosition(item);
                 }, self.settings.interval);
             }
 
@@ -241,13 +248,16 @@
         /**
          * Callback au hover
          *
-         * @param {toggleMenuHover, options de l'item}
+         * @param {object} item
          */
-        onOver: function () {
-            this.$item.addClass(this.toggleMenuHover.settings.classes.active);
+        onOver: function (item) {
+            item.element.addClass(this.settings.classes.active);
 
-            if (this.toggleMenuHover.settings.onOver !== undefined) {
-                this.toggleMenuHover.settings.onOver.call(this);
+            if (this.settings.onOver !== undefined) {
+                this.settings.onOver.call({
+                    toggleMenuHover: this,
+                    item: item
+                });
             }
 
             return this;
@@ -256,13 +266,16 @@
         /**
          * Callback au leave
          *
-         * @param {toggleMenuHover, options de l'item}
+         * @param {object} item
          */
-        onOut: function () {
-            this.$item.removeClass(this.toggleMenuHover.settings.classes.active);
+        onOut: function (item) {
+            item.element.removeClass(this.settings.classes.active);
 
-            if (this.toggleMenuHover.settings.onOut !== undefined) {
-                this.toggleMenuHover.settings.onOut.call(this);
+            if (this.settings.onOut !== undefined) {
+                this.settings.onOut.call({
+                    toggleMenuHover: this,
+                    item: item
+                });
             }
 
             return this;

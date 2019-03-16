@@ -1,6 +1,14 @@
 (function ($) {
     'use strict';
 
+    /**
+     * ToggleMenuMega
+     *
+     * @param {object} toggleMenu
+     * @param {object=undefined} options
+     *
+     * @return {$.ToggleMenuMega}
+     */
     $.ToggleMenuMega = function (toggleMenu, options) {
         // Héritage
         this.toggleMenu = toggleMenu;
@@ -36,9 +44,7 @@
         overlay: true,
         closeOnEscape: true,
         classes: {
-            open: 'is-{prefix}-open',
-            overlay: '{prefix}-overlay',
-            active: 'is-active'
+            overlay: '{prefix}-overlay'
         },
         beforeLoad: undefined,
         beforeAddOverlay: undefined,
