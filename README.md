@@ -43,13 +43,15 @@ Liste des menus présents dans ToggleMenu :
 
 ## Options ToggleMenu
 
-| Option                         | Type     | Valeur par défaut | Description                                |
-|--------------------------------|----------|-------------------|--------------------------------------------|
-| classes                        | object   | Voir ci-dessous   | Objet pour l'option ci-dessous             |
-| &nbsp;&nbsp;&nbsp;&nbsp;prefix | string   | 'togglemenu'      | Préfix de classe                           |
-| menuBeforeLoad                 | function | undefined         | Callback au début du chargement du menu    |
-| menuComplete                   | function | undefined         | Callback à la fin du chargement du menu    |
-| menuUnload                     | function | undefined         | Callback à la suppression du menu          |
+| Option                         | Type     | Valeur par défaut  | Description                                           |
+|--------------------------------|----------|--------------------|-------------------------------------------------------|
+| classes                        | object   | Voir ci-dessous    | Objet pour l'option ci-dessous                        |
+| &nbsp;&nbsp;&nbsp;&nbsp;prefix | string   | 'togglemenu'       | Préfix de classe                                      |
+| &nbsp;&nbsp;&nbsp;&nbsp;open   | string   | 'is-{prefix}-open' | Nom de la classe lorsque le menu est ouvert           |
+| &nbsp;&nbsp;&nbsp;&nbsp;active | string   | 'is-active'        | Nom de la classe lorsque un élément parent est actif  |                               
+| menuBeforeLoad                 | function | undefined          | Callback au début du chargement du menu               |
+| menuComplete                   | function | undefined          | Callback à la fin du chargement du menu               |
+| menuUnload                     | function | undefined          | Callback à la suppression du menu                     |
 
 
 ## API ToggleMenu

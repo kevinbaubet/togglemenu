@@ -1,6 +1,26 @@
-# Menu "push"
+# Push
 
-Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les sous-menus s'affiche au choix en panel ou accordéon.
+Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les sous-menus s'affiche au choix en panel ou accordéon ou les deux.
+
+* Nom du menu : **push**
+* Nom du fichier : **togglemenu-push.js**
+* Nom de la classe : **$.ToggleMenuPush**
+
+
+## Initialisation
+
+    var toggleMenu = new $.ToggleMenu();
+    
+    toggleMenu.addMenu('push', {
+        elements: {
+            content: {
+                close: 'Fermer',
+                menu: $('#nav--main'),
+                social: $('#nav--social')
+            }
+        }
+    });
+
 
 ## Options
 
@@ -17,10 +37,8 @@ Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les s
 | &nbsp;&nbsp;&nbsp;&nbsp;back                            | Élément jQuery | undefined                                                 | Élément wrapper pour revenir au niveau précédent (en mode panel). Si la valeur n'est pas définie, l'élément sera généré automatiquement                                                                                                                                                 |
 | &nbsp;&nbsp;&nbsp;&nbsp;backBtn                         | function       | function (wrapper) { return wrapper.children('button'); } | Fonction retournant le bouton du wrapper "back" permettant de revenir au niveau précédent (en mode panel)                                                                                                                                                                               |
 | layout                                                  | string         | 'accordion'                                               | Mode d'affichage pour les sous-menus. Valeurs possibles : 'accordion', 'panel' ou 'data'. Si la valeur est 'data', le layout doit être défini en paramètre data-layout dans l'élément parent correspondant. Ainsi, il est possible de spécifier un layout différent par élément parent. |
-| backLink                                                | boolean        | false                                                     | Ajouter un lien sur le titre du niveau parent en mode d'affichage 'panel'                                                                                                                                                                                                              |
+| backLink                                                | boolean        | false                                                     | Ajouter un lien sur le titre du niveau parent en mode d'affichage 'panel'                                                                                                                                                                                                               |
 | classes                                                 | object         | Voir ci-dessous                                           | Objet pour les options ci-dessous                                                                                                                                                                                                                                                       |
-| &nbsp;&nbsp;&nbsp;&nbsp;open                            | string         | 'is-{prefix}-open'                                        | Nom de la classe lorsque le menu est ouvert                                                                                                                                                                                                                                             |
-| &nbsp;&nbsp;&nbsp;&nbsp;active                          | string         | 'is-active'                                               | Nom de la classe lorsque un élément parent est actif                                                                                                                                                                                                                                    |
 | &nbsp;&nbsp;&nbsp;&nbsp;copy                            | string         | '{prefix}-copy'                                           | Nom de la classe des éléments copiés dans le menu                                                                                                                                                                                                                                       |
 | &nbsp;&nbsp;&nbsp;&nbsp;back                            | string         | 'item-back'                                               | Nom de la classe de l'élément "back" permettant de revenir au niveau précédent                                                                                                                                                                                                          |
 | beforeLoad                                              | function       | undefined                                                 | Callback au début du chargement                                                                                                                                                                                                                                                         |
@@ -32,19 +50,3 @@ Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les s
 | onComplete                                              | function       | undefined                                                 | Callback à la fin du chargement                                                                                                                                                                                                                                                         |
 | onToggle                                                | function       | undefined                                                 | Callback à l'ouverture/fermeture du menu                                                                                                                                                                                                                                                |
 | onToggleSubmenu                                         | function       | undefined                                                 | Callback à l'ouverture/fermeture d'un sous-menu                                                                                                                                                                                                                                         |
-
-/!\ Options obligatoires.
-
-## Exemple
-
-    var toggleMenu = new $.ToggleMenu();
-    
-    toggleMenu.setDisplay('push', {
-        elements: {
-            content: {
-                close: 'Fermer',
-                menu: $('#nav--main'),
-                social: $('#nav--social')
-            }
-        }
-    });

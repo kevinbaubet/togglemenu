@@ -25,8 +25,8 @@
     $.ToggleMenu.defaults = {
         classes: {
             prefix: 'togglemenu',
-            active: 'is-active',
-            open: 'is-{prefix}-open'
+            open: 'is-{prefix}-open',
+            active: 'is-active'
         },
         menuBeforeLoad: undefined,
         menuComplete: undefined,
