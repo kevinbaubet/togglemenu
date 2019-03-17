@@ -330,7 +330,8 @@
         /**
          * Retourne le layout correspondant à l'item
          *
-         * @param  {object} item Élément parent (optionnel)
+         * @param  {object=undefined} item Élément parent
+         *
          * @return {string}
          */
         getItemLayout: function (item) {
@@ -405,6 +406,8 @@
 
         /**
          * Ouverture/fermeture du menu
+         *
+         * @param {object=undefined} event
          */
         toggle: function (event) {
             var self = (event !== undefined && event.data !== undefined && event.data.self !== undefined) ? event.data.self : this;

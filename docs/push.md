@@ -56,4 +56,31 @@ Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les s
 
 [Hérite de l'API des menus.](../README.md#api-menus)
 
-todo
+
+#### getItemLayout()
+
+Retourne le layout correspondant à l'item
+
+* @param *{object=undefined}* **item** Élément parent
+* @return *{string}*
+
+
+#### toggle()
+
+Ouverture/fermeture du menu
+
+* @param *{object}* **event**
+
+
+#### toggleSubmenu()
+
+Ouverture/fermeture d'un sous-menu
+
+* @param *{object}* **item** Élément parent
+
+
+#### closeSubmenus()
+
+Fermeture des sous menus
+
+* @param *{object=undefined}* **item** Élément parent

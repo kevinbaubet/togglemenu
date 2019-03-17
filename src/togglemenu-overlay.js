@@ -302,6 +302,8 @@
 
         /**
          * Ouverture/fermeture du menu
+         *
+         * @param {object=undefined} event
          */
         toggle: function (event) {
             var self = (event !== undefined && event.data !== undefined && event.data.self !== undefined) ? event.data.self : this;

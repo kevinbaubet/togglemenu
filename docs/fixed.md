@@ -39,4 +39,25 @@ Permet de fixer un menu et d'afficher les sous-menus par dessus la page puis en 
 
 [Hérite de l'API des menus.](../README.md#api-menus)
 
-todo
+
+#### toggle()
+
+Ouverture/fermeture du menu
+
+* @param *{object}* **event**
+
+
+#### toggleSubmenu()
+
+Ouverture/fermeture d'un sous-menu
+
+* @param *{object}* **item** Élément parent
+
+
+#### closeSubmenus()
+
+Fermeture des sous menus
+
+* @param *{object=undefined}* **item** Élément parent
+
+

@@ -43,4 +43,18 @@ Permet d'afficher un mega-menu au clique sur un élément parent de 1er niveau.
 
 [Hérite de l'API des menus.](../README.md#api-menus)
 
-todo
+
+#### toggleSubmenu()
+
+Ouverture/fermeture d'un sous-menu
+
+* @param *{object=undefined}* **item** Élément parent
+
+
+#### closeSubmenus()
+
+Fermeture des sous menus
+
+* @param *{object=undefined}* **item** Élément parent
+
+

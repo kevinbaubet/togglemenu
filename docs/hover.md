@@ -39,5 +39,3 @@ Navigation classique en ligne. Permet d'afficher des sous-menus au survol de la 
 ## API
 
 [Hérite de l'API des menus.](../README.md#api-menus)
-
-todo
