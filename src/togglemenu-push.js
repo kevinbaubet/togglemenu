@@ -156,10 +156,10 @@
             self.getElements().items.each(function (i, item) {
                 item = $(item);
 
-                self.getElements().itemLink(item).off('click.togglemenu.itemLink');
+                self.getElements().itemLink(item).off('click.togglemenuPush');
 
                 if (self.getElements().back !== undefined) {
-                    self.getElements().backBtn(item).off('click.togglemenu.backBtn');
+                    self.getElements().backBtn(item).off('click.togglemenuPush');
                 }
             });
 
@@ -270,11 +270,11 @@
             var self = this;
 
             // Bouton toggle
-            self.getElements().toggle.on((self.events.toggle = 'click.togglemenu.toggle'), {self: self}, self.toggle);
+            self.getElements().toggle.on(self.events.toggle = 'click.togglemenuPush', {self: self}, self.toggle);
 
             // Bouton close
             if (self.getElements().closeContent !== undefined) {
-                self.getElements().closeContent.on((self.events.closeContent = 'click.togglemenu.close'), {self: self}, self.toggle);
+                self.getElements().closeContent.on(self.events.closeContent = 'click.togglemenuPush', {self: self}, self.toggle);
             }
 
             // User callback
@@ -307,7 +307,7 @@
                     self.addItemContent(item);
 
                     // Events
-                    self.getElements().itemLink(item).on('click.togglemenu.itemLink', function (event) {
+                    self.getElements().itemLink(item).on('click.togglemenuPush', function (event) {
                         event.preventDefault();
 
                         self.toggleSubmenu(item);
@@ -385,7 +385,7 @@
                     content.prependTo(self.getElements().itemContent(item));
 
                     // Event
-                    self.getElements().backBtn(content).on('click.togglemenu.backBtn', function () {
+                    self.getElements().backBtn(content).on('click.togglemenuPush', function () {
                         self.toggleSubmenu(item);
                     });
 
@@ -416,7 +416,7 @@
             // Événement
             self.onReady(function () {
                 if (self.isOpen) {
-                    self.getElements().page.on((self.events.page = 'click touchstart'), function (event) {
+                    self.getElements().page.on(self.events.page = 'click.togglemenuPush touchstart.togglemenuPush', function (event) {
                         event.preventDefault();
 
                         if (self.isOpen) {

@@ -122,7 +122,7 @@
                 self.getElements()[element].off(event);
             });
             self.getElements().items.each(function (i, item) {
-                self.getElements().itemLink($(item)).off('click.togglemenu.itemLink');
+                self.getElements().itemLink($(item)).off('click.togglemenuMega');
             });
             $(document).off('keyup.togglemenuMega');
 
@@ -168,12 +168,12 @@
 
             // Fermeture
             if (self.getElements().close !== undefined) {
-                self.getElements().close.on(self.events.close = 'click.togglemenu.close', {self: self}, self.toggleSubmenu);
+                self.getElements().close.on(self.events.close = 'click.togglemenuMega', {self: self}, self.toggleSubmenu);
             }
 
             // Overlay
             if (self.settings.overlay) {
-                self.getElements().overlay.on(self.events.overlay = 'click.togglemenu.overlay', {self: self}, self.toggleSubmenu);
+                self.getElements().overlay.on(self.events.overlay = 'click.togglemenuMega', {self: self}, self.toggleSubmenu);
             }
 
             // User callback
@@ -199,7 +199,7 @@
                     item = $(item);
 
                     // Events
-                    self.getElements().itemLink(item).on('click.togglemenu.itemLink', function (event) {
+                    self.getElements().itemLink(item).on('click.togglemenuMega', function (event) {
                         event.preventDefault();
                         self.toggleSubmenu(item);
                     });

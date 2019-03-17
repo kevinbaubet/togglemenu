@@ -133,14 +133,16 @@
             });
             if (self.getElements().itemLink !== null) {
                 self.getElements().items.each(function (i, item) {
-                    self.getElements().itemLink($(item)).off('click.togglemenu.itemLink');
+                    self.getElements().itemLink($(item)).off('click.togglemenuOverlay');
                 });
             }
             $(document).off('keydown.togglemenuOverlay');
 
             // Suppression des classes "copy"
             $.each(self.getContentElements(), function (type, element) {
-                element.removeClass(self.settings.classes.copy);
+                if (type !== 'close') {
+                    element.removeClass(self.settings.classes.copy);
+                }
             });
 
             return self;
@@ -179,7 +181,7 @@
         },
 
         /**
-         * Ajout les contenus dans le wrapper
+         * Ajout des contenus dans le wrapper
          */
         addContent: function () {
             var self = this;
@@ -189,7 +191,11 @@
                 var content = null;
 
                 // Copie du contenu
-                if (typeof element === 'object' && element.length) {
+                if (type === 'close') {
+                    content = $('<button>', {
+                        html: element
+                    });
+                } else if (typeof element === 'object' && element.length) {
                     content = element.clone();
                     content.removeAttr('id');
                     element.addClass(self.settings.classes.copy);
@@ -203,10 +209,11 @@
                     }));
 
                     // Ajout des éléments
-                    if (type === 'menu') {
+                    if (type === 'close' || type === 'menu') {
                         self.elements[type + 'Content'] = content;
                         self.elements[type] = content.parent();
-
+                    }
+                    if (type === 'menu') {
                         if (self.getElements().items === undefined) {
                             self.elements.items = self.getItemsParent(content.find('li'));
 
@@ -238,7 +245,12 @@
             var self = this;
 
             // Bouton toggle
-            self.getElements().toggle.on(self.events.toggle = 'click.togglemenu.toggle', {self: self}, self.toggle);
+            self.getElements().toggle.on(self.events.toggle = 'click.togglemenuOverlay', {self: self}, self.toggle);
+
+            // Bouton close
+            if (self.getElements().closeContent !== undefined) {
+                self.getElements().closeContent.on(self.events.closeContent = 'click.togglemenuOverlay', {self: self}, self.toggle);
+            }
 
             // User callback
             if (self.settings.afterEventsHandler !== undefined) {
@@ -264,7 +276,7 @@
 
                     // Events
                     if (self.getElements().itemLink !== null) {
-                        self.getElements().itemLink(item).on('click.togglemenu.itemLink', function (event) {
+                        self.getElements().itemLink(item).on('click.togglemenuOverlay', function (event) {
                             event.preventDefault();
 
                             if (!self.isOpen) {
@@ -289,7 +301,7 @@
         },
 
         /**
-         * Ouverture/fermeture du toggleMenu
+         * Ouverture/fermeture du menu
          */
         toggle: function (event) {
             var self = (event !== undefined && event.data !== undefined && event.data.self !== undefined) ? event.data.self : this;

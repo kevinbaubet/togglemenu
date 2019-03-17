@@ -130,7 +130,7 @@
                 self.getElements()[element].off(event);
             });
             self.getElements().items.each(function (i, item) {
-                self.getElements().itemLink($(item)).off('click.togglemenu.itemLink');
+                self.getElements().itemLink($(item)).off('click.togglemenuFixed');
             });
 
             return self;
@@ -144,10 +144,10 @@
 
             // Bouton toggle
             if (self.settings.toggle) {
-                self.getElements().toggle.on(self.events.toggle = 'click.togglemenu.toggle', {self: self}, self.toggle);
+                self.getElements().toggle.on(self.events.toggle = 'click.togglemenuFixed', {self: self}, self.toggle);
 
             } else {
-                self.getElements().menu.on(self.events.menu = 'mouseenter.togglemenu.toggle mouseleave.togglemenu.toggle', {self: self}, self.toggle);
+                self.getElements().menu.on(self.events.menu = 'mouseenter.togglemenuFixed mouseleave.togglemenuFixed', {self: self}, self.toggle);
             }
 
             // User callback
@@ -173,12 +173,13 @@
                     item = $(item);
 
                     // Events
-                    self.getElements().itemLink(item).on('click.togglemenu.itemLink', function (event) {
+                    self.getElements().itemLink(item).on('click.togglemenuFixed', function (event) {
                         event.preventDefault();
 
                         if (!self.isOpen) {
                             self.toggle();
                         }
+
                         self.toggleSubmenu(item);
                     });
 

@@ -27,7 +27,6 @@
             current: {x: 0, y: 0}
         };
         this.events = {};
-        this.items = {};
 
         // Init
         if (this.prepareUserOptions()) {
@@ -118,7 +117,7 @@
         eventsHandler: function () {
             var self = this;
 
-            self.getElements().items.on(self.events.items = 'focusin.togglemenu focusout.togglemenu blur.togglemenu mouseenter.togglemenu mouseleave.togglemenu', function (event) {
+            self.getElements().items.on(self.events.items = 'focusin.togglemenuHover focusout.togglemenuHover blur.togglemenuHover mouseenter.togglemenuHover mouseleave.togglemenuHover', function (event) {
                 var item = {
                     storage: this,
                     element: $(event.currentTarget)
@@ -135,7 +134,7 @@
                     self.setPosition('previous', {x: event.pageX, y: event.pageY});
 
                     // Puis on met à jour cette position pour faire une comparaison
-                    item.element.on('mousemove.togglemenu', function () {
+                    item.element.on('mousemove.togglemenuHover', function () {
                         self.setPosition('current', {x: event.pageX, y: event.pageY});
                     });
 
@@ -149,7 +148,7 @@
                 // Leave
                 else {
                     // Désactivation de l'event mousemove
-                    item.element.off('mousemove.togglemenu');
+                    item.element.off('mousemove.togglemenuHover');
 
                     // S'il y a un état hover sur l'item, on execute onOut() après un délai
                     if (item.storage.hoverState === true) {
@@ -165,7 +164,7 @@
 
             // Désativation du click sur les items parent
             if (self.settings.disableItemsClick) {
-                self.getElements().items.on(self.events.itemsLink = 'click.togglemenu', self.getElements().itemLink, function (event) {
+                self.getElements().items.on(self.events.itemsLink = 'click.togglemenuHover', self.getElements().itemLink, function (event) {
                     event.preventDefault();
                 });
             }
@@ -224,7 +223,7 @@
 
             // Hover
             if ((Math.abs(self.getPosition('previous', 'x') - self.getPosition('current', 'x')) + Math.abs(self.getPosition('previous', 'y') - self.getPosition('current', 'y'))) < 7) {
-                item.element.off('mousemove.togglemenu');
+                item.element.off('mousemove.togglemenuHover');
                 item.storage.hoverState = true;
 
                 return self.onOver(item);
