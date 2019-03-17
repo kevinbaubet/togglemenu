@@ -50,3 +50,10 @@ Permet de pousser la page pour afficher le menu via un bouton d'ouverture. Les s
 | onComplete                                              | function       | undefined                                                 | Callback à la fin du chargement                                                                                                                                                                                                                                                         |
 | onToggle                                                | function       | undefined                                                 | Callback à l'ouverture/fermeture du menu                                                                                                                                                                                                                                                |
 | onToggleSubmenu                                         | function       | undefined                                                 | Callback à l'ouverture/fermeture d'un sous-menu                                                                                                                                                                                                                                         |
+
+
+## API
+
+[Hérite de l'API des menus.](../README.md#api-menus)
+
+todo

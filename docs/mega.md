@@ -37,3 +37,10 @@ Permet d'afficher un mega-menu au clique sur un élément parent de 1er niveau.
 | afterItemHandler                 | function       | undefined                                      | Callback après le gestionnaire d'un élément parent                                           |
 | onComplete                       | function       | undefined                                      | Callback à la fin du chargement                                                              |
 | onToggleSubmenu                  | function       | undefined                                      | Callback à l'ouverture/fermeture d'un sous-menu                                              |
+
+
+## API
+
+[Hérite de l'API des menus.](../README.md#api-menus)
+
+todo

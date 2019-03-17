@@ -34,3 +34,10 @@ Navigation classique en ligne. Permet d'afficher des sous-menus au survol de la 
 | onComplete                        | function       | undefined         | Callback à la fin du chargement                                                                        |
 | onOver                            | function       | undefined         | Callback une fois qu'un élément parent est survolé                                                     |
 | onOut                             | function       | undefined         | Callback une fois qu'un élément parent n'est plus survolé                                              |
+
+
+## API
+
+[Hérite de l'API des menus.](../README.md#api-menus)
+
+todo

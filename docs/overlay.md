@@ -42,3 +42,10 @@ Permet d'afficher la navigation par dessus toute la page avec un overlay. La nav
 | onComplete                                              | function       | undefined                                      | Callback à la fin du chargement                                                                                                             |
 | onToggle                                                | function       | undefined                                      | Callback à l'ouverture/fermeture du menu                                                                                                    |
 | onToggleSubmenu                                         | function       | undefined                                      | Callback à l'ouverture/fermeture d'un sous-menu                                                                                             |
+
+
+## API
+
+[Hérite de l'API des menus.](../README.md#api-menus)
+
+todo

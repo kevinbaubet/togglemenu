@@ -56,4 +56,135 @@ Liste des menus présents dans ToggleMenu :
 
 ## API ToggleMenu
 
-todo
+**API utilisable seulement avec l'objet ToggleMenu.**
+
+
+#### setOptions()
+
+Enregistre les options pour un menu
+
+* @param *{string}* **type** Type de menu
+* @param *{object}* **options** Options du menu
+
+        toggleMenu.setOptions('push', {
+            onToggle: function () {
+                console.log('open/close menu');
+            }
+        });
+
+
+#### toggleMenu()
+
+Switch le menu courant vers un nouveau
+
+* @param *{string}* **type** Type de menu
+* @param *{object=undefined}* **options** Options du menu
+
+        toggleMenu.toggleMenu('push');
+
+
+#### addMenu()
+
+Ajout d'un menu
+
+* @param *{string}* **type** Type de menu
+* @param *{object=undefined}* **options** Options du menu
+
+        toggleMenu.addMenu('hover');
+        toggleMenu.addMenu('push');
+
+
+#### removeMenu()
+
+Suppression du menu courant
+
+* @param *{string=undefined}* **type** Type de menu
+
+        toggleMenu.removeMenu(); // remove current menu
+        toggleMenu.removeMenu('hover');
+
+
+#### isCurrentMenu()
+
+Détermine si c'est le menu courant
+
+* @param *{string}* **type** Type de menu
+* @return *{boolean}*
+
+        if (toggleMenu.isCurrentMenu('hover')) {
+            toggleMenu.removeMenu();
+        }
+
+
+#### getMenuClassName()
+
+Récupère le nom de la classe du menu correspondant
+
+* @param *{string}* **type** Type de menu
+* @return *{string}*
+
+
+#### getInstances()
+
+Récupère les instances en cours
+
+* @return *{object}*
+
+---
+
+## API Menus
+
+**API globale à tous les menus de ToggleMenu.**
+
+
+#### getItemsParent()
+
+Récupère les éléments parents en fonction d'un contexte
+
+* @param *{object}* **search** Élément jQuery dans lequel la recherche d'éléments parents sera effectée
+* @return *{object}*
+
+
+#### onReady()
+
+Une fois ToggleMenu prêt
+
+* @param *{function}* **callback** Fonction à exécuter
+
+
+#### getElements()
+
+Retourne tous les éléments de toggleMenu
+
+* @return *{object}*
+
+
+#### getContentElements()
+
+Retourne tous les éléments de contenu
+
+* @return *{object}*
+
+
+#### getWrapper()
+
+Retourne le wrapper global
+
+* @return *{object}*
+
+
+#### setLog()
+
+Créer un log
+
+* @param *{string}* **log**
+* @param *{string=undefined}* **type**
+
+        toggleMenu.setLog('information message');
+        toggleMenu.setLog('warning!', 'warn');
+        toggleMenu.setLog('error message', 'error');
+        
+        
+#### replacePrefixClass()
+
+Remplace la chaine {prefix} par la classe de préfix dans toutes les classes

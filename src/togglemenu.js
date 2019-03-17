@@ -35,6 +35,18 @@
 
     $.ToggleMenu.prototype = {
         /**
+         * Enregistre les options pour un menu
+         *
+         * @param {string} type Type de menu
+         * @param {object} options Options du menu
+         */
+        setOptions: function (type, options) {
+            this.options[type] = options;
+
+            return this;
+        },
+
+        /**
          * Switch le menu courant vers un nouveau
          *
          * @param {string} type Type de menu
@@ -53,28 +65,10 @@
         },
 
         /**
-         * Enregistre les options pour un menu
+         * Ajout d'un menu
          *
          * @param {string} type Type de menu
-         * @param {object} options Options du menu
-         */
-        setOptions: function (type, options) {
-            this.options[type] = options;
-
-            return this;
-        },
-
-        /**
-         * Détermine si c'est le menu courant
-         *
-         * @return {boolean}
-         */
-        isCurrentMenu: function (type) {
-            return this.menu.current === type;
-        },
-
-        /**
-         * Ajout d'un menu
+         * @param {object=undefined} options Options du menu
          */
         addMenu: function (type, options) {
             // On stop l'initialisation si le menu est déjà initialisé
@@ -116,12 +110,14 @@
         },
 
         /**
-         * Suppression du menu courant
+         * Suppression d'un menu
          *
-         * @return bool
+         * @param {string=undefined} type Type de menu
          */
-        removeMenu: function () {
-            if (this.menu.current !== null) {
+        removeMenu: function (type) {
+            type = type || this.menu.current;
+
+            if (type !== undefined && type !== null) {
                 // Appel du unload du display correspondant
                 if ($[this.menu.className].prototype.hasOwnProperty('unload')) {
                     $[this.menu.className].prototype.unload.call(this.instances[this.menu.current]);
@@ -138,6 +134,17 @@
             }
 
             return this;
+        },
+
+        /**
+         * Détermine si c'est le menu courant
+         *
+         * @param {string} type Type de menu
+         *
+         * @return {boolean}
+         */
+        isCurrentMenu: function (type) {
+            return this.menu.current === type;
         },
 
         /**
