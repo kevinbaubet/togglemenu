@@ -1,8 +1,11 @@
 {
-  "name": "togglemenu",
+  "name": "@kevinbaubet/togglemenu",
   "version": "3.0.0",
   "main": "./dist/togglemenu.min.js",
-  "repository": "https://github.com/kevinbaubet/togglemenu.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinbaubet/togglemenu.git"
+  },
   "author": "Kévin Baubet <contact@kevinbaubet.fr>",
   "license": "MIT",
   "dependencies": {
