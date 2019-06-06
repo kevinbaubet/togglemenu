@@ -151,7 +151,9 @@
 
             // Désactivation des events
             $.each(self.events, function (element, event) {
-                self.getElements()[element].off(event);
+                if (self.getElements()[element] !== undefined) {
+                    self.getElements()[element].off(event);
+                }
             });
             self.getElements().items.each(function (i, item) {
                 item = $(item);
