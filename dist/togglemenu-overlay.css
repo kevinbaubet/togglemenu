@@ -11,7 +11,7 @@
   top: 50px;
   right: 50px;
   z-index: 1050;
-  padding: 0.938rem 3.125rem 0.938rem 1.25rem;
+  padding: 15px 50px 15px 20px;
   line-height: .7;
   font-size: 1.5em;
 }
@@ -131,7 +131,7 @@
 .togglemenu--overlay .togglemenu-menu .nav-item a {
   position: relative;
   display: block;
-  padding: 1.25rem;
+  padding: 20px;
   color: #fff;
   font-size: 1.5em;
   font-weight: bold;

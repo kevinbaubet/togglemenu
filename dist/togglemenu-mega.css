@@ -20,7 +20,7 @@
 
 .togglemenu--mega .nav-item a {
   display: block;
-  padding: 0.625rem 1.25rem;
+  padding: 10px 20px;
   color: #303748;
   font-size: 1.5em;
   text-decoration: none;
@@ -39,7 +39,7 @@
 }
 
 .togglemenu--mega .depth-1 > .nav-item + .nav-item {
-  margin-left: 0.625rem;
+  margin-left: 10px;
 }
 
 .togglemenu--mega .togglemenu-close {
@@ -111,7 +111,7 @@
 }
 
 .togglemenu--mega .title--h3 {
-  padding-left: 1.25rem;
+  padding-left: 20px;
 }
 
 .togglemenu--mega .megamenu {
@@ -143,7 +143,7 @@
 }
 
 .togglemenu--mega .item-menu {
-  padding: 1.25rem;
+  padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -158,7 +158,7 @@
 }
 
 .togglemenu--mega .menu-primary > .item-depth .item-depth a {
-  padding-left: 2.5rem;
+  padding-left: 40px;
   font-size: 1em;
 }
 

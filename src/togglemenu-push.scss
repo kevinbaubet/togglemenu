@@ -10,6 +10,7 @@ $menu-push--width: 280px;
    Togglemenu push
    ========================================================================== */
 
+
 /* Contexte de page
    ========================================================================== */
 body {
@@ -31,13 +32,14 @@ body {
     }
 }
 
+
 /* Menu
    ========================================================================== */
 .togglemenu--push {
     position: absolute;
+    z-index: 50;
     top: 0;
     left: 0;
-    z-index: 50;
     width: $menu-push--width;
     height: 100vh;
     background: #fff;
@@ -47,7 +49,7 @@ body {
     transition: transform .3s;
     box-sizing: border-box;
 
-    .item-depth {
+    .nav-menu {
         margin: 0;
         padding: 0;
         overflow: hidden;
@@ -60,180 +62,191 @@ body {
             display: block;
             padding: 20px;
             color: $color--secondary;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-decoration: none;
         }
 
         & + .nav-item > a {
-            border-top: 1px solid rgba($color--secondary, .1);
+            border-top: 1px solid rgba(#000, .1);
         }
     }
-}
-
-/* Close
-   ========================================================================== */
-.togglemenu-close {
-    padding: 20px;
-    background: $color--tertiary;
-    overflow: hidden;
-
-    button {
-        position: relative;
-        display: inline-block;
-        float: right;
-        padding: 0;
-        width: 50px;
-        height: 50px;
-        color: #fff;
-        text-indent: -9999px;
-        background: $color--secondary;
-        border: 0;
-        cursor: pointer;
-        transition: background-color .3s;
-
-        &:hover {
-            background-color: $color--primary;
-        }
-
-        &:before,
-        &:after {
-            content: "";
-            position: absolute;
-            top: 46%;
-            left: 29%;
-            width: 22px;
-            height: 3px;
-            background-color: #fff;
-            transform: rotate(45deg);
-        }
-        &:after {
-            transform: rotate(-45deg);
+    .is-parent {
+        > a {
+            padding-right: 40px;
         }
     }
-}
 
-/* Layout accordéon
+    /* Close
    ========================================================================== */
-.l-accordion {
-    & > .item-depth {
-        padding-left: 20px;
-        max-height: 0;
+    .togglemenu-close {
+        padding: 20px;
+        background: $color--tertiary;
         overflow: hidden;
-        transition: max-height ease-out .3s;
 
-        > .nav-item {
-            > a {
-                padding-top: 0;
-                font-weight: normal;
-            }
-
-            + .nav-item > a {
-                border: 0;
-            }
-        }
-    }
-
-    > a {
-        &:before,
-        &:after {
-            content: "";
-            position: absolute;
-            bottom: 31px;
-            right: 22px;
-            z-index: 5;
-            width: 10px;
-            height: 2px;
+        button { $size: 44px;
+            position: relative;
+            display: inline-block;
+            float: right;
+            padding: 0;
+            width: $size;
+            height: $size;
+            color: #fff;
+            text-indent: -9999px;
             background: $color--secondary;
-            transform: rotate(45deg);
-            transform-origin: center -3px;
-            transition: transform-origin .3s;
-        }
-        &:after {
-            transform: rotate(-45deg);
+            border: 0;
+            cursor: pointer;
+            transition: background-color .3s;
+
+            &:hover {
+                background-color: $color--primary;
+            }
+
+            &:before,
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 50%;
+                height: 3px;
+                background-color: #fff;
+                transform: rotate(45deg) translate(-50%, -50%);
+                transform-origin: 0 0;
+            }
+            &:after {
+                transform: rotate(-45deg) translate(-50%, -50%);
+            }
         }
     }
-    &.is-active {
-        > .item-depth {
-            z-index: 50;
-            max-height: 500px;
-            overflow: visible;
+
+    /* Layout accordéon
+	   ========================================================================== */
+    .l-accordion {
+        > .nav-menu {
+            padding-left: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: .3s ease-out;
+
+            > .nav-item {
+                > a {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+                &:last-of-type {
+                    padding-bottom: 10px;
+                }
+
+                + .nav-item > a {
+                    border: 0;
+                }
+            }
         }
+
         > a {
             &:before,
             &:after {
-                transform-origin: center 5px;
+                content: "";
+                position: absolute;
+                bottom: 48%;
+                right: 20px;
+                width: 10px;
+                height: 2px;
+                background: $color--secondary;
+                transform: rotate(45deg);
+                transform-origin: center -3px;
+                transition: .3s;
+            }
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+        &.is-active {
+            > .nav-menu {
+                z-index: 50;
+                max-height: 500px;
+                overflow: visible;
+            }
+            > a {
+                &:before,
+                &:after {
+                    transform-origin: center 5px;
+                }
             }
         }
     }
-}
 
-/* Layout panel
-   ========================================================================== */
-.l-panel {
-    > a {
-        &:before,
-        &:after {
-            content: "";
-            position: absolute;
-            bottom: 31px;
-            right: 22px;
-            z-index: 5;
-            width: 10px;
-            height: 2px;
-            background: $color--secondary;
-            transform: rotate(45deg);
-            transform-origin: right center;
-            transition: transform-origin .3s;
-        }
-        &:after {
-            transform: rotate(-45deg);
-        }
-    }
-    > .item-depth {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 55;
-        width: $menu-push--width;
-        height: 100%;
-        background: #fff;
-        transform: translateX(-100%);
-        transition: transform .3s;
-    }
-    &.is-active {
-        > .item-depth {
-            transform: translateX(0);
-        }
-    }
 
-    /* Retour
-       ========================================================================== */
-    .item-back {
-        @extend .togglemenu-close;
 
-        .item-btn {
-            float: left;
-
+    /* Layout panel
+	   ========================================================================== */
+    .l-panel {
+        > a {
             &:before,
             &:after {
-                transform-origin: 0 center;
+                content: "";
+                position: absolute;
+                bottom: 48%;
+                right: 20px;
+                width: 10px;
+                height: 2px;
+                background: $color--secondary;
+                transform: rotate(45deg);
+                transform-origin: right center;
+                transition: .3s;
+            }
+            &:after {
+                transform: rotate(-45deg);
             }
         }
-        .item-title {
-            float: left;
-            padding-left: 20px;
-            color: #fff;
-            font-size: 1.4em;
-            font-weight: bold;
+        > .nav-menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 55;
+            width: $menu-push--width;
+            height: 100%;
+            background: #fff;
+            transform: translateX(-100%);
+            transition: transform .3s;
+        }
+        &.is-active {
+            > .nav-menu {
+                transform: translateX(0);
+            }
+        }
+
+        /* Header (retour, item de menu courant)
+		   ========================================================================== */
+        .item-back {
+            @extend .togglemenu-close;
+            display: flex;
+            align-items: center;
+
+            .item-btn {
+                flex-shrink: 0;
+
+                &:before,
+                &:after {
+                    width: 35%;
+                    transform-origin: -46% 0;
+                }
+            }
+            .item-title {
+                padding-left: 20px;
+                color: #fff;
+            }
         }
     }
 }
+
+
+/* States
+   ========================================================================== */
 .is-togglemenu-submenu-open {
     .togglemenu--push {
         overflow: hidden;
-    }
-    .l-panel > .item-depth {
-        overflow-y: auto;
+
+        .l-panel > .nav-menu {
+            overflow-y: auto;
+        }
     }
 }

@@ -34,9 +34,9 @@ body.is-togglemenu-open .togglemenu--push {
    ========================================================================== */
 .togglemenu--push {
   position: absolute;
+  z-index: 50;
   top: 0;
   left: 0;
-  z-index: 50;
   width: 280px;
   height: 100vh;
   background: #fff;
@@ -50,9 +50,15 @@ body.is-togglemenu-open .togglemenu--push {
   transition: transform .3s, -webkit-transform .3s;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  /* Close
+   ========================================================================== */
+  /* Layout accordéon
+	   ========================================================================== */
+  /* Layout panel
+	   ========================================================================== */
 }
 
-.togglemenu--push .item-depth {
+.togglemenu--push .nav-menu {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -65,32 +71,31 @@ body.is-togglemenu-open .togglemenu--push {
 .togglemenu--push .nav-item a {
   position: relative;
   display: block;
-  padding: 1.25rem;
+  padding: 20px;
   color: #303748;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-decoration: none;
 }
 
 .togglemenu--push .nav-item + .nav-item > a {
-  border-top: 1px solid rgba(48, 55, 72, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Close
-   ========================================================================== */
-.togglemenu-close, .l-panel .item-back {
-  padding: 1.25rem;
+.togglemenu--push .is-parent > a {
+  padding-right: 40px;
+}
+
+.togglemenu--push .togglemenu-close, .togglemenu--push .l-panel .item-back {
+  padding: 20px;
   background: #181b22;
   overflow: hidden;
 }
 
-.togglemenu-close button, .l-panel .item-back button {
+.togglemenu--push .togglemenu-close button, .togglemenu--push .l-panel .item-back button {
   position: relative;
   display: inline-block;
   float: right;
   padding: 0;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   color: #fff;
   text-indent: -9999px;
   background: #303748;
@@ -100,52 +105,55 @@ body.is-togglemenu-open .togglemenu--push {
   transition: background-color .3s;
 }
 
-.togglemenu-close button:hover, .l-panel .item-back button:hover {
+.togglemenu--push .togglemenu-close button:hover, .togglemenu--push .l-panel .item-back button:hover {
   background-color: #ff5a60;
 }
 
-.togglemenu-close button:before, .l-panel .item-back button:before, .togglemenu-close button:after, .l-panel .item-back button:after {
+.togglemenu--push .togglemenu-close button:before, .togglemenu--push .l-panel .item-back button:before, .togglemenu--push .togglemenu-close button:after, .togglemenu--push .l-panel .item-back button:after {
   content: "";
   position: absolute;
-  top: 46%;
-  left: 29%;
-  width: 22px;
+  top: 50%;
+  left: 50%;
+  width: 50%;
   height: 3px;
   background-color: #fff;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  -webkit-transform: rotate(45deg) translate(-50%, -50%);
+          transform: rotate(45deg) translate(-50%, -50%);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
 }
 
-.togglemenu-close button:after, .l-panel .item-back button:after {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+.togglemenu--push .togglemenu-close button:after, .togglemenu--push .l-panel .item-back button:after {
+  -webkit-transform: rotate(-45deg) translate(-50%, -50%);
+          transform: rotate(-45deg) translate(-50%, -50%);
 }
 
-/* Layout accordéon
-   ========================================================================== */
-.l-accordion > .item-depth {
-  padding-left: 1.25rem;
+.togglemenu--push .l-accordion > .nav-menu {
+  padding-left: 20px;
   max-height: 0;
   overflow: hidden;
-  -webkit-transition: max-height ease-out .3s;
-  transition: max-height ease-out .3s;
+  -webkit-transition: .3s ease-out;
+  transition: .3s ease-out;
 }
 
-.l-accordion > .item-depth > .nav-item > a {
-  padding-top: 0;
-  font-weight: normal;
+.togglemenu--push .l-accordion > .nav-menu > .nav-item > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.l-accordion > .item-depth > .nav-item + .nav-item > a {
+.togglemenu--push .l-accordion > .nav-menu > .nav-item:last-of-type {
+  padding-bottom: 10px;
+}
+
+.togglemenu--push .l-accordion > .nav-menu > .nav-item + .nav-item > a {
   border: 0;
 }
 
-.l-accordion > a:before, .l-accordion > a:after {
+.togglemenu--push .l-accordion > a:before, .togglemenu--push .l-accordion > a:after {
   content: "";
   position: absolute;
-  bottom: 31px;
-  right: 22px;
-  z-index: 5;
+  bottom: 48%;
+  right: 20px;
   width: 10px;
   height: 2px;
   background: #303748;
@@ -153,41 +161,36 @@ body.is-togglemenu-open .togglemenu--push {
           transform: rotate(45deg);
   -webkit-transform-origin: center -3px;
           transform-origin: center -3px;
-  -webkit-transition: -webkit-transform-origin .3s;
-  transition: -webkit-transform-origin .3s;
-  transition: transform-origin .3s;
-  transition: transform-origin .3s, -webkit-transform-origin .3s;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 
-.l-accordion > a:after {
+.togglemenu--push .l-accordion > a:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.l-accordion.is-active > .item-depth {
+.togglemenu--push .l-accordion.is-active > .nav-menu {
   z-index: 50;
   max-height: 500px;
   overflow: visible;
 }
 
-.l-accordion.is-active > a:before, .l-accordion.is-active > a:after {
+.togglemenu--push .l-accordion.is-active > a:before, .togglemenu--push .l-accordion.is-active > a:after {
   -webkit-transform-origin: center 5px;
           transform-origin: center 5px;
 }
 
-/* Layout panel
-   ========================================================================== */
-.l-panel {
-  /* Retour
-       ========================================================================== */
+.togglemenu--push .l-panel {
+  /* Header (retour, item de menu courant)
+		   ========================================================================== */
 }
 
-.l-panel > a:before, .l-panel > a:after {
+.togglemenu--push .l-panel > a:before, .togglemenu--push .l-panel > a:after {
   content: "";
   position: absolute;
-  bottom: 31px;
-  right: 22px;
-  z-index: 5;
+  bottom: 48%;
+  right: 20px;
   width: 10px;
   height: 2px;
   background: #303748;
@@ -195,18 +198,16 @@ body.is-togglemenu-open .togglemenu--push {
           transform: rotate(45deg);
   -webkit-transform-origin: right center;
           transform-origin: right center;
-  -webkit-transition: -webkit-transform-origin .3s;
-  transition: -webkit-transform-origin .3s;
-  transition: transform-origin .3s;
-  transition: transform-origin .3s, -webkit-transform-origin .3s;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 
-.l-panel > a:after {
+.togglemenu--push .l-panel > a:after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
-.l-panel > .item-depth {
+.togglemenu--push .l-panel > .nav-menu {
   position: absolute;
   top: 0;
   left: 0;
@@ -222,32 +223,42 @@ body.is-togglemenu-open .togglemenu--push {
   transition: transform .3s, -webkit-transform .3s;
 }
 
-.l-panel.is-active > .item-depth {
+.togglemenu--push .l-panel.is-active > .nav-menu {
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
 
-.l-panel .item-back .item-btn {
-  float: left;
+.togglemenu--push .l-panel .item-back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.l-panel .item-back .item-btn:before, .l-panel .item-back .item-btn:after {
-  -webkit-transform-origin: 0 center;
-          transform-origin: 0 center;
+.togglemenu--push .l-panel .item-back .item-btn {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
-.l-panel .item-back .item-title {
-  float: left;
-  padding-left: 1.25rem;
+.togglemenu--push .l-panel .item-back .item-btn:before, .togglemenu--push .l-panel .item-back .item-btn:after {
+  width: 35%;
+  -webkit-transform-origin: -46% 0;
+          transform-origin: -46% 0;
+}
+
+.togglemenu--push .l-panel .item-back .item-title {
+  padding-left: 20px;
   color: #fff;
-  font-size: 1.4em;
-  font-weight: bold;
 }
 
+/* States
+   ========================================================================== */
 .is-togglemenu-submenu-open .togglemenu--push {
   overflow: hidden;
 }
 
-.is-togglemenu-submenu-open .l-panel > .item-depth {
+.is-togglemenu-submenu-open .togglemenu--push .l-panel > .nav-menu {
   overflow-y: auto;
 }

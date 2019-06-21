@@ -8,7 +8,7 @@
    ========================================================================== */
 body .page {
   margin: 0;
-  padding-left: 12.5rem;
+  padding-left: 200px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   -webkit-transition: padding-left .3s;
@@ -16,7 +16,7 @@ body .page {
 }
 
 body.is-togglemenu-open .page {
-  padding-left: 18.75rem;
+  padding-left: 300px;
 }
 
 /* Toggle
@@ -76,7 +76,7 @@ body.is-togglemenu-open .page {
 }
 
 .togglemenu--fixed .title {
-  margin-top: 1.25rem;
+  margin-top: 20px;
   height: 42px;
   text-align: center;
 }
@@ -118,7 +118,7 @@ body.is-togglemenu-open .page {
 }
 
 .togglemenu--fixed > .item-depth.depth-1 {
-  padding-top: 3.125rem;
+  padding-top: 50px;
 }
 
 .togglemenu--fixed > .item-depth.depth-1 > .nav-item {
@@ -128,7 +128,7 @@ body.is-togglemenu-open .page {
 .togglemenu--fixed > .item-depth.depth-1 > .nav-item > a {
   position: relative;
   display: inline-block;
-  padding: 0.938rem;
+  padding: 15px;
   min-height: 50px;
   line-height: 60px;
   text-align: center;
@@ -200,7 +200,7 @@ body.is-togglemenu-open .page {
 
 .is-togglemenu-open .togglemenu--fixed > .item-depth.depth-1 > .nav-item span {
   height: auto;
-  margin: 0.938rem 0;
+  margin: 15px 0;
   opacity: 1;
   -webkit-transform: translateX(0);
           transform: translateX(0);
@@ -211,7 +211,7 @@ body.is-togglemenu-open .page {
   top: 0;
   left: 200px;
   z-index: -1;
-  padding: 7.5rem 1.875rem 1.875rem;
+  padding: 120px 30px 30px;
   width: 200px;
   height: 100%;
   background-color: rgba(48, 55, 72, 0.95);
@@ -225,7 +225,7 @@ body.is-togglemenu-open .page {
 }
 
 .togglemenu--fixed > .item-depth .depth-2 .nav-item {
-  margin-bottom: 1.25rem;
+  margin-bottom: 20px;
 }
 
 .togglemenu--fixed > .item-depth .depth-2 .nav-item.is-parent > a {
@@ -277,16 +277,16 @@ body.is-togglemenu-open .page {
 }
 
 .togglemenu--fixed > .item-depth .is-active .depth-2 .nav-item + .nav-item {
-  margin-top: 1.25rem 0.938rem;
+  margin-top: 20px 15px;
 }
 
 .togglemenu--fixed > .item-depth .depth-3 {
   display: none;
-  padding: 0.938rem;
+  padding: 15px;
 }
 
 .togglemenu--fixed > .item-depth .depth-3 .nav-item {
-  margin-bottom: 0.938rem;
+  margin-bottom: 15px;
 }
 
 .togglemenu--fixed > .item-depth .depth-3 a {

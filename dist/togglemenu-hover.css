@@ -16,7 +16,7 @@
 
 .nav--hover .nav-item a {
   display: block;
-  padding: 0.625rem 1.25rem;
+  padding: 10px 20px;
   color: #303748;
   font-size: 1.5em;
   text-decoration: none;
@@ -36,7 +36,7 @@
 }
 
 .nav--hover .depth-1 > .nav-item + .nav-item {
-  margin-left: 0.625rem;
+  margin-left: 10px;
 }
 
 .nav--hover .is-parent > .item-depth {
