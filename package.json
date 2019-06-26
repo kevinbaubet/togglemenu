@@ -12,7 +12,6 @@
     "jquery": ">=1.7.0"
   },
   "devDependencies": {
-    "autopublish": "^0.0.8",
     "autoprefixer": "^9.6.0",
     "gulp": "^4.0.2",
     "gulp-load-plugins": "^1.6.0",
