@@ -122,9 +122,7 @@ body {
     .l-accordion {
         > .nav-menu {
             padding-left: 20px;
-            max-height: 0;
             overflow: hidden;
-            transition: .3s ease-out;
 
             > .nav-item {
                 > a {
@@ -162,7 +160,6 @@ body {
         &.is-active {
             > .nav-menu {
                 z-index: 50;
-                max-height: 500px;
                 overflow: visible;
             }
             > a {

@@ -53,6 +53,7 @@
             }
         },
         layout: 'accordion',
+        slideDuration: 200,
         backLink: false,
         classes: {
             submenuOpen: 'is-{prefix}-submenu-open',
@@ -304,6 +305,7 @@
                     // Ajout du layout
                     item.layout = self.getItemLayout(item);
                     item.addClass('l-' + item.layout);
+                    item.addClass(self.settings.classes.active);
 
                     // Ajout de contenu
                     self.addItemContent(item);
@@ -324,6 +326,8 @@
                         });
                     }
                 });
+
+                self.closeSubmenus();
             }
 
             return self;
@@ -338,7 +342,7 @@
          */
         getItemLayout: function (item) {
             if (this.settings.layout === 'data' && item !== undefined) {
-                var layout = item.attr('data-layout');
+                var layout = item.layout !== undefined ? item.layout : item.attr('data-layout');
                 return (layout !== undefined || layout !== '') ? layout : $.ToggleMenuPush.defaults.layout;
 
             } else {
@@ -456,6 +460,10 @@
             this.closeSubmenus(item);
             item.toggleClass(this.settings.classes.active);
 
+            if (this.getItemLayout(item) === 'accordion') {
+                this.getElements().itemContent(item).slideToggle(this.settings.slideDuration);
+            }
+
             if (item.layout !== undefined && item.layout === 'panel') {
                 this.getWrapper().scrollTop(0);
                 this.getElements().body.toggleClass(this.settings.classes.submenuOpen);
@@ -478,32 +486,35 @@
          * @param {object=undefined} item Élément parent
          */
         closeSubmenus: function (item) {
-            var active = item !== undefined ? item.siblings('.' + this.settings.classes.active) : this.getElements().items;
-            var activeChildren = active.find('.' + this.settings.classes.active);
+            var self = this;
+            var submenus = [];
 
-            // Suppression de l'état actif sur les frères
-            if (active.length) {
-                active.removeClass(this.settings.classes.active);
-
-                // Suppression de l'état d'ouverture d'un sous-menu
-                if (this.getElements().body.hasClass(this.settings.classes.submenuOpen)) {
-                    this.getElements().body.removeClass(this.settings.classes.submenuOpen);
-                }
-            }
-
-            // Si un frère a un enfant actif
-            if (activeChildren.length) {
-                activeChildren.removeClass(this.settings.classes.active);
-            }
-
-            // Si un enfant de l'item courant est actif
             if (item !== undefined) {
-                var itemChildren = item.find('.' + this.settings.classes.active);
+                var siblings = item.siblings('.' + self.settings.classes.active);
+                var children = item.find('.' + self.settings.classes.active);
 
-                if (itemChildren.length) {
-                    itemChildren.removeClass(this.settings.classes.active);
+                if (siblings.length) {
+                    submenus.push(siblings[0]);
                 }
+                if (children.length) {
+                    submenus.push(children[0]);
+                }
+
+                submenus = $(submenus);
+
+            } else {
+                submenus = self.getElements().items;
             }
+
+            submenus.removeClass(self.settings.classes.active);
+
+            submenus.each(function (i, submenu) {
+                submenu = $(submenu);
+
+                if (self.getItemLayout(submenu) === 'accordion') {
+                    self.getElements().itemContent(submenu).slideUp(self.settings.slideDuration);
+                }
+            });
 
             return this;
         }
