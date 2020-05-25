@@ -24,6 +24,7 @@
         // Variables
         this.events = {};
         this.isOpen = false;
+        this.level = 0;
 
         // Init
         if (this.prepareUserOptions()) {
@@ -421,6 +422,9 @@
             // Statut
             self.getElements().body.toggleClass(self.settings.classes.open);
             self.isOpen = self.getElements().body.hasClass(self.settings.classes.open);
+            if (!self.isOpen) {
+                self.level = 0;
+            }
 
             // Événement
             self.onReady(function () {
@@ -459,6 +463,7 @@
             // States
             this.closeSubmenus(item);
             item.toggleClass(this.settings.classes.active);
+            this.level = item.hasClass(this.settings.classes.active) ? this.level + 1 : this.level - 1;
 
             if (this.getItemLayout(item) === 'accordion') {
                 this.getElements().itemContent(item).slideToggle(this.settings.slideDuration);
@@ -466,7 +471,11 @@
 
             if (item.layout !== undefined && item.layout === 'panel') {
                 this.getWrapper().scrollTop(0);
-                this.getElements().body.toggleClass(this.settings.classes.submenuOpen);
+                this.getElements().body.removeClass(this.settings.classes.submenuOpen);
+
+                if (this.level > 0) {
+                    this.getElements().body.addClass(this.settings.classes.submenuOpen);
+                }
             }
 
             // User callback
