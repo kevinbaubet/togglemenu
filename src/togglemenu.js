@@ -26,7 +26,8 @@
         classes: {
             prefix: 'togglemenu',
             open: 'is-{prefix}-open',
-            active: 'is-active'
+            active: 'is-active',
+            current: 'is-current'
         },
         menuBeforeLoad: undefined,
         menuComplete: undefined,

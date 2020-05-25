@@ -464,12 +464,19 @@
             this.closeSubmenus(item);
             item.toggleClass(this.settings.classes.active);
             this.level = item.hasClass(this.settings.classes.active) ? this.level + 1 : this.level - 1;
+            
+            // Current
+            if (this.level > 0 && this.level === this.getElements().menuContent.find('.' + this.settings.classes.active).length) {
+                item.addClass(this.settings.classes.current);
+            }
 
+            // Accordion
             if (this.getItemLayout(item) === 'accordion') {
                 this.getElements().itemContent(item).slideToggle(this.settings.slideDuration);
             }
 
-            if (item.layout !== undefined && item.layout === 'panel') {
+            // Panel
+            if (this.getItemLayout(item) === 'panel') {
                 this.getWrapper().scrollTop(0);
                 this.getElements().body.removeClass(this.settings.classes.submenuOpen);
 
@@ -516,6 +523,7 @@
             }
 
             submenus.removeClass(self.settings.classes.active);
+            self.getElements().items.removeClass(self.settings.classes.current);
 
             submenus.each(function (i, submenu) {
                 submenu = $(submenu);
@@ -525,7 +533,7 @@
                 }
             });
 
-            return this;
+            return self;
         }
     };
 })(jQuery);
