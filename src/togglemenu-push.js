@@ -464,10 +464,18 @@
             this.closeSubmenus(item);
             item.toggleClass(this.settings.classes.active);
             this.level = item.hasClass(this.settings.classes.active) ? this.level + 1 : this.level - 1;
-            
+
             // Current
             if (this.level > 0 && this.level === this.getElements().menuContent.find('.' + this.settings.classes.active).length) {
-                item.addClass(this.settings.classes.current);
+                if (item.hasClass(this.settings.classes.active)) {
+                    item.addClass(this.settings.classes.current);
+                } else {
+                    var parentActiveItem = item.closest('.' + this.settings.classes.active);
+
+                    if (parentActiveItem.length) {
+                        parentActiveItem.addClass(this.settings.classes.current);
+                    }
+                }
             }
 
             // Accordion
