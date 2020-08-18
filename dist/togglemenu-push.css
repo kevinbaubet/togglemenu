@@ -51,7 +51,7 @@ body.is-togglemenu-open .togglemenu--push {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   /* Close
-   ========================================================================== */
+       ========================================================================== */
   /* Layout accordéon
 	   ========================================================================== */
   /* Layout panel
@@ -61,7 +61,6 @@ body.is-togglemenu-open .togglemenu--push {
 .togglemenu--push .nav-menu {
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .togglemenu--push .nav-item {
@@ -84,15 +83,17 @@ body.is-togglemenu-open .togglemenu--push {
 }
 
 .togglemenu--push .togglemenu-close, .togglemenu--push .l-panel .item-back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding: 20px;
   background: #181b22;
-  overflow: hidden;
 }
 
 .togglemenu--push .togglemenu-close button, .togglemenu--push .l-panel .item-back button {
   position: relative;
   display: inline-block;
-  float: right;
+  margin-left: auto;
   padding: 0;
   width: 44px;
   height: 44px;
@@ -236,6 +237,7 @@ body.is-togglemenu-open .togglemenu--push {
 .togglemenu--push .l-panel .item-back .item-btn {
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  margin-left: 0;
 }
 
 .togglemenu--push .l-panel .item-back .item-btn:before, .togglemenu--push .l-panel .item-back .item-btn:after {

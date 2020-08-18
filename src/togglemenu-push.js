@@ -312,10 +312,18 @@
                     self.addItemContent(item);
 
                     // Events
-                    self.getElements().itemLink(item).on('click.togglemenuPush', function (event) {
+                    self.getElements().itemLink(item).on('click.togglemenuPush keydown.togglemenuPush', function (event) {
                         event.preventDefault();
 
-                        self.toggleSubmenu(item);
+                        if (event.type === 'keydown' && event.key === 'Tab') {
+                            var focusItem = item[(event.shiftKey) ? 'prev' : 'next']();
+                            if (focusItem.length) {
+                                self.getElements().itemLink(focusItem).focus();
+                            }
+
+                        } else if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                            self.toggleSubmenu(item);
+                        }
                     });
 
                     // User callback
@@ -433,11 +441,21 @@
                         event.preventDefault();
 
                         if (self.isOpen) {
+                            self.getElements().toggle.focus();
                             self.toggle();
                         }
                     });
+
+                    // Focus
+                    if (self.getElements().closeContent !== undefined && self.getElements().closeContent.length) {
+                        self.getElements().closeContent.focus();
+                    } else if (self.getElements().menuContent.length) {
+                        self.getElements().menuContent.find('a:first').focus();
+                    }
+
                 } else {
                     self.getElements().page.off(self.events.page);
+                    self.getElements().toggle.focus();
                     self.closeSubmenus();
                 }
             });
@@ -480,7 +498,14 @@
 
             // Accordion
             if (this.getItemLayout(item) === 'accordion') {
-                this.getElements().itemContent(item).slideToggle(this.settings.slideDuration);
+                var menuContent = this.getElements().itemContent(item);
+
+                menuContent.slideToggle(this.settings.slideDuration);
+
+                // Focus
+                if (menuContent.parent().hasClass(this.settings.classes.active)) {
+                    menuContent.find('a:first').focus();
+                }
             }
 
             // Panel
@@ -490,6 +515,21 @@
 
                 if (this.level > 0) {
                     this.getElements().body.addClass(this.settings.classes.submenuOpen);
+                }
+
+                // Focus
+                if (item.hasClass(this.settings.classes.active)) {
+                    // Back btn
+                    var backItem = item.find('.' + this.settings.classes.back).eq(0);
+                    if (backItem.length) {
+                        var backBtn = this.getElements().backBtn(backItem);
+
+                        if (backBtn.length) {
+                            backBtn.focus();
+                        }
+                    }
+                } else {
+                    this.getElements().itemLink(item).focus();
                 }
             }
 

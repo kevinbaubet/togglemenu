@@ -52,7 +52,6 @@ body {
     .nav-menu {
         margin: 0;
         padding: 0;
-        overflow: hidden;
     }
     .nav-item {
         list-style: none;
@@ -75,16 +74,16 @@ body {
     }
 
     /* Close
-   ========================================================================== */
+       ========================================================================== */
     .togglemenu-close {
+        display: flex;
         padding: 20px;
         background: $color--tertiary;
-        overflow: hidden;
 
         button { $size: 44px;
             position: relative;
             display: inline-block;
-            float: right;
+            margin-left: auto;
             padding: 0;
             width: $size;
             height: $size;
@@ -171,8 +170,6 @@ body {
         }
     }
 
-
-
     /* Layout panel
 	   ========================================================================== */
     .l-panel {
@@ -220,6 +217,7 @@ body {
 
             .item-btn {
                 flex-shrink: 0;
+                margin-left: 0;
 
                 &:before,
                 &:after {
