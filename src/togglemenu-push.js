@@ -317,8 +317,13 @@
 
                         if (event.type === 'keydown' && event.key === 'Tab') {
                             var focusItem = item[(event.shiftKey) ? 'prev' : 'next']();
+
                             if (focusItem.length) {
-                                self.getElements().itemLink(focusItem).focus();
+                                var focusItemLink = self.getElements().itemLink(focusItem);
+
+                                if (focusItemLink.length) {
+                                    focusItemLink.focus();
+                                }
                             }
 
                         } else if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
@@ -447,11 +452,13 @@
                     });
 
                     // Focus
-                    if (self.getElements().closeContent !== undefined && self.getElements().closeContent.length) {
-                        self.getElements().closeContent.focus();
-                    } else if (self.getElements().menuContent.length) {
-                        self.getElements().menuContent.find('a:first').focus();
-                    }
+                    setTimeout(function () {
+                        if (self.getElements().closeContent !== undefined && self.getElements().closeContent.length) {
+                            self.getElements().closeContent.focus();
+                        } else if (self.getElements().menuContent.length) {
+                            self.getElements().menuContent.find('a:first').focus();
+                        }
+                    }, 100);
 
                 } else {
                     self.getElements().page.off(self.events.page);
