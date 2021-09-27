@@ -5,8 +5,8 @@
      * ToggleMenu
      *
      * @param {object=undefined} options
-     *
-     * @return {$.ToggleMenu}
+     * @returns {jQuery.ToggleMenu}
+     * @constructor
      */
     $.ToggleMenu = function (options) {
         // Config
@@ -118,7 +118,7 @@
         removeMenu: function (type) {
             type = type || this.menu.current;
 
-            if (type !== undefined && type !== null) {
+            if ($[this.menu.className] !== undefined && type !== undefined && type !== null) {
                 // Appel du unload du display correspondant
                 if ($[this.menu.className].prototype.hasOwnProperty('unload')) {
                     $[this.menu.className].prototype.unload.call(this.instances[this.menu.current]);
